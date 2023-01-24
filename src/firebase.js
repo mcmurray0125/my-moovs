@@ -1,6 +1,6 @@
 import firebase from 'firebase/app'
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged, getRedirectResult, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth } from "firebase/auth"
 
 
 
@@ -14,5 +14,5 @@ const app = initializeApp({
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
   });
 
-export const auth = getAuth(app);
+export const auth = getAuth(app)
 export default app
