@@ -40,7 +40,7 @@ export default function ForgotPassword() {
                 </Form.Group>
                 <Button disabled={loading} type='submit' className='w-100 mt-3'>Reset Password</Button>
             </Form>
-            <div className='w-100 text-center mt-2'>
+            <div className='w-100 text-center mt-3'>
                 <Link to="/login">Login</Link>
             </div>
         </Card.Body>
