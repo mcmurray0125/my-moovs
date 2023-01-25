@@ -8,7 +8,7 @@ export default function UpdateProfile() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const { currentUser, emailChange, passwordChange } = useAuth()
+    const { currentUser, emailChange, passwordChange, upgradeDemo } = useAuth()
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -23,10 +23,13 @@ export default function UpdateProfile() {
         const promises = []
         setLoading(true)
         setError("")
-        if (emailRef.current.value !== currentUser.email) {
+        if (currentUser.isAnonymous) {
+            promises.push(upgradeDemo(emailRef.current.value, passwordRef.current.value))
+        }
+        else if (emailRef.current.value !== currentUser.email) {
             promises.push(emailChange(emailRef.current.value))
         }
-        if (passwordRef.current.value) {
+        else if (passwordRef.current.value) {
             promises.push(passwordChange(passwordRef.current.value))
         }
 

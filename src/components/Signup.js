@@ -8,7 +8,7 @@ export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const { signup } = useAuth()
+    const { signup, loginDemo } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -24,6 +24,20 @@ export default function Signup() {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
+            navigate("/")
+        } catch(error) {
+            console.log(error)
+            setError('Failed to create an account')
+        }
+        setLoading(false)
+    }
+    async function handleDemoSubmit(e) {
+        e.preventDefault()
+
+        try {
+            setError('')
+            setLoading(true)
+            await loginDemo()
             navigate("/")
         } catch(error) {
             console.log(error)
@@ -52,6 +66,10 @@ export default function Signup() {
                     <Form.Control type="password" ref={passwordConfirmRef} required></Form.Control>
                 </Form.Group>
                 <Button disabled={loading} type='submit' className='w-100 mt-3'>Sign Up</Button>
+            </Form>
+            <p className='text-center mt-3 mb-3'>Or</p>
+            <Form onSubmit={handleDemoSubmit}>
+                <Button disabled={loading} type='submit' className='w-100'>Sign in as Demo User</Button>
             </Form>
         </Card.Body>
     </Card>
