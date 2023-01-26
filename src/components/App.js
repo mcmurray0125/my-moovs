@@ -9,6 +9,7 @@ import PrivateRoute from './PrivateRoute';
 import ForgotPassword from './ForgotPassword';
 import UpdateProfile from './UpdateProfile';
 import Home from './Home';
+import TopMovies from './TopMovies';
 
 
 
@@ -26,6 +27,7 @@ function App() {
                 <Route path='/login' element={<Login className='w-100' style={formStyles}/>} />
                 <Route path='/forgot-password' element={<ForgotPassword className='w-100' style={formStyles}/>} />
                 <Route path="/home" element={<Home/>}/>
+                <Route path="/top-movies" element={<TopMovies/>}/>
               </Routes>
             </AuthProvider>
           </Router>
