@@ -4,7 +4,7 @@ import { Container, Card, Row, Col } from "react-bootstrap"
 import axios from "axios"
 import MovieCard from './MovieCard'
 
-export default function TopMovies() {
+export default function PopularMovies() {
   const [popularMovies, setpopularMovies] = React.useState([])
 
   useEffect(() => {
@@ -17,10 +17,11 @@ export default function TopMovies() {
     <div>
         <Navigation/>
           <Container>
-            <Row>
+          <h1 className='text-center m-3'>Popular Movies</h1>
+            <Row >
             {popularMovies.map((movie, index) => {
               return (
-                <Col xs={3} key={index}>
+                <Col xs={3} key={index} className='mb-4'>
                   <MovieCard {...movie}/>
                 </Col>
                 )

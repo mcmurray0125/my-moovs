@@ -3,6 +3,7 @@ import { Card, Button, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+import Navigation from './Navigation'
 
 
 export default function Dashboard() {
@@ -22,7 +23,9 @@ export default function Dashboard() {
     }
 
   return (
-    <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "100vh"}}>
+    <>
+    <Navigation/>
+    <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "90vh"}}>
         <div className='w-100' style={{maxWidth: "400px"}}>
             <Card>
                 <Card.Body>
@@ -40,5 +43,6 @@ export default function Dashboard() {
             </div>
         </div>
     </Container>
+    </>
   )
 }

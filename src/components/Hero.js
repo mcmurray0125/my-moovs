@@ -14,7 +14,7 @@ export default function Hero() {
                                 Welcome to MyMoovs!
                             </Card.Title>
                             <Card.Text>
-                                <Link to="/signup">Sign up</Link> with and email, or register as a demo user to browse and save your favorite movies! Then, add comments and other thought about the movies to keep a digital journal of your cinematic experiences.
+                                <Link to="/signup">Sign up</Link> with and email, or register as a demo user to browse and save your favorite movies! Then, add comments and other thoughts about the movies to keep a digital journal of your cinematic experiences.
                             </Card.Text>
                         </Card.Body>
                     </Card>
