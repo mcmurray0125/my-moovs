@@ -6,8 +6,11 @@ export default function MovieCard({poster_path, title, release_date}) {
     <Card className="m-auto">
         <Card.Body>
             <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} />
-            <Card.Title className='mb-1'>{title}</Card.Title>
-            <Card.Text>{release_date}</Card.Text>
+            <Card.Title className='my-1'>{title}</Card.Title>
+            <div className='d-flex align-items-center'>
+            <Card.Text className='my-0'>{release_date}</Card.Text>
+            <i className="fa-regular fa-star ms-auto fs-5"></i>
+            </div>
         </Card.Body>
     </Card>
   )

@@ -14,9 +14,11 @@ export default function Navigation() {
           <Nav className="me-auto">
             <Nav.Link href="/popular-movies">Popular Movies</Nav.Link>
             <NavDropdown title="Genres" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Comedy</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Drama</NavDropdown.Item>
+              <NavDropdown.Item href="/action">Action</NavDropdown.Item>
+              <NavDropdown.Item href="/comedy">Comedy</NavDropdown.Item>
+              <NavDropdown.Item href="/drama">Drama</NavDropdown.Item>
+              <NavDropdown.Item href="/family">Family</NavDropdown.Item>
+              <NavDropdown.Item href="/science-fiction">Science Fiction</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 A-Z

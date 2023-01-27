@@ -10,6 +10,11 @@ import ForgotPassword from './ForgotPassword';
 import UpdateProfile from './UpdateProfile';
 import Home from './Home';
 import PopularMovies from './PopularMovies';
+import Action from './Action';
+import Comedy from './Comedy';
+import Drama from './Drama';
+import Family from './Family';
+import ScienceFiction from './ScienceFiction';
 import SearchMovies from './SearchMovies';
 
 
@@ -30,6 +35,11 @@ function App() {
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/popular-movies" element={<PopularMovies/>}/>
                 <Route path="/search-movies" element={<SearchMovies/>}/>
+                <Route path="/action" element={<Action/>}/>
+                <Route path="/comedy" element={<Comedy/>}/>
+                <Route path="/drama" element={<Drama/>}/>
+                <Route path="/family" element={<Family/>}/>
+                <Route path="/science-fiction" element={<ScienceFiction/>}/>
               </Routes>
             </AuthProvider>
           </Router>
