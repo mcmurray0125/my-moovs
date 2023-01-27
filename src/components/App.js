@@ -10,11 +10,11 @@ import ForgotPassword from './ForgotPassword';
 import UpdateProfile from './UpdateProfile';
 import Home from './Home';
 import PopularMovies from './PopularMovies';
-import Action from './Action';
-import Comedy from './Comedy';
-import Drama from './Drama';
-import Family from './Family';
-import ScienceFiction from './ScienceFiction';
+import Action from './genres/Action';
+import Comedy from './genres/Comedy';
+import Drama from './genres/Drama';
+import Family from './genres/Family';
+import ScienceFiction from './genres/ScienceFiction';
 import SearchMovies from './SearchMovies';
 
 

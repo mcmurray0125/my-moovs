@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
-import Navigation from './Navigation'
+import Navigation from '../Navigation'
 import { Container, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
-import MovieCard from './MovieCard'
+import MovieCard from '../MovieCard'
 
-export default function Family() {
-  const [familyMovies, setFamilyMovies] = React.useState([])
+export default function Action() {
+  const [actionMovies, setActionMovies] = React.useState([])
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const paginate = (number) => setCurrentPage(number);
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=10751&with_watch_monetization_types=flatrate`).then(response=>{
-    setFamilyMovies(response.data.results)
+    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=28&with_watch_monetization_types=flatrate`).then(response=>{
+    setActionMovies(response.data.results)
     }).catch(err=>{console.log(err)})
   },[paginate])
 
@@ -36,9 +36,9 @@ export default function Family() {
     <div>
         <Navigation/>
           <Container>
-          <h1 className='text-center m-3'>Family Movies</h1>
+          <h1 className='text-center m-3'>Action Movies</h1>
             <Row >
-            {familyMovies.map((movie, index) => {
+            {actionMovies.map((movie, index) => {
               return (
                 <Col xs={3} key={index} className='mb-4'>
                   <MovieCard {...movie}/>
