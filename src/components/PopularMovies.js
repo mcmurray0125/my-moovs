@@ -16,7 +16,7 @@ export default function PopularMovies() {
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=${currentPage}`).then(response=>{
     setpopularMovies(response.data.results)
     }).catch(err=>{console.log(err)})
-  },[paginate])
+  },[currentPage])
   
   let items = [];
   for (let number = 1; number <= 7; number++) {

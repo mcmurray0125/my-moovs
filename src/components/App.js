@@ -16,6 +16,7 @@ import Drama from './genres/Drama';
 import Family from './genres/Family';
 import ScienceFiction from './genres/ScienceFiction';
 import SearchMovies from './SearchMovies';
+import SavedMovies from './SavedMovies';
 
 
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path='/forgot-password' element={<ForgotPassword className='w-100' style={formStyles}/>} />
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/popular-movies" element={<PopularMovies/>}/>
+                <Route path="/saved-movies" element={<SavedMovies/>}/>
                 <Route path="/search-movies" element={<SearchMovies/>}/>
                 <Route path="/action" element={<Action/>}/>
                 <Route path="/comedy" element={<Comedy/>}/>

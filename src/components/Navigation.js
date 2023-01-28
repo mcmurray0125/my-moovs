@@ -27,7 +27,7 @@ export default function Navigation() {
             <Nav.Link href="/search-movies">Search <i className="fa-solid fa-magnifying-glass"></i></Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Your Movies</Nav.Link>
+            <Nav.Link href="/saved-movies">Saved Movies</Nav.Link>
             <Nav.Link eventKey={2} href="/">
               Account
             </Nav.Link>

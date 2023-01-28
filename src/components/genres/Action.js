@@ -7,7 +7,7 @@ import MovieCard from '../MovieCard'
 
 export default function Action() {
   const [actionMovies, setActionMovies] = React.useState([])
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentPage, setCurrentPage] = React.useState();
 
   const paginate = (number) => setCurrentPage(number);
 
@@ -15,7 +15,7 @@ export default function Action() {
     axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=28&with_watch_monetization_types=flatrate`).then(response=>{
     setActionMovies(response.data.results)
     }).catch(err=>{console.log(err)})
-  },[paginate])
+  },[currentPage])
 
   let items = [];
   for (let number = 1; number <= 7; number++) {

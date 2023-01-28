@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react'
-import { Form, Button, Card, FormLabel, Alert } from "react-bootstrap"
+import React, { useEffect, useRef, useState } from 'react'
+import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from "react-router-dom"
 import { Container } from 'react-bootstrap'
-
 
 
 export default function Signup() {
@@ -15,6 +14,7 @@ export default function Signup() {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
+    //Sign Up Email and Password
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -33,6 +33,7 @@ export default function Signup() {
         }
         setLoading(false)
     }
+    //Login Demo
     async function handleDemoSubmit(e) {
         e.preventDefault()
 
