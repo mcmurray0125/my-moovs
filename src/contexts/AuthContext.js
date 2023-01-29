@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth, db } from "../firebase"
+import { doc, setDoc, getDoc } from "firebase/firestore"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, signOut, sendPasswordResetEmail, onAuthStateChanged, updateEmail, updatePassword, linkWithCredential, EmailAuthProvider } from "firebase/auth";
 
 const AuthContext = React.createContext()
@@ -11,6 +12,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
+    const [hasFolder, setHasFolder] = useState(false)
 
     function signup(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -55,6 +57,20 @@ export function AuthProvider({ children }) {
         return unsubscribe
       }, [])
 
+      useEffect(() => {
+        const checkFolder = async () => {
+          const docRef = doc(db, "users", currentUser.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            console.log(docSnap.data());
+            setHasFolder(true);
+          } else {
+            setHasFolder(false);
+          }
+        };
+      }, [currentUser]);
+      
+
     const value = { 
         currentUser,
         login,
@@ -64,7 +80,8 @@ export function AuthProvider({ children }) {
         resetPassword,
         emailChange,
         passwordChange,
-        upgradeDemo
+        upgradeDemo,
+        hasFolder
     }
 
   return (
