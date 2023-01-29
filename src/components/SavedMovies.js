@@ -28,10 +28,10 @@ export default function SavedMovies() {
         setError('Failed to create folder. Log in or sign up to save movies')
         console.log(error)
     }
-} else {
-    setError(<span><Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link> to save movies.</span>)
-}
-    setLoading(false)
+    } else {
+        setError(<span><Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link> to save movies.</span>)
+    }
+        setLoading(false)
 }
 
   return (
