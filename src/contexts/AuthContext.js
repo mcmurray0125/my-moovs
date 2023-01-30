@@ -58,20 +58,19 @@ export function AuthProvider({ children }) {
          return unsubscribe
        }, [])
 
+       //Check is user has a database folder. If not, creates one with their UID
       useEffect(() => {
        if(currentUser && !loading) {
          const checkFolder = async () => {
            const docRef = doc(db, "users", currentUser.uid);
            const docSnap = await getDoc(docRef);
            if (docSnap.exists()) {
-             console.log(docSnap.data());
              setHasFolder(true);
            } else {
             try {
               await setDoc(doc(db, "users", currentUser.uid), {
                   saved: []
                 })
-              console.log('folder created')
           } catch(error) {
               console.log(error)
           }
@@ -86,6 +85,7 @@ export function AuthProvider({ children }) {
       }, [hasFolder]);
       
     const value = { 
+        loading,
         currentUser,
         login,
         loginDemo,
