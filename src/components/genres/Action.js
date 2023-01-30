@@ -35,8 +35,8 @@ export default function Action() {
   return (
     <div>
         <Navigation/>
-          <Container>
-          <h1 className='text-center m-3'>Action Movies</h1>
+          <Container style={{marginTop: "6rem"}}>
+          <h1 className='text-center mb-4'>Action Movies</h1>
             <Row >
             {actionMovies.map((movie, index) => {
               return (

@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function Navigation() {
     return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="w-100 py-3">
+    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="position-absolute w-100 top-0 py-3" id="navbar">
       <Container>
         <Navbar.Brand href="/home">MyMoovs</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -28,9 +28,13 @@ export default function Navigation() {
           </Nav>
           <Nav>
             <Nav.Link href="/saved-movies">Saved Movies</Nav.Link>
-            <Nav.Link eventKey={2} href="/">
-              Account
-            </Nav.Link>
+            <NavDropdown title="Profile" id="collasible-nav-dropdown">
+              <NavDropdown.Item eventKey={2} href="/">My Account</NavDropdown.Item>
+              <NavDropdown.Item href="/saved-movies">Saved Movies</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+              <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

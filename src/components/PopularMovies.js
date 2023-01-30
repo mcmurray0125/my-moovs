@@ -36,8 +36,8 @@ export default function PopularMovies() {
   return (
     <div>
         <Navigation/>
-          <Container>
-          <h1 className='text-center m-3'>Popular Movies</h1>
+          <Container style={{marginTop: "6rem"}}>
+          <h1 className='text-center mb-4'>Popular Movies</h1>
             <Row >
             {popularMovies.map((movie, index) => {
               return (

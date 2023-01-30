@@ -35,8 +35,8 @@ export default function Comedy() {
   return (
     <div>
         <Navigation/>
-          <Container>
-          <h1 className='text-center m-3'>Comedy Movies</h1>
+          <Container style={{marginTop: "6rem"}}>
+          <h1 className='text-center mb-4'>Comedy Movies</h1>
             <Row >
             {comedyMovies.map((movie, index) => {
               return (

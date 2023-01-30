@@ -9,12 +9,7 @@ export default function MovieCard({poster_path, title, release_date, id}) {
   const { currentUser } = useAuth()
 
   function handleClick() {
-    setSaved(prevSaved => {
-      const newSaved = [...prevSaved, { user: currentUser.uid, id: id }]
-      console.log(newSaved)
-      return newSaved
-    })
-    setFavorite(!favorite)
+    console.log(id)
   }
 
   

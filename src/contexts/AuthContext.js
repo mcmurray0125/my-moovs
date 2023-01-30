@@ -48,53 +48,38 @@ export function AuthProvider({ children }) {
         return updatePassword(currentUser, password)
       }
 
+      
+     useEffect(() => {
+         const unsubscribe = auth.onAuthStateChanged(user => {
+           setCurrentUser(user)
+           setLoading(false)
+         })
+    
+         return unsubscribe
+       }, [])
 
       useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async user => {
-          setCurrentUser(user)
-          setLoading(false)
-          if (user) {
+       if(currentUser && !loading) {
+         const checkFolder = async () => {
+           const docRef = doc(db, "users", currentUser.uid);
+           const docSnap = await getDoc(docRef);
+           if (docSnap.exists()) {
+             console.log(docSnap.data());
+             setHasFolder(true);
+           } else {
             try {
-              const docSnap = await getDoc(docRef).then(response => response.json());
-              if (docSnap.exists()) {
-                setHasFolder(true);
-              } else {
-                setHasFolder(false);
-              }
-            } catch (error) {
-              console.error(error);
-            }
-          } else {
-            setHasFolder(false)
+              await setDoc(doc(db, "users", currentUser.uid), {
+                  saved: []
+                })
+              console.log('folder created')
+          } catch(error) {
+              console.log(error)
           }
-        });
-      
-        return () => unsubscribe();
-      }, []);
-      
-
-    // useEffect(() => {
-    //     const unsubscribe = auth.onAuthStateChanged(user => {
-    //       setCurrentUser(user)
-    //       setLoading(false)
-    //     })
-    
-    //     return unsubscribe
-    //   }, [])
-
-      // useEffect(() => {
-      //   const checkFolder = async () => {
-      //     const docRef = doc(db, "users", currentUser.uid);
-      //     const docSnap = await getDoc(docRef);
-      //     if (docSnap.exists()) {
-      //       console.log(docSnap.data());
-      //       setHasFolder(true);
-      //     } else {
-      //       setHasFolder(false);
-      //     }
-      //   };
-      //   checkFolder()
-      // }, [currentUser]);
+           }
+         };
+         checkFolder();
+       }
+      }, [currentUser]);
 
       useEffect(() => {
         console.log(hasFolder);

@@ -35,8 +35,8 @@ export default function Family() {
   return (
     <div>
         <Navigation/>
-          <Container>
-          <h1 className='text-center m-3'>Family Movies</h1>
+          <Container style={{marginTop: "6rem"}}>
+          <h1 className='text-center mb-4'>Family Movies</h1>
             <Row >
             {familyMovies.map((movie, index) => {
               return (
