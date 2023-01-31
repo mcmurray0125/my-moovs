@@ -7,7 +7,7 @@ import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firest
 import { useAuth } from '../contexts/AuthContext'
 
 
-export default function MovieCard({poster_path, title, release_date, id, paginate}) {
+export default function MovieCard({movie, poster_path, title, release_date, id, paginate}) {
   const [favorite, setFavorite] = React.useState(false)
   const { currentUser } = useAuth()
   const [savedMovies, setSavedMovies] = React.useState([])
@@ -15,23 +15,24 @@ export default function MovieCard({poster_path, title, release_date, id, paginat
   const  handleClick = async () => {
     if (currentUser) {
       const savedRef = doc(db, "users", currentUser.uid);
-      if (savedMovies.includes(id)) {
+      const movieRef = JSON.stringify(movie);
+      if (savedMovies.includes(movieRef)) {
         try {
           await updateDoc(savedRef, {
-          saved: arrayRemove(id)
+          saved: arrayRemove(movieRef)
         });
         setFavorite(false)
-        console.log(`${id} Movie Removed`)
+        console.log(`Removed ${movieRef}`)
       } catch(error) {
         console.log(error)
         }
       } else {
         try {
           await updateDoc(savedRef, {
-          saved: arrayUnion(id)
+          saved: arrayUnion(movieRef)
         });
         setFavorite(true)
-        console.log(`${id} Movie Saved`)
+        console.log(`Saved ${movieRef}`)
       } catch(error) {
         console.log(error)
         }
@@ -43,6 +44,7 @@ export default function MovieCard({poster_path, title, release_date, id, paginat
     const checkData = async () => {
       if (currentUser) {
         const docRef = doc(db, "users", currentUser.uid);
+        const movieRef = JSON.stringify(movie);
         try {
           const docSnap = await getDoc(docRef);
           setSavedMovies(docSnap.data().saved);
@@ -56,7 +58,8 @@ export default function MovieCard({poster_path, title, release_date, id, paginat
 
    useEffect(() => {
      const addFavorites = async () => {
-         if (savedMovies.includes(id)) {
+      const movieRef = JSON.stringify(movie);
+         if (savedMovies.includes(movieRef)) {
            setFavorite(true)
          } else {
            setFavorite(false)
@@ -67,13 +70,13 @@ export default function MovieCard({poster_path, title, release_date, id, paginat
   
    
   return (
-    <Card className="m-auto">
+    <Card className="m-auto shadow border-0">
         <Card.Body >
-            <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} />
+            <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg" />
             <Card.Title className='my-1'>{title}</Card.Title>
             <div className='d-flex align-items-center justify-content-between'>
             <Card.Text className='my-0'>{release_date}</Card.Text>
-            <img style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star}/>
+            <img className='star' style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star}/>
             </div>
         </Card.Body>
     </Card>

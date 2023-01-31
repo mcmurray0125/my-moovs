@@ -23,7 +23,7 @@ export default function PopularMovies() {
     items.push(
       <Pagination.Item key={number} active={currentPage === number} onClick={() => paginate(number)}>
         {number}
-      </Pagination.Item>,
+      </Pagination.Item>
     );
   }
   
@@ -42,7 +42,7 @@ export default function PopularMovies() {
             {popularMovies.map((movie, index) => {
               return (
                 <Col xs={3} key={index} className='mb-4'>
-                  <MovieCard {...movie} paginate={paginate}/>
+                  <MovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )
               })}

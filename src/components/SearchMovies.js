@@ -73,17 +73,17 @@ export default function SearchMovies() {
         <Navigation/>
           <Container className='my-3'>
             <InputGroup className="mb-3">
-            <Form.Label className='fs-2 text-center text-decoration-underline' style={{width: "100%"}}>Find Movies</Form.Label>
-              <Form.Control
-                placeholder="Movie Title"
-                aria-label="search"
-                aria-describedby="basic-addon2"
-                onChange={changeHandler}
-                type="search"
-                name='query'
-                value={query}
-                className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
-              />
+              <Form.Label className='fs-2 text-center text-decoration-underline' style={{width: "100%"}}>Find Movies</Form.Label>
+                <Form.Control
+                  placeholder="Movie Title"
+                  aria-label="search"
+                  aria-describedby="basic-addon2"
+                  onChange={changeHandler}
+                  type="search"
+                  name='query'
+                  value={query}
+                  className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
+                />
             </InputGroup>
             {query === '' &&
             <div className='d-flex align-items-center justify-content-between'>
