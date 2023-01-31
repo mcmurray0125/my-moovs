@@ -16,3 +16,21 @@
 .star:hover {
   transform: rotate(90deg) !important;
 }
+
+.large-card {
+  background-color: rgba(224, 224, 224, 0.626);
+  transform: scale(1) !important;
+  transition: all 0.2s !important;
+}
+.large-card:hover {
+  background-color: rgba(239, 239, 239, 0.817);
+  transform: scale(1) !important;
+}
+
+.comments-form {
+  background-color: rgba(224, 224, 224, 0.626);
+  transition: all 0.2s !important;
+}
+.comments-form:hover {
+  background-color: rgba(132, 179, 159, 0.817);
+}

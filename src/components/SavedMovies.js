@@ -7,7 +7,7 @@ import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore"
 import Navigation from './Navigation'
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
-import MovieCard from './MovieCard'
+import LargeMovieCard from './LargeMovieCard'
 
 export default function SavedMovies() {
     const [error, setError] = useState("")
@@ -47,12 +47,6 @@ export default function SavedMovies() {
         setParsedMovies(parsedArray)
       }
     }, [dbMovies]);
-
-     useEffect(() => {
-       if (dbMovies) {
-           console.log(parsedMovies);
-       }
-     }, [parsedMovies]);
 
 
     //When input is empty, display saved movies by default.
@@ -108,8 +102,8 @@ export default function SavedMovies() {
           <Row >
             {parsedMovies.map((movie, index) => {
               return (
-                <Col xs={3} key={index} className='mb-4'>
-                  <MovieCard {...movie} paginate={paginate} movie={movie}/>
+                <Col sm={12} key={index} className='mb-4'>
+                  <LargeMovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )
               })}
