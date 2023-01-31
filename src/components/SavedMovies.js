@@ -18,6 +18,7 @@ export default function SavedMovies() {
     const [totalPages, setTotalPages] = React.useState(1)
     const [currentPage, setCurrentPage] = React.useState(1);
     const [dbMovies, setDBMovies] = React.useState()
+    const [parsedMovies, setParsedMovies] = React.useState([])
 
     const paginate = (number) => setCurrentPage(number);
 
@@ -39,19 +40,20 @@ export default function SavedMovies() {
 
     useEffect(() => {
       if (dbMovies) {
+        let parsedArray = []
         dbMovies.forEach(function(item) {
-          console.log(JSON.parse(item));
+          parsedArray.push((JSON.parse(item)));
         });
+        setParsedMovies(parsedArray)
       }
     }, [dbMovies]);
 
-    // useEffect(() => {
-    //   if (dbMovies) {
-    //     dbMovies.forEach(function(item) {
-    //       console.log(JSON.parse(item));
-    //     });
-    //   }
-    // }, [dbMovies]);
+     useEffect(() => {
+       if (dbMovies) {
+           console.log(parsedMovies);
+       }
+     }, [parsedMovies]);
+
 
     //When input is empty, display saved movies by default.
   //  useEffect(() => {
@@ -75,15 +77,13 @@ export default function SavedMovies() {
   //     }
 
 
-
-
-
   return (
     <div>
         <Navigation/>
-        <Container className='d-flex align-items-center justify-content-center' style={{marginTop: "6rem"}}>
+        <Container style={{marginTop: "6rem"}}>
+          <div className='d-flex align-items-center flex-column justify-content-start'>
             <div className='w-100' style={{maxWidth: "400px"}}>
-            <Card className="text-center my-5">
+            <Card className="text-center mb-3">
                     <Card.Body >
                         <Card.Title>Saved Movies</Card.Title>
                         {currentUser ?
@@ -92,6 +92,28 @@ export default function SavedMovies() {
                     </Card.Body>
             </Card>
             </div>
+            <InputGroup className="mb-3">
+              <Form.Label className='fs-2 text-center text-decoration-underline my-0' style={{width: "100%"}}>Filter Saved Movies</Form.Label>
+                <Form.Control
+                  placeholder="Movie Title"
+                  aria-label="search"
+                  aria-describedby="basic-addon2"
+                  type="search"
+                  name='query'
+                  value={query}
+                  className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
+                />
+            </InputGroup>
+          </div>
+          <Row >
+            {parsedMovies.map((movie, index) => {
+              return (
+                <Col xs={3} key={index} className='mb-4'>
+                  <MovieCard {...movie} paginate={paginate} movie={movie}/>
+                </Col>
+                )
+              })}
+            </Row>
         </Container>
     </div>
   )

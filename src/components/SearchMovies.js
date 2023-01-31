@@ -71,7 +71,7 @@ export default function SearchMovies() {
   return (
     <div>
         <Navigation/>
-          <Container className='my-3'>
+          <Container style={{marginTop: "6rem"}}>
             <InputGroup className="mb-3">
               <Form.Label className='fs-2 text-center text-decoration-underline' style={{width: "100%"}}>Find Movies</Form.Label>
                 <Form.Control
@@ -100,7 +100,7 @@ export default function SearchMovies() {
             {movies.map((movie, index) => {
               return (
                 <Col xs={3} key={index} className='mb-4'>
-                  <MovieCard {...movie} paginate={paginate}/>
+                  <MovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )
               })}
