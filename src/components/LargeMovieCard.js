@@ -10,6 +10,8 @@ import { useAuth } from '../contexts/AuthContext'
 export default function LargeMovieCard({movie, poster_path, title, release_date, id, paginate}) {
   const [favorite, setFavorite] = React.useState(false)
   const { currentUser } = useAuth()
+  const [comments, setComments] = React.useState("")
+  const [dbComments, setDBComments] = React.useState([])
   const [savedMovies, setSavedMovies] = React.useState([])
   
   const  handleClick = async () => {
@@ -40,6 +42,34 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
     }
   }
 
+  //Post Comment to Database
+  const  handleSubmit = async (e) => {
+    e.preventDefault()
+    if (currentUser) {
+      const docRef = doc(db, "users", currentUser.uid);
+      try {
+        await updateDoc(docRef, {
+        comments: arrayUnion(id + comments)
+      });
+      console.log(`Saved ${comments}`)
+    } catch(error) {
+      console.log(error)
+    } try {
+      const docSnap = await getDoc(docRef);
+      setDBComments(docSnap.data().comments);
+      console.log(`Fetched ${docSnap.data().comments}`)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+  setComments("")
+  }
+
+  const changeHandler = (e) => {
+  setComments(e.target.value);
+  }
+
+  //Check Fire Store for Saved Movies and Comments
   useEffect(() => {
     const checkData = async () => {
       if (currentUser) {
@@ -47,6 +77,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
         try {
           const docSnap = await getDoc(docRef);
           setSavedMovies(docSnap.data().saved);
+          setDBComments(docSnap.data().comments);
         } catch(error) {
           console.log(error)
         }
@@ -55,6 +86,18 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
     checkData();
   },[paginate, favorite])
 
+
+//log dbComments to check
+  useEffect(() => {
+    if (dbComments) {
+      console.log(dbComments);
+    }
+  }, [dbComments])
+
+
+  //Set Card to Favorite if it is included in the savedMovies.
+  //Might not be needed in this component since this component
+  //is only rendered if it is a saved movie.
    useEffect(() => {
      const addFavorites = async () => {
       const movieRef = JSON.stringify(movie);
@@ -88,9 +131,17 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
             <Form className='comments-form w-100 position-relative h-100 rounded p-1'>
                 <Form.Group className="mb-3" controlId="comments">
                     <Form.Label>Comments</Form.Label>
-                    <Form.Control as="textarea" type="comments" placeholder="Your thought about the movie"/>
+                    <Form.Control 
+                    as="textarea"
+                    type="text"
+                    aria-label="comment-input"
+                    name="comments"
+                    placeholder="Your thought about the movie"
+                    onChange={changeHandler}
+                    value={comments}
+                    />
                 </Form.Group>
-                <Button variant="primary" type="submit" className='position-absolute top-100 end-0'>
+                <Button variant="primary" onClick={handleSubmit} type="submit" className='position-absolute top-100 end-0'>
                     Submit
                 </Button>
             </Form>

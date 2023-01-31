@@ -47,7 +47,11 @@ export default function SavedMovies() {
         setParsedMovies(parsedArray)
       }
     }, [dbMovies]);
-
+    
+    
+    // const changeHandler = (e) => {
+    //   setComments(e.target.value);
+    // }
 
     //When input is empty, display saved movies by default.
   //  useEffect(() => {
@@ -60,9 +64,6 @@ export default function SavedMovies() {
   //     }
   //     },[query, currentPage])
 
-  //     const changeHandler = (e) => {
-  //       setQuery(e.target.value);
-  //     }
 
   //     const handleBackspace = (event) => {
   //       if (event.key === 'Backspace') {
@@ -79,22 +80,21 @@ export default function SavedMovies() {
             <div className='w-100' style={{maxWidth: "400px"}}>
             <Card className="text-center mb-3">
                     <Card.Body >
-                        <Card.Title>Saved Movies</Card.Title>
+                        <Card.Title>Saved Moovs</Card.Title>
                         {currentUser ?
-                        <Card.Text>Here are your saved movies.</Card.Text> :
+                        <Card.Text>Find your movies below.</Card.Text> :
                         <Card.Text><Link to="/login">Login</Link> or <Link to="/signup">Create an account</Link> to save movies.</Card.Text> }
                     </Card.Body>
             </Card>
             </div>
             <InputGroup className="mb-3">
-              <Form.Label className='fs-2 text-center text-decoration-underline my-0' style={{width: "100%"}}>Filter Saved Movies</Form.Label>
+              <Form.Label className='fs-3 text-center text-decoration-underline my-0' style={{width: "100%"}}>Search your Saved Moovs</Form.Label>
                 <Form.Control
                   placeholder="Movie Title"
-                  aria-label="search"
+                  aria-label="comment-input"
                   aria-describedby="basic-addon2"
                   type="search"
-                  name='query'
-                  value={query}
+                  name='search'
                   className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
                 />
             </InputGroup>
