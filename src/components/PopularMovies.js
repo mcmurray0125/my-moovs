@@ -42,7 +42,7 @@ export default function PopularMovies() {
             {popularMovies.map((movie, index) => {
               return (
                 <Col xs={3} key={index} className='mb-4'>
-                  <MovieCard {...movie} popularMovies={popularMovies}/>
+                  <MovieCard {...movie} paginate={paginate}/>
                 </Col>
                 )
               })}

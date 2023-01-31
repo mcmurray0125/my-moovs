@@ -41,7 +41,7 @@ export default function ScienceFiction() {
             {sciFiMovies.map((movie, index) => {
               return (
                 <Col xs={3} key={index} className='mb-4'>
-                  <MovieCard {...movie}/>
+                  <MovieCard {...movie} paginate={paginate}/>
                 </Col>
                 )
               })}

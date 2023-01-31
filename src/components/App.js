@@ -28,7 +28,6 @@ function App() {
   return (
           <Router>
             <AuthProvider>
-              <DatabaseProvider>
               <Routes>
                 <Route exact path='/' element={<PrivateRoute><Dashboard className='w-100' style={formStyles}/></PrivateRoute>} />
                 <Route path='/update-profile' element={<PrivateRoute><UpdateProfile className='w-100' style={formStyles}/></PrivateRoute>} />
@@ -45,7 +44,6 @@ function App() {
                 <Route path="/family" element={<Family/>}/>
                 <Route path="/science-fiction" element={<ScienceFiction/>}/>
               </Routes>
-              </DatabaseProvider>
             </AuthProvider>
           </Router>
   );

@@ -5,10 +5,9 @@ import starFilled from '../assets/star-filled.png'
 import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import { useAuth } from '../contexts/AuthContext'
-import { useDB } from '../contexts/DatabaseContext'
 
 
-export default function MovieCard({poster_path, title, release_date, id, popularMovies}) {
+export default function MovieCard({poster_path, title, release_date, id, paginate}) {
   const [favorite, setFavorite] = React.useState(false)
   const { currentUser } = useAuth()
   const [savedMovies, setSavedMovies] = React.useState([])
@@ -53,7 +52,7 @@ export default function MovieCard({poster_path, title, release_date, id, popular
       }
     }
     checkData();
-  },[popularMovies, favorite])
+  },[paginate, favorite])
 
    useEffect(() => {
      const addFavorites = async () => {
@@ -66,37 +65,10 @@ export default function MovieCard({poster_path, title, release_date, id, popular
      addFavorites();
    },[savedMovies])
   
-
-  
-  //  useEffect(() => {
-  //    if (currentUser && favorite) {
-  //        const savedRef = doc(db, "users", currentUser.uid);
-  //        try {
-  //          updateDoc(savedRef, {
-  //          saved: arrayUnion(id)
-  //        });
-  //        console.log(`${id} Movie Saved`)
-  //      } catch(error) {
-  //        console.log(error)
-  //        }
-  //      } else if (currentUser && !favorite) {
-  //       const savedRef = doc(db, "users", currentUser.uid);
-  //        try {
-  //          updateDoc(savedRef, {
-  //          saved: arrayRemove(id)
-  //        });
-  //          console.log(`${id} Movie Removed`)
-  //        } catch(error) {
-  //            console.log(error)
-  //        }
-  //      }
-  //  }, [favorite])
-
-
-  
+   
   return (
     <Card className="m-auto">
-        <Card.Body>
+        <Card.Body >
             <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} />
             <Card.Title className='my-1'>{title}</Card.Title>
             <div className='d-flex align-items-center justify-content-between'>
