@@ -57,7 +57,6 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
     } try {
       const docSnap = await getDoc(docRef);
       setDBComments(docSnap.data().comments);
-      console.log(`Fetched ${docSnap.data().comments}`)
     } catch(error) {
       console.log(error)
     }
@@ -87,14 +86,6 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
   },[paginate, favorite])
 
 
-//log dbComments to check
-  useEffect(() => {
-    if (dbComments) {
-      console.log(dbComments);
-    }
-  }, [dbComments])
-
-
   //Set Card to Favorite if it is included in the savedMovies.
   //Might not be needed in this component since this component
   //is only rendered if it is a saved movie.
@@ -113,12 +104,22 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
    
   return (
     <Container >
-        <div className='d-flex rounded p-3 gap-2' style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat'}}>
-            <Card className="large-card m-auto shadow border-0" style={{maxWidth: "26%"}}>
+        <div className='d-flex rounded p-3 gap-2 wrapper position-relative'>
+          {/* Backdrop Image */}
+            <div className='backdrop-image position-absolute rounded' style={{
+                top: "0",
+                left: "0",
+                bottom: "0",
+                right: "0",
+                backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                filter: "brightness(80%)",
+                zIndex: "-100"
+            }}></div>
+            {/* Movie Poster */}
+            <Card className="large-card shadow border-0 h-100" style={{maxWidth: "26%"}}>
                 <Card.Body >
                     <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg" />
                     <Card.Title className='my-1'>{title}</Card.Title>
@@ -128,23 +129,38 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
                     </div>
                 </Card.Body>
             </Card>
-            <Form className='comments-form w-100 position-relative h-100 rounded p-1'>
-                <Form.Group className="mb-3" controlId="comments">
-                    <Form.Label>Comments</Form.Label>
-                    <Form.Control 
-                    as="textarea"
-                    type="text"
-                    aria-label="comment-input"
-                    name="comments"
-                    placeholder="Your thought about the movie"
-                    onChange={changeHandler}
-                    value={comments}
-                    />
-                </Form.Group>
-                <Button variant="primary" onClick={handleSubmit} type="submit" className='position-absolute top-100 end-0'>
-                    Submit
-                </Button>
-            </Form>
+            {/* Comments Section */}
+            <section className='comments-wrapper d-flex flex-column w-100 gap-2'>
+              <Form className='comments-form w-100 h-auto rounded p-1'>
+                  <Form.Group className="mb-1" controlId="comments">
+                      <Form.Label>Comments</Form.Label>
+                      <Form.Control 
+                      as="textarea"
+                      type="text"
+                      aria-label="comment-input"
+                      name="comments"
+                      placeholder="Your thought about the movie"
+                      onChange={changeHandler}
+                      value={comments}
+                      className="opacity-75"
+                      />
+                  </Form.Group>
+                  <Button variant="success" onClick={handleSubmit} type="submit" className='py-1'>
+                      Submit
+                  </Button>
+              </Form>
+              <article>
+              {dbComments.map((comment, index) => {
+                if (comment.includes(id)) {
+                  return (
+                    <Card key={index} className="comment-card mb-1">
+                      <Card.Body>{comment.replace(id, '')}</Card.Body>
+                    </Card>
+                    )
+                }
+              })}
+              </article>
+            </section>
         </div>
     </Container>
   )

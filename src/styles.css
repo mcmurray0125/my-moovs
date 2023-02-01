@@ -32,5 +32,14 @@
   transition: all 0.2s !important;
 }
 .comments-form:hover {
-  background-color: rgba(132, 179, 159, 0.817);
+  background-color: rgba(239, 239, 239, 0.817);
+}
+
+.comment-card {
+  background-color: rgba(224, 224, 224, 0.626);
+  transition: all 0.2s !important;
+}
+.comment-card:hover {
+  background-color: rgba(239, 239, 239, 0.817);
+  transform: scale(1) !important;
 }
