@@ -130,7 +130,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
                 </Card.Body>
             </Card>
             {/* Comments Section */}
-            <section className='comments-wrapper d-flex flex-column w-100 gap-2 overflow-scroll'>
+            <section className='comments-wrapper d-flex flex-column w-100 gap-2 overflow-auto'>
               <Form className='comments-form w-100 h-auto rounded p-1'>
                   <Form.Group className="mb-1" controlId="comments">
                       <Form.Label>Comments</Form.Label>

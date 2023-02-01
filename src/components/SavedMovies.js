@@ -49,20 +49,23 @@ export default function SavedMovies() {
     }, [dbMovies]);
     
     
-    // const changeHandler = (e) => {
-    //   setComments(e.target.value);
-    // }
+     const changeHandler = (e) => {
+       setQuery(e.target.value);
+     }
+
+    //If query is empty, parsedMovies
+    //if query !== '',
+      //filter parsed movies based on if parsedmovies includes the query.
 
     //When input is empty, display saved movies by default.
-  //  useEffect(() => {
-  //    if (query === ''){
-  //      axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=${currentPage}`).then(response=>{
-  //      setMovies(response.data.results)
-  //      }).catch(err=>{console.log(err)})
-  //      console.log('default movies')
-  //      setTotalPages(12)
-  //     }
-  //     },[query, currentPage])
+    useEffect(() => {
+      if (parsedMovies) {
+        if (query !== '') {
+          setParsedMovies(parsedMovies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase())))
+        }
+      }
+    }, [query])
+    
 
 
   //     const handleBackspace = (event) => {
@@ -94,7 +97,9 @@ export default function SavedMovies() {
                   aria-label="comment-input"
                   aria-describedby="basic-addon2"
                   type="search"
+                  onChange={changeHandler}
                   name='search'
+                  value={query}
                   className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
                 />
             </InputGroup>
