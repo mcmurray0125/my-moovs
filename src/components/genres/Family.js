@@ -36,11 +36,11 @@ export default function Family() {
     <div>
         <Navigation/>
           <Container style={{marginTop: "6rem"}}>
-          <h1 className='text-center mb-4'>Family Movies</h1>
+          <h1 className='text-center mb-4'><i class="fa-solid fa-child-reaching fs-3"></i> Family Movies <i class="fa-solid fa-child-reaching fs-3"></i></h1>
             <Row >
             {familyMovies.map((movie, index) => {
               return (
-                <Col xs={3} key={index} className='mb-4'>
+                <Col xs={6} md={3} key={index} className='mb-4'>
                   <MovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )

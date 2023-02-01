@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, Container, InputGroup, Form, Button } from "react-bootstrap"
+import { Card, Container, Form, Button } from "react-bootstrap"
 import star from '../assets/star.png'
 import starFilled from '../assets/star-filled.png'
 import { db } from "../firebase"
@@ -104,7 +104,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
    
   return (
     <Container >
-        <div className='d-flex rounded p-3 gap-2 wrapper position-relative'>
+        <div className='d-flex rounded p-3 gap-2 wrapper position-relative shadow'>
           {/* Backdrop Image */}
             <div className='backdrop-image position-absolute rounded' style={{
                 top: "0",
@@ -130,7 +130,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
                 </Card.Body>
             </Card>
             {/* Comments Section */}
-            <section className='comments-wrapper d-flex flex-column w-100 gap-2'>
+            <section className='comments-wrapper d-flex flex-column w-100 gap-2 overflow-scroll'>
               <Form className='comments-form w-100 h-auto rounded p-1'>
                   <Form.Group className="mb-1" controlId="comments">
                       <Form.Label>Comments</Form.Label>
@@ -149,6 +149,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
                       Submit
                   </Button>
               </Form>
+              {/* Render Comments */}
               <article>
               {dbComments.map((comment, index) => {
                 if (comment.includes(id)) {

@@ -36,7 +36,7 @@ export default function Dashboard() {
                 </Card.Body>
             </Card>
             <div className='w-100 text-center mt-2'>
-                <Link to="/home">Go to Home Page</Link>
+                <Link to="/">Go to Home Page</Link>
             </div>
             <div className='w-100 text-center mt-2'>
                 <Button variant='link' onClick={handleLogout}>Log Out</Button>

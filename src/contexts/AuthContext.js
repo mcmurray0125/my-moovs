@@ -80,10 +80,6 @@ export function AuthProvider({ children }) {
          checkFolder();
        }
       }, [currentUser]);
-
-      useEffect(() => {
-        console.log(hasFolder);
-      }, [hasFolder]);
       
     const value = { 
         loading,

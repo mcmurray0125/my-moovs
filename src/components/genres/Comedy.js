@@ -36,11 +36,11 @@ export default function Comedy() {
     <div>
         <Navigation/>
           <Container style={{marginTop: "6rem"}}>
-          <h1 className='text-center mb-4'>Comedy Movies</h1>
+          <h1 className='text-center mb-4'><i class="fa-regular fa-face-laugh-beam fs-3"></i> Comedy Movies <i class="fa-regular fa-face-laugh-beam fs-3"></i></h1>
             <Row >
             {comedyMovies.map((movie, index) => {
               return (
-                <Col xs={3} key={index} className='mb-4'>
+                <Col xs={6} md={3} key={index} className='mb-4'>
                   <MovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )

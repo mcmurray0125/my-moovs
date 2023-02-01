@@ -36,11 +36,11 @@ export default function Action() {
     <div>
         <Navigation/>
           <Container style={{marginTop: "6rem"}}>
-          <h1 className='text-center mb-4'>Action Movies</h1>
+          <h1 className='text-center mb-4'><i className="fa-solid fa-burst fs-3"></i> Action Movies <i className="fa-solid fa-burst fs-3"></i></h1>
             <Row >
             {actionMovies.map((movie, index) => {
               return (
-                <Col xs={3} key={index} className='mb-4'>
+                <Col xs={3} md={3} key={index} className='mb-4'>
                   <MovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )

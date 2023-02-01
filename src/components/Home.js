@@ -36,12 +36,12 @@ export default function Home() {
                 ref={videoRef} >
                 <source src={Theater} type="video/mp4"/>
             </video>
-            <div className='video-controls d-flex position-absolute bottom-0 mb-2 start-0 ms-2 gap-1 opacity-50'>
+            <div className='video-controls d-flex position-absolute bottom-0 start-0 gap-1 opacity-50'>
                 <Button onClick={handlePlay} className="rounded-circle" variant="light"><i className="fa-solid fa-play"></i></Button>
                 <Button onClick={handlePause} className="rounded-circle" variant="light"><i className="fa-solid fa-pause"></i></Button>
             </div>
             <Container fluid="md" >
-                <Card style={{backgroundColor: "rgba(255,255,255,0.25)"}} className="p-3" >
+                <Card style={{backgroundColor: "rgba(255,255,255,0.25)"}} className="home-card p-3" >
                     <Card.Body className='text-center'>
                         <Card.Title className='fs-1 text-light'>
                             Welcome to MyMoovs!

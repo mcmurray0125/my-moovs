@@ -80,7 +80,7 @@ export default function SavedMovies() {
             <div className='w-100' style={{maxWidth: "400px"}}>
             <Card className="text-center mb-3">
                     <Card.Body >
-                        <Card.Title>Saved Moovs</Card.Title>
+                      {dbMovies !== [] ? <Card.Title>Saved Moovs</Card.Title> : <Card.Title>No Saved Moovs</Card.Title> }
                         {currentUser ?
                         <Card.Text>Find your movies below.</Card.Text> :
                         <Card.Text><Link to="/login">Login</Link> or <Link to="/signup">Create an account</Link> to save movies.</Card.Text> }

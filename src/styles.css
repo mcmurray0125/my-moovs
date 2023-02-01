@@ -1,3 +1,10 @@
+body {
+  font-family: "Red Hat Display", sans-serif;
+}
+.video-controls {
+  transform: scale(0.5);
+}
+
 .card {
   background-color: rgba(37, 108, 207, 0.216);
   transform: scale(1) !important;
@@ -8,7 +15,12 @@
   background-color: rgba(10, 119, 73, 0.224);
   transform: scale(1.05) !important;
 }
-
+.home-card {
+  transform: scale(1) !important;
+}
+.home-card:hover {
+  transform: scale(1) !important;
+}
 .star {
   transform: rotate(0deg) !important;
   transition: 0.2s !important;
@@ -36,10 +48,20 @@
 }
 
 .comment-card {
-  background-color: rgba(224, 224, 224, 0.626);
+  background-color: rgba(239, 239, 239, 0.817);
   transition: all 0.2s !important;
 }
 .comment-card:hover {
-  background-color: rgba(239, 239, 239, 0.817);
+  background-color: rgba(239, 239, 239, 0.883);
   transform: scale(1) !important;
+}
+
+@media screen and (max-width: 700px) {
+  .wrapper {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .large-card {
+    max-width: 100% !important;
+  }
 }

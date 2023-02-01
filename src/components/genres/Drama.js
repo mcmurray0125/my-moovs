@@ -36,11 +36,11 @@ export default function Drama() {
     <div>
         <Navigation/>
           <Container style={{marginTop: "6rem"}}>
-          <h1 className='text-center mb-4'>Drama Movies</h1>
+          <h1 className='text-center mb-4'><i class="fa-solid fa-masks-theater fs-3"></i> Drama Movies <i class="fa-solid fa-masks-theater fs-3"></i></h1>
             <Row >
             {dramaMovies.map((movie, index) => {
               return (
-                <Col xs={3} key={index} className='mb-4'>
+                <Col xs={6} md={3} key={index} className='mb-4'>
                   <MovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )
