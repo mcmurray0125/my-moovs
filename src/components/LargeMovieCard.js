@@ -5,6 +5,7 @@ import starFilled from '../assets/star-filled.png'
 import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import { useAuth } from '../contexts/AuthContext'
+import MovieCard from './MovieCard'
 
 
 export default function LargeMovieCard({movie, poster_path, title, release_date, id, paginate}) {
@@ -13,6 +14,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
   const [comments, setComments] = React.useState("")
   const [dbComments, setDBComments] = React.useState([])
   const [savedMovies, setSavedMovies] = React.useState([])
+  
   
   const  handleClick = async () => {
     if (currentUser) {
@@ -102,7 +104,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
    
   return (
     <Container >
-        <div className='d-flex rounded p-3 gap-2 wrapper position-relative shadow'>
+        <div className='d-flex rounded p-3 gap-2 saved-movie-wrapper position-relative shadow'>
           {/* Backdrop Image */}
             <div className='backdrop-image position-absolute rounded' style={{
                 top: "0",
@@ -117,16 +119,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
                 zIndex: "-100"
             }}></div>
             {/* Movie Poster */}
-            <Card className="large-card shadow border-0 h-100" style={{maxWidth: "26%"}}>
-                <Card.Body >
-                    <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg" />
-                    <Card.Title className='my-1'>{title}</Card.Title>
-                    <div className='d-flex align-items-center justify-content-between'>
-                    <Card.Text className='my-0'>{release_date}</Card.Text>
-                    <img className='star' style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star}/>
-                    </div>
-                </Card.Body>
-            </Card>
+            <MovieCard {...movie} movie={movie}/>
             {/* Comments Section */}
             <section className='comments-wrapper d-flex flex-column w-100 gap-2 overflow-auto'>
               <Form className='comments-form w-100 h-auto rounded p-1'>

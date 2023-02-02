@@ -29,13 +29,20 @@ body {
   transform: rotate(90deg) !important;
 }
 
-.large-card {
-  background-color: rgba(224, 224, 224, 0.626);
+.movie-card{
+  margin: auto
+}
+
+.saved-movie-wrapper .movie-card {
+  margin: 0;
+  height: 100%;
+  max-width: 26%;
+  background-color: rgba(224, 224, 224, 0.626) !important;
   transform: scale(1) !important;
   transition: all 0.2s !important;
 }
-.large-card:hover {
-  background-color: rgba(239, 239, 239, 0.817);
+.saved-movie-wrapper .movie-card:hover {
+  background-color: rgba(239, 239, 239, 0.817) !important;
   transform: scale(1) !important;
 }
 
@@ -47,21 +54,21 @@ body {
   background-color: rgba(239, 239, 239, 0.817);
 }
 
-.comment-card {
+.comments-wrapper .comment-card {
   background-color: rgba(239, 239, 239, 0.817);
   transition: all 0.2s !important;
 }
-.comment-card:hover {
+.comments-wrapper .comment-card:hover {
   background-color: rgba(239, 239, 239, 0.883);
   transform: scale(1) !important;
 }
 
 @media screen and (max-width: 700px) {
-  .wrapper {
+  .saved-movie-wrapper {
     flex-direction: column !important;
     align-items: center !important;
   }
-  .large-card {
+  .saved-movie-wrapper .card {
     max-width: 100% !important;
   }
 }
