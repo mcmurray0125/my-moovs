@@ -24,7 +24,6 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
           saved: arrayRemove(movieRef)
         });
         setFavorite(false)
-        console.log(`Removed ${movieRef}`)
       } catch(error) {
         console.log(error)
         }
@@ -34,7 +33,6 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
           saved: arrayUnion(movieRef)
         });
         setFavorite(true)
-        console.log(`Saved ${movieRef}`)
       } catch(error) {
         console.log(error)
         }
@@ -152,7 +150,7 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
               {/* Render Comments */}
               <article>
               {dbComments.map((comment, index) => {
-                if (comment.includes(id)) {
+                if (comment.startsWith(id)) {
                   return (
                     <Card key={index} className="comment-card mb-1">
                       <Card.Body>{comment.replace(id, '')}</Card.Body>

@@ -13,14 +13,39 @@ export default function SavedMovies() {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState("")
+    const [variant, setVariant ] = useState("")
+    const [linkPath, setLinkPath] = useState("")
+    const [linkText, setLinkText] = useState("")
     const { currentUser, hasFolder } = useAuth()
     const [query, setQuery] = React.useState('')
     const [totalPages, setTotalPages] = React.useState(1)
     const [currentPage, setCurrentPage] = React.useState(1);
-    const [dbMovies, setDBMovies] = React.useState()
+    const [dbMovies, setDBMovies] = React.useState([])
     const [parsedMovies, setParsedMovies] = React.useState([])
+    const [filteredMovies, setFilteredMovies] = React.useState(parsedMovies)
 
     const paginate = (number) => setCurrentPage(number);
+
+    useEffect(() => {
+      if (currentUser) {
+        if (dbMovies.length === 0) {
+          setVariant("info")
+          setMessage("No Saved Movies! When browsing, click the star icon to save a movie.")
+          setLinkText("Search for Movies")
+          setLinkPath("/search-movies")
+        } else {
+          setVariant("success")
+          setMessage("See your saved movies below.")
+          setLinkText("")
+          setLinkPath("")
+        }
+      } else {
+        setVariant("warning")
+        setMessage("You need to be logged in to save Movies.")
+        setLinkText("Login")
+        setLinkPath("/login")
+      }
+    },[dbMovies])
 
      //Get the Movies from Database
      useEffect(() => {
@@ -53,44 +78,28 @@ export default function SavedMovies() {
        setQuery(e.target.value);
      }
 
-    //If query is empty, parsedMovies
-    //if query !== '',
-      //filter parsed movies based on if parsedmovies includes the query.
-
-    //When input is empty, display saved movies by default.
+    //When input is empty, setFiltered to parsedMovie,
+      // else, setFiltered to parsedMovies, filtered by query.
     useEffect(() => {
       if (parsedMovies) {
         if (query !== '') {
-          setParsedMovies(parsedMovies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase())))
+          setFilteredMovies(parsedMovies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase())))
+        } else {
+          setFilteredMovies(parsedMovies)
         }
       }
-    }, [query])
+    }, [query, parsedMovies])
     
-
-
-  //     const handleBackspace = (event) => {
-  //       if (event.key === 'Backspace') {
-  //         setCurrentPage(1);
-  //       }
-  //     }
-
-
   return (
     <div>
         <Navigation/>
         <Container style={{marginTop: "6rem"}}>
           <div className='d-flex align-items-center flex-column justify-content-start'>
-            <div className='w-100' style={{maxWidth: "400px"}}>
-            <Card className="text-center mb-3">
-                    <Card.Body >
-                      {dbMovies !== [] ? <Card.Title>Saved Moovs</Card.Title> : <Card.Title>No Saved Moovs</Card.Title> }
-                        {currentUser ?
-                        <Card.Text>Find your movies below.</Card.Text> :
-                        <Card.Text><Link to="/login">Login</Link> or <Link to="/signup">Create an account</Link> to save movies.</Card.Text> }
-                    </Card.Body>
-            </Card>
-            </div>
-            <InputGroup className="mb-3">
+            {/* If dbMovies is not empty, display search bar */}
+            <Alert variant={variant}>
+              {message} <Alert.Link href={linkPath}>{linkText}</Alert.Link>
+            </Alert>
+            {dbMovies.length !== 0 && <InputGroup className="mb-3">
               <Form.Label className='fs-3 text-center text-decoration-underline my-0' style={{width: "100%"}}>Search your Saved Moovs</Form.Label>
                 <Form.Control
                   placeholder="Movie Title"
@@ -103,9 +112,10 @@ export default function SavedMovies() {
                   className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
                 />
             </InputGroup>
+            }
           </div>
           <Row >
-            {parsedMovies.map((movie, index) => {
+            {filteredMovies.map((movie, index) => {
               return (
                 <Col sm={12} key={index} className='mb-4'>
                   <LargeMovieCard {...movie} paginate={paginate} movie={movie}/>

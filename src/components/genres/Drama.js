@@ -36,7 +36,7 @@ export default function Drama() {
     <div>
         <Navigation/>
           <Container style={{marginTop: "6rem"}}>
-          <h1 className='text-center mb-4'><i class="fa-solid fa-masks-theater fs-3"></i> Drama Movies <i class="fa-solid fa-masks-theater fs-3"></i></h1>
+          <h1 className='text-center mb-4'><i className="fa-solid fa-masks-theater fs-3"></i> Drama Movies <i className="fa-solid fa-masks-theater fs-3"></i></h1>
             <Row >
             {dramaMovies.map((movie, index) => {
               return (

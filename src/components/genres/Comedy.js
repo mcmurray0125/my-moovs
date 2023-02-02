@@ -36,7 +36,7 @@ export default function Comedy() {
     <div>
         <Navigation/>
           <Container style={{marginTop: "6rem"}}>
-          <h1 className='text-center mb-4'><i class="fa-regular fa-face-laugh-beam fs-3"></i> Comedy Movies <i class="fa-regular fa-face-laugh-beam fs-3"></i></h1>
+          <h1 className='text-center mb-4'><i className="fa-regular fa-face-laugh-beam fs-3"></i> Comedy Movies <i className="fa-regular fa-face-laugh-beam fs-3"></i></h1>
             <Row >
             {comedyMovies.map((movie, index) => {
               return (

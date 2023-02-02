@@ -19,7 +19,6 @@ export default function SearchMovies() {
       axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=${currentPage}`).then(response=>{
       setMovies(response.data.results)
       }).catch(err=>{console.log(err)})
-      console.log('default movies')
       setTotalPages(12)
     }
   },[query, currentPage])
@@ -45,7 +44,6 @@ export default function SearchMovies() {
       setMovies(response.data.results)
       setTotalPages(response.data.total_pages)
       }).catch(err=>{console.log(err)})
-      console.log('searching')
     }
     return () => {
       window.removeEventListener('keydown', handleBackspace);
@@ -88,14 +86,12 @@ export default function SearchMovies() {
             {query === '' &&
             <div className='d-flex align-items-center justify-content-between'>
                 <span className='d-flex justify-content-center align-items-center gap-3 mb-3'>
-                  <i className="fa-solid fa-ranking-star"></i>
-                  <p className='text-center fs-5 my-0'>Showing Top-Rated Movies</p>
-                  <i className="fa-solid fa-ranking-star"></i>
+                  <p className='text-center text-nowrap fs-5 my-0'>Showing Top-Rated Movies</p>
                 </span>
                 <p>Page {currentPage} of {totalPages}</p>
             </div>
             }
-            {query !== '' && <span className='d-flex justify-content-between'><p>Showing results for {query}</p><p>Page {currentPage} of {totalPages}</p></span>}
+            {query !== '' && <span className='d-flex justify-content-between'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>}
             <Row >
             {movies.map((movie, index) => {
               return (

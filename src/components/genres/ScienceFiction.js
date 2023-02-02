@@ -36,7 +36,7 @@ export default function ScienceFiction() {
     <div>
         <Navigation/>
           <Container style={{marginTop: "6rem"}}>
-          <h1 className='text-center mb-4'><i class="fa-solid fa-flask fs-3"></i> Sci-Fi Movies <i class="fa-solid fa-flask fs-3"></i></h1>
+          <h1 className='text-center mb-4'><i className="fa-solid fa-flask fs-3"></i> Sci-Fi Movies <i className="fa-solid fa-flask fs-3"></i></h1>
             <Row >
             {sciFiMovies.map((movie, index) => {
               return (

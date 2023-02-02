@@ -22,7 +22,6 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           saved: arrayRemove(movieRef)
         });
         setFavorite(false)
-        console.log(`Removed ${movieRef}`)
       } catch(error) {
         console.log(error)
         }
@@ -32,7 +31,6 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           saved: arrayUnion(movieRef)
         });
         setFavorite(true)
-        console.log(`Saved ${movieRef}`)
       } catch(error) {
         console.log(error)
         }
