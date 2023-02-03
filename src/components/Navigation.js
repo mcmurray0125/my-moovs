@@ -3,12 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import smallLogo from "../assets/small-logo.png"
 
 export default function Navigation() {
     return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="position-absolute w-100 top-0 py-3" id="navbar" style={{zIndex: "100"}}>
+    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="w-100 top-0 py-3" id="navbar" style={{zIndex: "100"}}>
       <Container>
-        <Navbar.Brand href="/">MyMoovs</Navbar.Brand>
+        <Navbar.Brand href="/">
+            <img
+              src={smallLogo}
+              height="30"
+              className="d-inline-block align-top"
+              alt="MyMoovs logo"
+            />
+          </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

@@ -1,8 +1,14 @@
+html {
+  margin: 0;
+}
+
 body {
   font-family: "Red Hat Display", sans-serif;
+  margin: 0;
 }
 .video-controls {
   transform: scale(0.5);
+
 }
 
 .card {
