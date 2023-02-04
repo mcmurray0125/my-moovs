@@ -69,7 +69,7 @@ export default function SearchMovies() {
   return (
     <div>
         <Navigation/>
-          <Container style={{marginTop: "6rem"}}>
+          <Container className='my-4'>
             <InputGroup className="mb-3">
               <Form.Label className='fs-2 text-center text-decoration-underline' style={{width: "100%"}}>Find Movies</Form.Label>
                 <Form.Control

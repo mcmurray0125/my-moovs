@@ -51,7 +51,6 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
         await updateDoc(docRef, {
         comments: arrayUnion(id + comments)
       });
-      console.log(`Saved ${comments}`)
     } catch(error) {
       console.log(error)
     } try {

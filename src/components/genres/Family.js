@@ -35,7 +35,7 @@ export default function Family() {
   return (
     <div>
         <Navigation/>
-          <Container style={{marginTop: "6rem"}}>
+          <Container className='my-4'>
           <h1 className='text-center mb-4'><i className="fa-solid fa-child-reaching fs-3"></i> Family Movies <i className="fa-solid fa-child-reaching fs-3"></i></h1>
             <Row >
             {familyMovies.map((movie, index) => {

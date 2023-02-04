@@ -93,16 +93,15 @@ export default function SavedMovies() {
   return (
     <div>
         <Navigation/>
-        <Container style={{marginTop: "6rem"}}>
+        <Container className='my-4'>
           <div className='d-flex align-items-center flex-column justify-content-start'>
             {/* If dbMovies is not empty, display search bar */}
             <Alert variant={variant}>
               {message} <Alert.Link href={linkPath}>{linkText}</Alert.Link>
             </Alert>
             {dbMovies.length !== 0 && <InputGroup className="mb-3">
-              <Form.Label className='fs-3 text-center text-decoration-underline my-0' style={{width: "100%"}}>Search your Saved Moovs</Form.Label>
                 <Form.Control
-                  placeholder="Movie Title"
+                  placeholder="Search saved Moovs"
                   aria-label="comment-input"
                   aria-describedby="basic-addon2"
                   type="search"
