@@ -8,7 +8,6 @@ body {
 }
 .video-controls {
   transform: scale(0.5);
-
 }
 
 .card {
@@ -26,7 +25,19 @@ body {
 }
 .home-card:hover {
   transform: scale(1) !important;
+  cursor: default;
 }
+
+.home-btn-card {
+  background-color: transparent;
+  cursor: pointer;
+  height: 150px;
+  width: 150px;
+}
+.home-btn-card:hover {
+  background-color: rgba(32, 79, 179, 0.434);
+}
+
 .star {
   transform: rotate(0deg) !important;
   transition: 0.2s !important;
@@ -35,8 +46,8 @@ body {
   transform: rotate(90deg) !important;
 }
 
-.movie-card{
-  margin: auto
+.movie-card {
+  margin: auto;
 }
 
 .saved-movie-wrapper .movie-card {

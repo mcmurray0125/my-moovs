@@ -4,9 +4,11 @@ import { Container, Row, Col, Card, Button, Image } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import Theater from "../assets/theater.mp4"
 import largeLogo from "../assets/large-logo.png"
-
+import homeCards from "./home-cards"
+import HomeCard from './HomeCard'
 
 export default function Home() {
+
   const navigate = useNavigate()
 
   const videoRef = useRef();
@@ -19,9 +21,23 @@ export default function Home() {
       videoRef.current.pause()
   }
 
+
+  const cardElements = homeCards.map((item) => {
+    return (
+        <HomeCard
+            key={item.id}
+            item={item}/>
+    )
+  })
+
+  const handleClick = () => {
+    navigate("/search-movies");
+};
+
 //   className='d-flex flex-column align-items-center justify-content-center mt-5'
   return (
     <>
+            {/* Background Video */}
             <div className='video-wrapper position-fixed h-100 w-100'>
                 <div className='video-container w-100 vh-100 position-relative overflow-hidden' style={{zIndex: "-200"}}>
                     <video autoPlay loop muted
@@ -50,16 +66,17 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            {/* Main Homepage */}
             <Navigation/>
-            <Container fluid="md" className='mt-3'>
+            <Container fluid="md" className='d-flex flex-column justify-content-center' style={{minHeight: "90vh"}}>
                 <Row gap={2} xs={1} sm={2} className="d-flex align-items-center">
-                    <Col className='d-flex justify-content-center align-items-center h-100 my-3'>
-                        <Card style={{backgroundColor: "rgba(255,255,255,0.25)"}} className="bg-transparent home-card p-0 boder border-light p-3" >
+                    <Col className='d-flex justify-content-center align-items-center my-3'>
+                        <Card className="bg-transparent home-card p-0 boder border-light p-3">
                             <Card.Img src={largeLogo} />
                         </Card>
                     </Col>
                     <Col className='d-flex justify-content-center my-3'>
-                        <Card style={{backgroundColor: "rgba(255,255,255,0.25)"}} className="home-card p-3 bg-transparent border border-light" >
+                        <Card className="home-card p-3 bg-transparent border border-light" >
                             <Card.Body className='text-center'>
                                 <Card.Title className='fs-3 text-light'>
                                     Welcome!
@@ -73,53 +90,21 @@ export default function Home() {
                         </Card>
                     </Col>
                 </Row>
-                <Row><h1 style={{zIndex: "400"}} className="text-light m-0 text-center mt-2">Browse Genre</h1></Row>
-                <Container className='home-cards-wrapper my-3'>
-                <Row xs={2} sm={3}>
-                    <Col className="my-3">
-                        <Card id="action-card">
-                            <Card.Body>
-                                <Card.Title className='text-light text-center m-0 border border-light p-2'>Action</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="my-3">
-                        <Card id="comedy-card">
-                            <Card.Body>
-                                <Card.Title className='text-light text-center m-0 border border-light p-2'>Comedy</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="my-3">
-                        <Card id="family-card">
-                            <Card.Body>
-                                <Card.Title className='text-light text-center m-0 border border-light p-2'>Family</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="my-3">
-                        <Card id="drama-card">
-                            <Card.Body>
-                                <Card.Title className='text-light text-center m-0 border border-light p-2'>Drama</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="my-3">
-                        <Card id="sci-fi-card">
-                            <Card.Body>
-                                <Card.Title className='text-light text-center m-0 border border-light p-2'>Sci-Fi</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="my-3">
-                        <Card id="popular-card">
-                            <Card.Body>
-                                <Card.Title className='text-light text-center m-0 border border-light p-2'>Popular</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>       
-
+                <Row><h1 style={{zIndex: "400"}} className="text-light m-0 text-center my-5">Browse by Genre</h1></Row>
+                <Container className='home-cards-wrapper'>
+                    <Row xs={2} sm={3} lg={6}>
+                        {cardElements}
+                    </Row>   
+                    <Row><h1 style={{zIndex: "400"}} className="text-light my-5 text-center">Or</h1></Row>   
+                    <Row>
+                        <Col className="my-3 d-flex align-items-center justify-content-center">
+                            <Card id="search-btn-card" className="home-btn-card bg-transparent w-100 h-auto" onClick={handleClick}>
+                                <Card.Body className='border border-light rounded d-flex flex-column justify-content-center'>
+                                    <Card.Title className='text-light text-center m-0 p-2'>Go To Search</Card.Title>
+                                </Card.Body>
+                            </Card>
+                        </Col>     
+                    </Row> 
                 </Container>
             </Container>
     </>
