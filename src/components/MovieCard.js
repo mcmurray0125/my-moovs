@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Card, Toast } from "react-bootstrap"
 import star from '../assets/star.png'
+import { Link } from 'react-router-dom'
 import starFilled from '../assets/star-filled.png'
 import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
@@ -38,6 +39,8 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           console.log(error)
         }
       }
+    } else {
+      setShow(true);
     }
   }
 
@@ -73,12 +76,14 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   return (
     <>
       <section className='fav-toast-wrapper position-absolute top-25 start-25' style={{zIndex: "300"}}>
-        <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide>
+        <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide className='w-auto'>
           <Toast.Header>
             <strong className="me-auto">MyMoovs</strong>
-            <small>&#128077;</small>
+            {currentUser ? <small>&#128077;</small> : <small>&#128078;</small>}
+            
           </Toast.Header>
-          <Toast.Body>{title} {favorite ?`added to saved movies.` : `removed from saved`}</Toast.Body>
+          {currentUser? <Toast.Body>{title} {favorite ?`added to saved movies.` : `removed from saved`}</Toast.Body> : <Toast.Body>Login or <Link to="/signup">Signup</Link> to save.</Toast.Body> }
+          
         </Toast>
       </section>
       <Card className="movie-card shadow border-0">
