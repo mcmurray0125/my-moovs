@@ -26,16 +26,16 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
         setShow(true)
       } catch(error) {
         console.log(error)
-        }
+      }
       } else {
         try {
           await updateDoc(savedRef, {
-          saved: arrayUnion(movieRef)
-        });
-        setFavorite(true)
-        setShow(true)
-      } catch(error) {
-        console.log(error)
+            saved: arrayUnion(movieRef)
+          });
+          setFavorite(true)
+          setShow(true)
+        } catch(error) {
+          console.log(error)
         }
       }
     }

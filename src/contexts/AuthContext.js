@@ -67,14 +67,25 @@ export function AuthProvider({ children }) {
            if (docSnap.exists()) {
              setHasFolder(true);
            } else {
-            try {
-              await setDoc(doc(db, "users", currentUser.uid), {
-                  saved: [],
-                  comments: []
-                })
-          } catch(error) {
-              console.log(error)
-          }
+            if (currentUser.email) {
+              try {
+                await setDoc(doc(db, "users", currentUser.uid), {
+                    saved: [],
+                    comments: []
+                  })
+            } catch(error) {
+                console.log(error)
+            }
+            } else {
+              try {
+                await setDoc(doc(db, "users", currentUser.uid), {
+                    saved: [`{"adult":false,"backdrop_path":"/jFp5aAlGQ1H3gwdORL2urr8dnoN.jpg","genre_ids":[36,18,53,10752],"id":205596,"original_language":"en","original_title":"The Imitation Game","overview":"Based on the real life story of legendary cryptanalyst Alan Turing, the film portrays the nail-biting race against time by Turing and his brilliant team of code-breakers at Britain's top-secret Government Code and Cypher School at Bletchley Park, during the darkest days of World War II.","popularity":52.988,"poster_path":"/zSqJ1qFq8NXFfi7JeIYMlzyR0dx.jpg","release_date":"2014-11-14","title":"The Imitation Game","video":false,"vote_average":8,"vote_count":15328}`],
+                    comments: ["205596Welcome Demo User! This is a sample saved movie. You can remove this movie by clicking the star (refresh or go to other pages to confirm)."]
+                  })
+            } catch(error) {
+                console.log(error)
+            }
+            }
            }
          };
          checkFolder();
