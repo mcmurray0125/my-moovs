@@ -95,7 +95,7 @@ export default function Home() {
                     <Row xs={2} sm={3} lg={6}>
                         {cardElements}
                     </Row>   
-                    <Row><h1 style={{zIndex: "400"}} className="text-light my-5 text-center">Or</h1></Row>   
+                    {/* <Row><h1 style={{zIndex: "400"}} className="text-light my-5 text-center">Or</h1></Row>    */}
                     <Row>
                         <Col className="my-3 d-flex align-items-center justify-content-center">
                             <Card id="search-btn-card" className="home-btn-card bg-transparent w-100 h-auto" onClick={handleClick}>

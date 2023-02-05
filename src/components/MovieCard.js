@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { Card, Toast } from "react-bootstrap"
+import { Card, Toast, Modal, Button } from "react-bootstrap"
 import star from '../assets/star.png'
 import { Link } from 'react-router-dom'
 import starFilled from '../assets/star-filled.png'
 import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import { useAuth } from '../contexts/AuthContext'
+import MovieModal from './Modal'
 
 
 export default function MovieCard({movie, poster_path, title, release_date, id, paginate}) {
@@ -13,6 +14,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   const { currentUser } = useAuth()
   const [savedMovies, setSavedMovies] = React.useState([])
   const [show, setShow] = React.useState(false);
+  const [modalShow, setModalShow] = React.useState(false);
   
   const  handleClick = async () => {
     if (currentUser) {
@@ -43,6 +45,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
       setShow(true);
     }
   }
+
 
   useEffect(() => {
     const checkData = async () => {
@@ -79,16 +82,14 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
         <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide className='w-auto'>
           <Toast.Header>
             <strong className="me-auto">MyMoovs</strong>
-            {currentUser ? <small>&#128077;</small> : <small>&#128078;</small>}
-            
+            {currentUser ? <small>&#128077;</small> : <small>&#128078;</small>}      
           </Toast.Header>
-          {currentUser? <Toast.Body>{title} {favorite ?`added to saved movies.` : `removed from saved`}</Toast.Body> : <Toast.Body>Login or <Link to="/signup">Signup</Link> to save.</Toast.Body> }
-          
+          {currentUser? <Toast.Body>{title} {favorite ?`added to saved movies.` : `removed from saved`}</Toast.Body> : <Toast.Body>Login or <Link to="/signup">Signup</Link> to save.</Toast.Body> }   
         </Toast>
       </section>
       <Card className="movie-card shadow border-0">
           <Card.Body >
-              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg" />
+              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg" role="button" onClick={() => setModalShow(true)}/>
               <Card.Title className='my-1'>{title}</Card.Title>
               <div className='d-flex align-items-center justify-content-between'>
               <Card.Text className='my-0'>{release_date}</Card.Text>
@@ -96,6 +97,11 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
               </div>
           </Card.Body>
       </Card>
+      <MovieModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          movie={movie}
+      />
     </>
   )
 }

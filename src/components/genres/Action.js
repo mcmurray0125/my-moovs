@@ -40,7 +40,7 @@ export default function Action() {
             <Row >
             {actionMovies.map((movie, index) => {
               return (
-                <Col xs={3} md={3} key={index} className='mb-4'>
+                <Col xs={6} md={3} key={index} className='mb-4'>
                   <MovieCard {...movie} paginate={paginate} movie={movie}/>
                 </Col>
                 )
