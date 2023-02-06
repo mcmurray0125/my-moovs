@@ -1,26 +1,35 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import Navigation from './Navigation'
 import { Container, Row, Col, Card, Button, Image } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
-import Theater from "../assets/theater.mp4"
 import largeLogo from "../assets/large-logo.png"
 import homeCards from "./home-cards"
 import HomeCard from './HomeCard'
+import VideoBG from './VideoBG'
+import PhotoBG from './PhotoBG'
 
 export default function Home() {
+const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
+
+React.useEffect(() => {
+    function watchWidth() {
+        console.log("Setting up...")
+        setWindowWidth(window.innerWidth)
+    }
+    
+    window.addEventListener("resize", watchWidth)
+    
+    return function() {
+        console.log("Cleaning up...")
+        window.removeEventListener("resize", watchWidth)
+    }
+}, [])
 
   const navigate = useNavigate()
 
-  const videoRef = useRef();
-
-  const handlePlay = () => {
-      videoRef.current.play()
-  }
-
-  const handlePause = () => {
-      videoRef.current.pause()
-  }
-
+  const handleClick = () => {
+    navigate("/search-movies");
+};
 
   const cardElements = homeCards.map((item) => {
     return (
@@ -30,40 +39,13 @@ export default function Home() {
     )
   })
 
-  const handleClick = () => {
-    navigate("/search-movies");
-};
-
-//   className='d-flex flex-column align-items-center justify-content-center mt-5'
   return (
     <>
-            {/* Background Video */}
+            {/* Homepage Background */}
             <div className='video-wrapper position-fixed h-100 w-100'>
                 <div className='video-container w-100 vh-100 position-relative overflow-hidden' style={{zIndex: "-200"}}>
-                    <video autoPlay loop muted
-                        style={{
-                            position: "absolute",
-                            left: "50%",
-                            top: "50%",
-                            width: "auto",
-                            height: "auto",
-                            minWidth: "100%",
-                            minHeight: "100%",
-                            transform: "translate(-50%, -50%)",
-                            zIndex: "-200"
-                        }}
-                        ref={videoRef} >
-                        <source src={Theater} type="video/mp4"/>
-                    </video>
-                    <div className='video-controls d-flex flex-column gap-1 opacity-50'
-                                    style={{
-                                        position: "absolute",
-                                        left: "0",
-                                        bottom: "0",
-                                    }}>
-                        <Button onClick={handlePlay} className="rounded-circle" variant="light"><i className="fa-solid fa-play"></i></Button>
-                        <Button onClick={handlePause} className="rounded-circle" variant="light"><i className="fa-solid fa-pause"></i></Button>
-                    </div>
+                    {/* If small screen, use PhotoBG, else use VideoBG */}
+                    {windowWidth < 1000 ? <PhotoBG/> : <VideoBG windowWidth={windowWidth}/>}
                 </div>
             </div>
             {/* Main Homepage */}
