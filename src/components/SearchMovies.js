@@ -19,7 +19,7 @@ export default function SearchMovies() {
       axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=${currentPage}`).then(response=>{
       setMovies(response.data.results)
       }).catch(err=>{console.log(err)})
-      setTotalPages(12)
+      setTotalPages(8)
     }
   },[query, currentPage])
 
@@ -52,7 +52,7 @@ export default function SearchMovies() {
 
   //Push Pagination items into array
   let items = [];
-  for (let number = 1; number <= Math.min(totalPages, 12); number++) {
+  for (let number = 1; number <= Math.min(totalPages, 8); number++) {
     items.push(
       <Pagination.Item key={number} active={currentPage === number} onClick={() => paginate(number)}>
         {number}
