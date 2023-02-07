@@ -35,7 +35,7 @@
     <a href="https://github.com/mcmurray0125/my-moovs">Explore the<strong> code »</strong></a>
     <br />
     <br />
-    <a href="#video-demos-">View Demos</a>
+    <a href="#video-demos">Video Demos</a>
     ·
     <a href="https://github.com/mcmurray0125/my-moovs/issues">Report Bug</a>
     ·
@@ -128,14 +128,22 @@ Visit a live version of the todo-list webpage <a href ="https://mymoovs.netlify.
 <details open>
   <summary>Navigating the Pages</summary>
 
-video here
+
+
+https://user-images.githubusercontent.com/116777356/217154788-046c25e2-2a91-4c16-b2be-a0078a8997fb.mp4
+
+
 
 </details>
 
-<details>
+<details open>
   <summary>Create account, Save Movies, add Comments</summary>
   
-  video here
+  
+
+https://user-images.githubusercontent.com/116777356/217154817-6e27d6ce-9b7d-4558-adcb-8592f7e27421.mp4
+
+
   
   
 </details>
@@ -143,7 +151,11 @@ video here
 <details>
   <summary>Upgrade demo account to email account.</summary>
   
-  video here
+  
+
+https://user-images.githubusercontent.com/116777356/217154850-27ae067e-42db-4098-802e-834fce828172.mp4
+
+
   
   
 </details>
