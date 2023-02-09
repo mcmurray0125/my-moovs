@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import Navigation from './Navigation'
-import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap"
+import { Container, Row, Col, Form, InputGroup } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
 import MovieCard from './MovieCard'
