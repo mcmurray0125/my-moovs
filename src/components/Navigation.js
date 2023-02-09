@@ -28,9 +28,7 @@ export default function Navigation() {
               <NavDropdown.Item href="/family">Family</NavDropdown.Item>
               <NavDropdown.Item href="/science-fiction">Sci-Fi</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/upcoming">
-                Upcoming
-              </NavDropdown.Item>
+              <NavDropdown.Item href="/upcoming-movies">Upcoming</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="/search-movies">Search <i className="fa-solid fa-magnifying-glass"></i></Nav.Link>
           </Nav>

@@ -13,14 +13,10 @@ const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
 
 React.useEffect(() => {
     function watchWidth() {
-        console.log("Setting up...")
         setWindowWidth(window.innerWidth)
     }
-    
-    window.addEventListener("resize", watchWidth)
-    
+    window.addEventListener("resize", watchWidth) 
     return function() {
-        console.log("Cleaning up...")
         window.removeEventListener("resize", watchWidth)
     }
 }, [])
@@ -58,7 +54,7 @@ React.useEffect(() => {
                         </Card>
                     </Col>
                     <Col className='d-flex justify-content-center my-3'>
-                        <Card className="home-card p-3 bg-transparent border border-light" >
+                        <Card className="home-card p-3 bg-transparent border-none" >
                             <Card.Body className='text-center'>
                                 <Card.Title className='fs-3 text-light'>
                                     Welcome!
@@ -72,7 +68,7 @@ React.useEffect(() => {
                         </Card>
                     </Col>
                 </Row>
-                <Row><h1 style={{zIndex: "400"}} className="text-light m-0 text-center my-5">Browse by Genre</h1></Row>
+                <Row><p style={{zIndex: "400"}} className="text-light fs-2 m-0 text-center my-3">Browse by Genre</p></Row>
                 <Container className='home-cards-wrapper'>
                     <Row xs={2} sm={3} lg={6}>
                         {cardElements}

@@ -16,6 +16,7 @@ import Family from './genres/Family';
 import ScienceFiction from './genres/ScienceFiction';
 import SearchMovies from './SearchMovies';
 import SavedMovies from './SavedMovies';
+import UpcomingMovies from './UpcomingMovies';
 
 
 
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/drama" element={<Drama/>}/>
                 <Route path="/family" element={<Family/>}/>
                 <Route path="/science-fiction" element={<ScienceFiction/>}/>
+                <Route path="/upcoming-movies" element={<UpcomingMovies/>}/>
               </Routes>
             </AuthProvider>
           </Router>
