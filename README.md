@@ -110,6 +110,7 @@ I appreciate your interest in MyMoovs!
 - [![REACT][react.js]][react-url]
 - [![JavaScript][javascript.com]][javascript-url]
 - [![HTML5][html.org]][html-url]
+- [![BOOTSTRAP][bootstrap.com]][bootstrap-url]
 - [![CSS][css.org]][css-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -118,7 +119,7 @@ I appreciate your interest in MyMoovs!
 
 ## View The Live Project
 
-Visit a live version of the todo-list webpage <a href ="https://mymoovs.netlify.app/">here</a>
+Visit a live version of MyMoovs <a href ="https://mymoovs.netlify.app/">here</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- USAGE EXAMPLES -->
