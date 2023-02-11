@@ -82,12 +82,12 @@ _What you can do with MyMoovs:_
 - Create an account with email or log in as a demo user.
 - Search an entire database of movies.
 - Browse movies by genre.
-- Browse movies by popular.
-- See movie description, relase data, and images.
+- Browse movies by popular & upcoming.
+- View movie description, release date, and images.
 - Save movies to your account.
 - Add comments to your saved movies.
 - Data is saved securely on Google Firebase backend.
-- Bootstrap Screen responsive design.
+- Bootstrap screen-responsive design.
 
 _Things I learned building this project:_
 
@@ -208,7 +208,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Michael Murray - [@LinkedIn](https://www.linkedin.com/in/michaelchristophermurray/) - mcmurray0125@gmail.com
 
-Project Link: [https://github.com/mcmurray0125/my-moovs](https://github.com/mcmurray0125/my-moovs)
+Personal Website - [https://michael-murray.netlify.app](https://michael-murray.netlify.app)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
