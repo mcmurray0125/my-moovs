@@ -1,12 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { Alert, Card, Button, Container, Row, Col, Form, InputGroup } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from 'react'
+import { Alert, Container, Row, Col, Form, InputGroup } from "react-bootstrap"
 import { useAuth } from '../contexts/AuthContext'
 import { db } from "../firebase"
-import { doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 import Navigation from './Navigation'
 import Pagination from 'react-bootstrap/Pagination';
-import axios from "axios"
 import LargeMovieCard from './LargeMovieCard'
 
 export default function SavedMovies() {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, Toast, Modal, Button } from "react-bootstrap"
+import { Card, Toast } from "react-bootstrap"
 import star from '../assets/star.png'
 import { Link } from 'react-router-dom'
 import starFilled from '../assets/star-filled.png'
@@ -15,21 +15,26 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   const [savedMovies, setSavedMovies] = React.useState([])
   const [show, setShow] = React.useState(false);
   const [modalShow, setModalShow] = React.useState(false);
+
   
-  const  handleClick = async () => {
+  const handleClick = async () => {
     if (currentUser) {
-      const savedRef = doc(db, "users", currentUser.uid);
       const movieRef = JSON.stringify(movie);
-      if (savedMovies.includes(movieRef)) {
+      const savedRef = doc(db, "users", currentUser.uid);
+      if (JSON.stringify(savedMovies).includes(id)) {
         try {
+          const newSavedMovies = savedMovies.filter((savedMovie) => {
+            const parsedMovie = JSON.parse(savedMovie);
+            return parsedMovie.id !== id;
+          });
           await updateDoc(savedRef, {
-          saved: arrayRemove(movieRef)
-        });
-        setFavorite(false)
-        setShow(true)
-      } catch(error) {
-        console.log(error)
-      }
+            saved: newSavedMovies
+          });
+          setFavorite(false)
+          setShow(true)
+        } catch (error) {
+          console.log(error)
+        }
       } else {
         try {
           await updateDoc(savedRef, {
@@ -37,21 +42,21 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           });
           setFavorite(true)
           setShow(true)
-        } catch(error) {
+        } catch (error) {
           console.log(error)
         }
       }
     } else {
       setShow(true);
     }
-  }
+  };
+  
 
 
   useEffect(() => {
     const checkData = async () => {
       if (currentUser) {
         const docRef = doc(db, "users", currentUser.uid);
-        const movieRef = JSON.stringify(movie);
         try {
           const docSnap = await getDoc(docRef);
           setSavedMovies(docSnap.data().saved);
@@ -61,21 +66,21 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
       }
     }
     checkData();
-  },[paginate, favorite])
+  },[paginate, favorite, currentUser])
+
 
    useEffect(() => {
-     const addFavorites = async () => {
-      const movieRef = JSON.stringify(movie);
-         if (savedMovies.includes(movieRef)) {
-           setFavorite(true)
-          } else {
-            setFavorite(false)
-          }
-        }
+     const addFavorites = () => {
+      const movieRef = JSON.stringify(id);
+      if (JSON.stringify(savedMovies).includes(movieRef)){
+        setFavorite(true)
+      } else {
+        setFavorite(false)
+      }
+    }
      addFavorites();
-   },[savedMovies])
+   },[savedMovies, id])
   
-   
   return (
     <>
       <section className='fav-toast-wrapper position-absolute top-25 start-25' style={{zIndex: "300"}}>
@@ -93,7 +98,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
               <Card.Title className='my-1'>{title}</Card.Title>
               <div className='d-flex align-items-center justify-content-between'>
               <Card.Text className='my-0'>{release_date}</Card.Text>
-              <img className='star' style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star}/>
+              <img className='star' style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star} alt="star-icon"/>
               </div>
           </Card.Body>
       </Card>
