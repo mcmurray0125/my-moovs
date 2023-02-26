@@ -80,6 +80,24 @@ body {
   transform: scale(1) !important;
 }
 
+.comment-delete-btn {
+  color: rgb(88, 88, 88);
+  background-color: transparent;
+  border-radius: 1rem !important;
+  transition: 0.15s !important;
+}
+.comment-delete-btn:hover {
+  background-color: rgba(164, 133, 133, 0.5);
+  border-radius: 1rem !important;
+  color: rgb(231, 231, 231);
+  background-color: rgba(197, 40, 40, 0.5);
+}
+.comment-delete-btn:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.5);
+  background-color: rgba(171, 9, 9, 0.611);
+  border: 1px solid rgb(83, 83, 83) !important;
+}
+
 @media screen and (max-width: 700px) {
   .saved-movie-wrapper {
     flex-direction: column !important;

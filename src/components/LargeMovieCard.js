@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react'
 import { Card, Container, Form, Button } from "react-bootstrap"
-import star from '../assets/star.png'
-import starFilled from '../assets/star-filled.png'
+import { nanoid } from "nanoid"
 import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import { useAuth } from '../contexts/AuthContext'
 import MovieCard from './MovieCard'
 
 
-export default function LargeMovieCard({movie, poster_path, title, release_date, id, paginate}) {
+export default function LargeMovieCard({movie, id, paginate}) {
   const [favorite, setFavorite] = React.useState(false)
   const { currentUser } = useAuth()
   const [comments, setComments] = React.useState("")
@@ -16,40 +15,18 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
   const [savedMovies, setSavedMovies] = React.useState([])
   
   
-  const  handleClick = async () => {
-    if (currentUser) {
-      const savedRef = doc(db, "users", currentUser.uid);
-      const movieRef = JSON.stringify(movie);
-      if (savedMovies.includes(movieRef)) {
-        try {
-          await updateDoc(savedRef, {
-          saved: arrayRemove(movieRef)
-        });
-        setFavorite(false)
-      } catch(error) {
-        console.log(error)
-        }
-      } else {
-        try {
-          await updateDoc(savedRef, {
-          saved: arrayUnion(movieRef)
-        });
-        setFavorite(true)
-      } catch(error) {
-        console.log(error)
-        }
-      }
-    }
+  const changeHandler = (e) => {
+  setComments(e.target.value);
   }
 
   //Post Comment to Database
-  const  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (currentUser) {
       const docRef = doc(db, "users", currentUser.uid);
       try {
         await updateDoc(docRef, {
-        comments: arrayUnion(id + comments)
+        comments: arrayUnion(id + comments + `//${nanoid()}`)
       });
     } catch(error) {
       console.log(error)
@@ -62,9 +39,24 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
   }
   setComments("")
   }
-
-  const changeHandler = (e) => {
-  setComments(e.target.value);
+  
+  //Delete Comment from Database
+  const deleteComment = async (comment) => {
+    if (currentUser) {
+      const docRef = doc(db, "users", currentUser.uid);
+      try {
+        await updateDoc(docRef, {
+        comments: arrayRemove(comment)
+      });
+    } catch(error) {
+      console.log(error)
+    } try {
+      const docSnap = await getDoc(docRef);
+      setDBComments(docSnap.data().comments);
+    } catch(error) {
+      console.log(error)
+    }
+  }
   }
 
   //Check Fire Store for Saved Movies and Comments
@@ -133,9 +125,10 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
                       onChange={changeHandler}
                       value={comments}
                       className="opacity-75"
+                      style={{maxHeight: "300px"}}
                       />
                   </Form.Group>
-                  <Button variant="success" onClick={handleSubmit} type="submit" className='py-1'>
+                  <Button disabled={comments === ""} variant="success" onClick={handleSubmit} type="submit" className='py-1'>
                       Submit
                   </Button>
               </Form>
@@ -143,9 +136,17 @@ export default function LargeMovieCard({movie, poster_path, title, release_date,
               <article>
               {dbComments.map((comment, index) => {
                 if (comment.startsWith(id)) {
+                  const [commentText, commentUID] = comment.split('//');
                   return (
-                    <Card key={index} className="comment-card mb-1">
-                      <Card.Body>{comment.replace(id, '')}</Card.Body>
+                    <Card key={index} className="comment-card mb-1 d-flex">
+                      <Card.Body className='d-flex'>
+                        <Card.Text className='m-0'>
+                          {commentText.replace(id, '')}
+                        </Card.Text>
+                        <button onClick={() => deleteComment(comment)} className='comment-delete-btn border-0 p-2 m-0 d-flex align-items-center justify-content-center align-self-center ms-auto' style={{height: "1.5rem", width: "1.5rem"}}>
+                          <i className="fa-solid fa-xmark"></i>
+                        </button>
+                        </Card.Body>
                     </Card>
                     )
                 }
