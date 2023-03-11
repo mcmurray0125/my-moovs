@@ -15,8 +15,12 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   const [savedMovies, setSavedMovies] = React.useState([])
   const [show, setShow] = React.useState(false);
   const [modalShow, setModalShow] = React.useState(false);
-
   
+  //Date Formatting
+  const movieDate = new Date(release_date);
+  const options = { month: 'short', day: 'numeric', year: 'numeric' };
+  const formattedDate = movieDate.toLocaleDateString('en-US', options)
+
   const handleClick = async () => {
     if (currentUser) {
       const movieRef = JSON.stringify(movie);
@@ -51,8 +55,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
     }
   };
   
-
-
+  //Set Saved movies from Database.
   useEffect(() => {
     const checkData = async () => {
       if (currentUser) {
@@ -94,10 +97,10 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
       </section>
       <Card className="movie-card shadow border-0">
           <Card.Body >
-              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg" role="button" onClick={() => setModalShow(true)}/>
+              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg movie-img" role="button" onClick={() => setModalShow(true)}/>
               <Card.Title className='my-1'>{title}</Card.Title>
               <div className='d-flex align-items-center justify-content-between'>
-              <Card.Text className='my-0'>{release_date}</Card.Text>
+              <Card.Text className='my-0'>Released {formattedDate}</Card.Text>
               <img className='star' style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star} alt="star-icon"/>
               </div>
           </Card.Body>

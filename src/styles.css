@@ -12,14 +12,8 @@ body {
 
 .card {
   background-color: rgba(37, 108, 207, 0.216);
-  transform: scale(1) !important;
-  transition: all 0.2s !important;
 }
 
-.card:hover {
-  background-color: rgba(10, 119, 73, 0.224);
-  transform: scale(1.05) !important;
-}
 .home-card {
   transform: scale(1) !important;
 }
@@ -47,9 +41,18 @@ body {
 }
 
 .movie-card {
-  margin: auto;
+  margin: auto !important;
+  background-color: transparent !important;
+  border-radius: 0px !important;
+  transform: scale(1) !important;
+  transition: all 0.3s !important;
 }
-
+.movie-card:hover {
+  transform: scale(1.03) !important;
+}
+.movie-img {
+  border-radius: 0px !important;
+}
 .saved-movie-wrapper .movie-card {
   margin: 0;
   height: 100%;
@@ -60,7 +63,6 @@ body {
 }
 .saved-movie-wrapper .movie-card:hover {
   background-color: rgba(239, 239, 239, 0.817) !important;
-  transform: scale(1) !important;
 }
 
 .comments-form {
