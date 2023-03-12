@@ -1,3 +1,9 @@
+:root {
+  --dark-bg: rgb(33, 37, 41) !important;
+  --dark-grey: rgb(22, 25, 28) !important;
+  --dark-text: rgba(255,255,255,0.55) !important;
+}
+
 html {
   margin: 0;
 }
@@ -8,8 +14,34 @@ body {
 }
 .video-controls {
   transform: scale(0.5);
+  z-index: 500 !important;
 }
 
+#dark {
+  background-color: var(--dark-bg);
+  z-index: -100 !important;
+}
+#dark h1, label {
+  color: var(--dark-text);
+}
+#dark hr {
+  background-color: var(--dark-text);
+}
+#dark #navbar {
+  border-bottom: 1px solid var(--dark-text);
+}
+.dropdown-menu {
+  left: -5.5rem !important;
+}
+#dark .dropdown-menu {
+  background-color: var(--dark-grey);
+}
+#dark .dropdown-item {
+  color: var(--dark-text);
+}
+#dark .dropdown-item:hover {
+  background-color: rgb(48, 55, 61);
+}
 .card {
   background-color: rgba(37, 108, 207, 0.216);
 }
@@ -47,6 +79,12 @@ body {
   transform: scale(1) !important;
   transition: all 0.3s !important;
 }
+
+#dark .movie-card {
+  background-color: rgba(69, 69, 69, 0.655) !important;
+  color: var(--dark-text);
+}
+
 .movie-card:hover {
   transform: scale(1.03) !important;
 }

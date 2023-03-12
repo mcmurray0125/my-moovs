@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import Navigation from './Navigation'
 import { Container, Card, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
@@ -35,8 +34,7 @@ export default function PopularMovies() {
 
   return (
     <div>
-        <Navigation/>
-          <Container className='my-4'>
+          <Container className='mt-4 pb-4'>
           <h1 className='text-center mb-4'>Popular Movies</h1>
             <Row >
             {popularMovies.map((movie, index) => {
@@ -47,7 +45,7 @@ export default function PopularMovies() {
                 )
               })}
             </Row>
-            <Pagination className='w-100 d-flex justify-content-center mb-5' onClick={top}>{items}</Pagination>
+            <Pagination className='w-100 d-flex justify-content-center' onClick={top}>{items}</Pagination>
           </Container>
     </div>
   )

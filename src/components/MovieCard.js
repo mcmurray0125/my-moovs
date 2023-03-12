@@ -96,7 +96,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
         </Toast>
       </section>
       <Card className="movie-card shadow border-0">
-          <Card.Body >
+          <Card.Body className='p-2'>
               <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg movie-img" role="button" onClick={() => setModalShow(true)}/>
               <Card.Title className='my-1'>{title}</Card.Title>
               <div className='d-flex align-items-center justify-content-between'>

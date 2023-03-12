@@ -1,13 +1,23 @@
 import React from "react"
+import { useTheme } from "../contexts/ThemeContext";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import smallLogo from "../assets/small-logo.png"
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
+
 
 export default function Navigation() {
+  const { toggleTheme } = useTheme()
+  const [isDarkMode, setDarkMode] = React.useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!isDarkMode);
+    toggleTheme();
+  };
     return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="w-100 top-0 py-3" id="navbar" style={{zIndex: "100"}}>
+    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="w-100 top-0 py-3" sticky="top" id="navbar" style={{zIndex: "1000"}}>
       <Container>
         <Navbar.Brand href="/">
             <img
@@ -33,7 +43,7 @@ export default function Navigation() {
             <Nav.Link href="/search-movies">Search <i className="fa-solid fa-magnifying-glass"></i></Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="/saved-movies"><i className="fa-solid fa-cloud"></i> Saved Movies</Nav.Link>
+            <Nav.Link href="/saved-movies"><i className="fa-solid fa-cloud"></i> Saved</Nav.Link>
             <NavDropdown title="Profile" id="collasible-nav-dropdown">
               <NavDropdown.Item eventKey={2} href="/profile">My Account</NavDropdown.Item>
               <NavDropdown.Item href="/saved-movies">Saved Movies</NavDropdown.Item>
@@ -41,6 +51,15 @@ export default function Navigation() {
               <NavDropdown.Item href="/login">Login</NavDropdown.Item>
               <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
             </NavDropdown>
+            <DarkModeSwitch
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+              size={20}
+              dark="rgba(255, 255, 255, 0.55)"
+              light="rgba(255, 255, 255, 0.55)"
+              sunColor="rgba(255, 255, 255, 0.55)"
+              moonColor="rgba(255, 255, 255, 0.55)"
+            />
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import Navigation from './Navigation'
 import { Container, Row, Col, Form, InputGroup } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
@@ -68,41 +67,40 @@ export default function SearchMovies() {
 
   return (
     <div>
-        <Navigation/>
-          <Container className='my-4'>
-            <InputGroup className="mb-3">
-              <Form.Label className='fs-2 text-center text-decoration-underline' style={{width: "100%"}}>Find Movies</Form.Label>
-                <Form.Control
-                  placeholder="Movie Title"
-                  aria-label="search"
-                  aria-describedby="basic-addon2"
-                  onChange={changeHandler}
-                  type="search"
-                  name='query'
-                  value={query}
-                  className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
-                />
-            </InputGroup>
-            {query === '' &&
-            <div className='d-flex align-items-center justify-content-between'>
-                <span className='d-flex justify-content-center align-items-center gap-3 mb-3'>
-                  <p className='text-center text-nowrap fs-5 my-0'>Showing Top-Rated Movies</p>
-                </span>
-                <p>Page {currentPage} of {totalPages}</p>
-            </div>
-            }
-            {query !== '' && <span className='d-flex justify-content-between'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>}
-            <Row >
-            {movies.map((movie, index) => {
-              return (
-                <Col xs={6} md={3} key={index} className='mb-4'>
-                  <MovieCard {...movie} paginate={paginate} movie={movie}/>
-                </Col>
-                )
-              })}
-            </Row>
-            <Pagination className='w-100 d-flex justify-content-center mb-5' onClick={scrollToTop}>{items}</Pagination>
-          </Container>
+      <Container className='mt-4 pb-4'>
+        <InputGroup className="mb-3">
+          <Form.Label className='fs-2 text-center text-decoration-underline' style={{width: "100%"}}>Find Movies</Form.Label>
+            <Form.Control
+              placeholder="Movie Title"
+              aria-label="search"
+              aria-describedby="basic-addon2"
+              onChange={changeHandler}
+              type="search"
+              name='query'
+              value={query}
+              className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
+            />
+        </InputGroup>
+        {query === '' &&
+        <div className='d-flex align-items-center justify-content-between'>
+            <span className='d-flex justify-content-center align-items-center gap-3 mb-3'>
+              <p className='text-center text-nowrap fs-5 my-0'>Showing Top-Rated Movies</p>
+            </span>
+            <p>Page {currentPage} of {totalPages}</p>
+        </div>
+        }
+        {query !== '' && <span className='d-flex justify-content-between'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>}
+        <Row >
+        {movies.map((movie, index) => {
+          return (
+            <Col xs={6} md={3} key={index} className='mb-4'>
+              <MovieCard {...movie} paginate={paginate} movie={movie}/>
+            </Col>
+            )
+          })}
+        </Row>
+        <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
+      </Container>
     </div>
   )
 }

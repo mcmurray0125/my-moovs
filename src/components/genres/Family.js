@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import Navigation from '../Navigation'
 import { Container, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
@@ -34,20 +33,19 @@ export default function Family() {
 
   return (
     <div>
-        <Navigation/>
-          <Container className='my-4'>
-          <h1 className='text-center mb-4'><i className="fa-solid fa-child-reaching fs-3"></i> Family Movies <i className="fa-solid fa-child-reaching fs-3"></i></h1>
-            <Row >
-            {familyMovies.map((movie, index) => {
-              return (
-                <Col xs={6} md={3} key={index} className='mb-4'>
-                  <MovieCard {...movie} paginate={paginate} movie={movie}/>
-                </Col>
-                )
-              })}
-            </Row>
-            <Pagination className='w-100 d-flex justify-content-center mb-5' onClick={scrollToTop}>{items}</Pagination>
-          </Container>
+      <Container className='mt-4 pb-4'>
+      <h1 className='text-center mb-4'><i className="fa-solid fa-child-reaching fs-3"></i> Family Movies <i className="fa-solid fa-child-reaching fs-3"></i></h1>
+        <Row >
+        {familyMovies.map((movie, index) => {
+          return (
+            <Col xs={6} md={3} key={index} className='mb-4'>
+              <MovieCard {...movie} paginate={paginate} movie={movie}/>
+            </Col>
+            )
+          })}
+        </Row>
+        <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
+      </Container>
     </div>
   )
 }
