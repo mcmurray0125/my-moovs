@@ -7,12 +7,15 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }) {
-    const [theme, setTheme] = useState('light')
+    const [theme, setTheme] = useState(() => {
+        const storedTheme = localStorage.getItem('theme')
+        return storedTheme || 'light'
+    })
   
     function toggleTheme() {
-      return (
-        setTheme((oldTheme) => (oldTheme === 'light' ? 'dark' : 'light'))
-        )
+        const newTheme = theme === 'light' ? 'dark' : 'light'
+        setTheme(newTheme)
+        localStorage.setItem('theme', newTheme)
     }
 
     const value = { 
@@ -20,9 +23,9 @@ export function ThemeProvider({ children }) {
         toggleTheme
     }
 
-  return (
-    <ThemeContext.Provider value={value}>
-        {children}
-    </ThemeContext.Provider>
-  )
+    return (
+        <ThemeContext.Provider value={value}>
+            {children}
+        </ThemeContext.Provider>
+    )
 }

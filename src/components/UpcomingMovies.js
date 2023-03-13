@@ -41,11 +41,10 @@ export default function UpcomingMovies() {
   return (
     <div>
       <Container className='mt-4 pb-4'>
-        <h1 className='text-center mb-4'>Upcoming Movies</h1>
-        <span className='d-flex justify-content-between'>
-        <p>Showing Upcoming Movies</p>
-        <p>Page {currentPage} of {totalPages}</p>
-        </span>
+        <header className='d-flex align-items-center justify-content-between mb-3'>
+          <h1 className='page-title m-0'>Upcoming Movies</h1>
+          <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
+        </header>
         <Row >
         {upcomingMovies.map((movie, index) => {
         return (

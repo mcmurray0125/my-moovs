@@ -23,10 +23,10 @@ export default function Dashboard() {
 
   return (
     <>
-    <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "90vh"}}>
-        <div className='w-100' style={{maxWidth: "400px"}}>
+    <Container className='d-flex align-items-center justify-content-center' style={{height: `calc(100vh - 73px)`}}>
+        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "400px"}}>
             <Card>
-                <Card.Body>
+                <Card.Body className='dashboard-card'>
                     <h2 className='text-center mb-4'>Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <strong>Email:</strong> {currentUser.email ? currentUser.email : `Demo User ${currentUser.uid}`}

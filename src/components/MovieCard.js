@@ -95,10 +95,10 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           {currentUser? <Toast.Body>{title} {favorite ?`added to saved movies.` : `removed from saved`}</Toast.Body> : <Toast.Body>Login or <Link to="/signup">Signup</Link> to save.</Toast.Body> }   
         </Toast>
       </section>
-      <Card className="movie-card shadow border-0">
-          <Card.Body className='p-2'>
-              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow-lg movie-img" role="button" onClick={() => setModalShow(true)}/>
-              <Card.Title className='my-1'>{title}</Card.Title>
+      <Card className="movie-card border-0">
+          <Card.Body className='p-0'>
+              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow movie-img mb-3" role="button" onClick={() => setModalShow(true)}/>
+              <Card.Title className='m-0'>{title}</Card.Title>
               <div className='d-flex align-items-center justify-content-between'>
               <Card.Text className='my-0'>Released {formattedDate}</Card.Text>
               <img className='star' style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star} alt="star-icon"/>

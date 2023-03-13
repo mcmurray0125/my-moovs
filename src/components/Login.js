@@ -29,9 +29,9 @@ export default function Login() {
     }
 
   return (
-    <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "100vh"}}>
-        <div className='w-100' style={{maxWidth: "400px"}}>
-            <Card>
+    <Container className='d-flex align-items-center justify-content-center' style={{height: `calc(100vh - 73px)`}}>
+        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "400px"}}>
+            <Card className='dashboard-card'>
                 <Card.Body>
                     <h2 className='text-center mb-4'>Log In</h2>
                     {error && <Alert variant="danger">{error}</Alert>}

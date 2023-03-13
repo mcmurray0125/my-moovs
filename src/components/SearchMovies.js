@@ -69,9 +69,8 @@ export default function SearchMovies() {
     <div>
       <Container className='mt-4 pb-4'>
         <InputGroup className="mb-3">
-          <Form.Label className='fs-2 text-center text-decoration-underline' style={{width: "100%"}}>Find Movies</Form.Label>
             <Form.Control
-              placeholder="Movie Title"
+              placeholder="Search"
               aria-label="search"
               aria-describedby="basic-addon2"
               onChange={changeHandler}
@@ -81,15 +80,15 @@ export default function SearchMovies() {
               className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
             />
         </InputGroup>
-        {query === '' &&
-        <div className='d-flex align-items-center justify-content-between'>
+        {query === '' ?
+        <div className='d-flex align-items-center justify-content-between page-info'>
             <span className='d-flex justify-content-center align-items-center gap-3 mb-3'>
-              <p className='text-center text-nowrap fs-5 my-0'>Showing Top-Rated Movies</p>
+              <p className='text-center text-nowrap my-0'>Showing Top-Rated Movies</p>
             </span>
             <p>Page {currentPage} of {totalPages}</p>
-        </div>
+        </div> :
+        <span className='d-flex justify-content-between page-info'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>
         }
-        {query !== '' && <span className='d-flex justify-content-between'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>}
         <Row >
         {movies.map((movie, index) => {
           return (

@@ -60,8 +60,8 @@ React.useEffect(() => {
                             <Card.Text className='fs-5 text-light'>
                             MyMoovs is a website where you can save favorite movies and share comments. It's a personal movie journal to document movie likes and dislikes.
                             </Card.Text>
-                            <Button href='/signup' className="me-4" variant="outline-info">Sign Up</Button>
-                            <Button href='/login' variant="outline-info">Login</Button>
+                            <Button href='/signup' className="me-4" variant="info">Sign Up</Button>
+                            <Button href='/login' variant="info">Login</Button>
                         </Card.Body>
                     </Card>
                 </Col>

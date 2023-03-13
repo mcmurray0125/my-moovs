@@ -127,7 +127,7 @@ export default function LargeMovieCard({movie, id, paginate}) {
                       style={{maxHeight: "300px"}}
                       />
                   </Form.Group>
-                  <Button disabled={comments === ""} variant="success" onClick={handleSubmit} type="submit" className='py-1'>
+                  <Button disabled={comments === ""} variant="success" onClick={handleSubmit} type="submit" className='py-1 float-end'>
                       Submit
                   </Button>
               </Form>

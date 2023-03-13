@@ -7,6 +7,7 @@ import MovieCard from '../MovieCard'
 export default function ScienceFiction() {
   const [sciFiMovies, setSciFiMovies] = React.useState([])
   const [currentPage, setCurrentPage] = React.useState(1);
+  const totalPages = 7
 
   const paginate = (number) => setCurrentPage(number);
 
@@ -34,7 +35,10 @@ export default function ScienceFiction() {
   return (
     <div>
       <Container className='mt-4 pb-4'>
-      <h1 className='text-center mb-4'><i className="fa-solid fa-flask fs-3"></i> Sci-Fi Movies <i className="fa-solid fa-flask fs-3"></i></h1>
+      <header className='d-flex align-items-center justify-content-between mb-3'>
+        <h1 className='page-title m-0'><i className="fa-solid fa-flask fs-3"></i> Sci-Fi Movies</h1>
+        <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
+      </header>
         <Row >
         {sciFiMovies.map((movie, index) => {
           return (

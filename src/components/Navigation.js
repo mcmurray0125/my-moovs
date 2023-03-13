@@ -5,12 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import smallLogo from "../assets/small-logo.png"
+import smallLogoBlack from "../assets/small-logo-black.png"
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 
 export default function Navigation() {
-  const { toggleTheme } = useTheme()
-  const [isDarkMode, setDarkMode] = React.useState(false);
+  const { theme, toggleTheme } = useTheme()
+  const [isDarkMode, setDarkMode] = React.useState(theme === 'light' ? false : true);
 
   const toggleDarkMode = () => {
     setDarkMode(!isDarkMode);
@@ -21,7 +22,7 @@ export default function Navigation() {
       <Container>
         <Navbar.Brand href="/">
             <img
-              src={smallLogo}
+              src={isDarkMode ? smallLogo : smallLogoBlack}
               height="30"
               className="d-inline-block align-top"
               alt="MyMoovs logo"
@@ -55,10 +56,8 @@ export default function Navigation() {
               checked={isDarkMode}
               onChange={toggleDarkMode}
               size={20}
-              dark="rgba(255, 255, 255, 0.55)"
-              light="rgba(255, 255, 255, 0.55)"
-              sunColor="rgba(255, 255, 255, 0.55)"
-              moonColor="rgba(255, 255, 255, 0.55)"
+              sunColor="rgb(22, 25, 28)"
+              moonColor="rgb(241, 241, 241)"
             />
           </Nav>
         </Navbar.Collapse>

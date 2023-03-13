@@ -7,8 +7,6 @@ import Pagination from 'react-bootstrap/Pagination';
 import LargeMovieCard from './LargeMovieCard'
 
 export default function SavedMovies() {
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState("")
     const [variant, setVariant ] = useState("")
     const [linkPath, setLinkPath] = useState("")
@@ -20,6 +18,7 @@ export default function SavedMovies() {
     const [dbMovies, setDBMovies] = React.useState([])
     const [parsedMovies, setParsedMovies] = React.useState([])
     const [filteredMovies, setFilteredMovies] = React.useState(parsedMovies)
+    const [show, setShow] = useState(true);
 
     const paginate = (number) => setCurrentPage(number);
 
@@ -88,37 +87,36 @@ export default function SavedMovies() {
     }, [query, parsedMovies])
     
   return (
-    <div>
-      <Container className='mt-4 pb-4'>
-        <div className='d-flex align-items-center flex-column justify-content-start'>
-          {/* If dbMovies is not empty, display search bar */}
-          <Alert variant={variant}>
-            {message} <Alert.Link href={linkPath}>{linkText}</Alert.Link>
-          </Alert>
-          {dbMovies.length !== 0 && <InputGroup className="mb-3">
-              <Form.Control
-                placeholder="Search saved Moovs"
-                aria-label="comment-input"
-                aria-describedby="basic-addon2"
-                type="search"
-                onChange={changeHandler}
-                name='search'
-                value={query}
-                className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
-              />
-          </InputGroup>
-          }
-        </div>
-        <Row >
-          {filteredMovies.map((movie, index) => {
-            return (
-              <Col sm={12} key={index} className='mb-4'>
-                <LargeMovieCard {...movie} paginate={paginate} movie={movie}/>
-              </Col>
-              )
-            })}
-          </Row>
-      </Container>
-    </div>
+    <Container className='mt-4 pb-4'>
+      <div className='d-flex align-items-center flex-column justify-content-start'>
+        {/* If dbMovies is not empty, display search bar */}
+
+        {show && <Alert variant={variant} onClose={() => setShow(false)} dismissible={variant === 'success'}>
+          {message} <Alert.Link href={linkPath}>{linkText}</Alert.Link>
+        </Alert>}
+        {dbMovies.length !== 0 && <InputGroup className="mb-3">
+            <Form.Control
+              placeholder="Search saved Moovs"
+              aria-label="comment-input"
+              aria-describedby="basic-addon2"
+              type="search"
+              onChange={changeHandler}
+              name='search'
+              value={query}
+              className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
+            />
+        </InputGroup>
+        }
+      </div>
+      <Row >
+        {filteredMovies.map((movie, index) => {
+          return (
+            <Col sm={12} key={index} className='mb-4'>
+              <LargeMovieCard {...movie} paginate={paginate} movie={movie}/>
+            </Col>
+            )
+          })}
+        </Row>
+    </Container>
   )
 }
