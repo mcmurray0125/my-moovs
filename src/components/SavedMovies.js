@@ -104,7 +104,7 @@ export default function SavedMovies() {
                 onChange={changeHandler}
                 name='search'
                 value={query}
-                className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
+                className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
               />
           </InputGroup>
           }

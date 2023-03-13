@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Modal, Button } from "react-bootstrap"
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function MovieModal(props) {
+  const { theme } = useTheme()
+
+  // useEffect(() => {
+  //   const modalTitles = document.querySelectorAll(".modal-title")
+  //   const modalBodies = document.querySelectorAll(".modal-body")
+  //   if (theme === "dark") {
+  //     modalTitles.classList.add("dark-modal")
+  //     modalBodies.classList.add("dark-modal")
+  //   } else {
+  //     modalTitles.classList.remove("dark-modal")
+  //     modalBodies.classList.remove("dark-modal")
+  //   }
+  // },[theme])
+
   return (
     <Modal
     {...props}
@@ -20,13 +35,11 @@ export default function MovieModal(props) {
     }}
     className="p-2 border border-light">
     <Modal.Header closeButton className='border-0 flex-grow-1'>
-      <Modal.Title id="contained-modal-title-vcenter" className='fs-2 p-2 rounded' style={{backgroundColor: "rgba(239, 239, 239, 0.817)"}}>
+      <Modal.Title id="contained-modal-title-vcenter" className='fs-2 p-2 rounded'>
         {props.movie.title}
       </Modal.Title>
     </Modal.Header>
-    <Modal.Body className='rounded d-flex align-items-center mx-5' style={{
-        backgroundColor: "rgba(239, 239, 239, 0.9)",
-    }}>
+    <Modal.Body className='rounded d-flex align-items-center mx-5'>
       <p className='m-0 fs-5'>{props.movie.overview}</p>
     </Modal.Body>
     <Modal.Footer className='border-0 flex-grow-1'>

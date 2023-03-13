@@ -78,7 +78,7 @@ export default function SearchMovies() {
               type="search"
               name='query'
               value={query}
-              className='border rounded-0 border-0 border-bottom fs-1 shadow-none'
+              className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
             />
         </InputGroup>
         {query === '' &&
