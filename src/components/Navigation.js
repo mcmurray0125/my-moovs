@@ -1,22 +1,34 @@
-import React from "react"
+import React, { useState } from "react"
 import { useTheme } from "../contexts/ThemeContext";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useAuth } from "../contexts/AuthContext";
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 import smallLogo from "../assets/small-logo.png"
 import smallLogoBlack from "../assets/small-logo-black.png"
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 
 export default function Navigation() {
+  const { currentUser, logout } = useAuth()
   const { theme, toggleTheme } = useTheme()
-  const [isDarkMode, setDarkMode] = React.useState(theme === 'light' ? false : true);
+  const navigate = useNavigate()
+  const [isDarkMode, setDarkMode] = useState(theme === 'light' ? false : true);
 
   const toggleDarkMode = () => {
     setDarkMode(!isDarkMode);
     toggleTheme();
   };
+
+  async function handleLogout(e) {
+    e.preventDefault()
+    try {
+        await logout()
+        navigate("/")
+    } catch(error) {
+        console.log(error)
+    }
+}
+
     return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" className="w-100 top-0 py-3" sticky="top" id="navbar" style={{zIndex: "1000"}}>
       <Container>
@@ -43,14 +55,19 @@ export default function Navigation() {
             </NavDropdown>
             <Nav.Link href="/search-movies">Search <i className="fa-solid fa-magnifying-glass"></i></Nav.Link>
           </Nav>
-          <Nav>
+          <Nav className="align-items-center">
             <Nav.Link href="/saved-movies"><i className="fa-solid fa-cloud"></i> Saved</Nav.Link>
             <NavDropdown title="Profile" id="collasible-nav-dropdown">
               <NavDropdown.Item eventKey={2} href="/profile">My Account</NavDropdown.Item>
               <NavDropdown.Item href="/saved-movies">Saved Movies</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-              <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
+              {currentUser ?
+              <NavDropdown.Item onClick={handleLogout}>Log out</NavDropdown.Item> :
+              <div id="login-items-wrapper">
+                <NavDropdown.Item href="/login">Log in</NavDropdown.Item>
+                <NavDropdown.Item href="/signup">Sign up</NavDropdown.Item>
+              </div>
+            }
             </NavDropdown>
             <DarkModeSwitch
               checked={isDarkMode}

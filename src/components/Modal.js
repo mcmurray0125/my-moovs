@@ -5,17 +5,14 @@ import { useTheme } from '../contexts/ThemeContext';
 export default function MovieModal(props) {
   const { theme } = useTheme()
 
-  // useEffect(() => {
-  //   const modalTitles = document.querySelectorAll(".modal-title")
-  //   const modalBodies = document.querySelectorAll(".modal-body")
-  //   if (theme === "dark") {
-  //     modalTitles.classList.add("dark-modal")
-  //     modalBodies.classList.add("dark-modal")
-  //   } else {
-  //     modalTitles.classList.remove("dark-modal")
-  //     modalBodies.classList.remove("dark-modal")
-  //   }
-  // },[theme])
+  const darkModalStyles = {
+    backgroundColor: "rgba(97, 97, 97, 0.655)",
+    color: "var(--dark-text)",
+  }
+  const lightModalStyles = {
+    backgroundColor: "rgba(239, 239, 239, 0.817)",
+    color: "var(--light-text)",
+  }
 
   return (
     <Modal
@@ -33,13 +30,13 @@ export default function MovieModal(props) {
         display: "flex",
         flexDirection: "column",
     }}
-    className="p-2 border border-light">
+    className="p-2 border border-dark">
     <Modal.Header closeButton className='border-0 flex-grow-1'>
-      <Modal.Title id="contained-modal-title-vcenter" className='fs-2 p-2 rounded'>
+      <Modal.Title id="contained-modal-title-vcenter" className='fs-2 p-2 rounded' style={theme === "dark" ? darkModalStyles : lightModalStyles}>
         {props.movie.title}
       </Modal.Title>
     </Modal.Header>
-    <Modal.Body className='rounded d-flex align-items-center mx-5'>
+    <Modal.Body className='rounded d-flex align-items-center mx-5' style={theme === "dark" ? darkModalStyles : lightModalStyles}>
       <p className='m-0 fs-5'>{props.movie.overview}</p>
     </Modal.Body>
     <Modal.Footer className='border-0 flex-grow-1'>

@@ -29,7 +29,7 @@ export default function Login() {
     }
 
   return (
-    <Container className='d-flex align-items-center justify-content-center' style={{height: `calc(100vh - 73px)`}}>
+    <Container className='d-flex align-items-center justify-content-center' style={{height: `calc(100dvh - 73px)`}}>
         <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "400px"}}>
             <Card className='dashboard-card'>
                 <Card.Body>

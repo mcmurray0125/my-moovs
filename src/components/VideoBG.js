@@ -18,7 +18,7 @@ export default function VideoBG({windowWidth}) {
     const smallScreenVideoControls = {
         position: "absolute",
         left: "0",
-        bottom: "65px",
+        bottom: "15dvh",
     }
     const largeScreenVideoControls = {
         position: "absolute",

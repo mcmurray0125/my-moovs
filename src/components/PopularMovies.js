@@ -8,6 +8,7 @@ import MovieCard from './MovieCard'
 export default function PopularMovies() {
   const [popularMovies, setpopularMovies] = React.useState([])
   const [currentPage, setCurrentPage] = React.useState(1);
+  const totalPages = 7
   
   const paginate = (number) => setCurrentPage(number);
 
@@ -35,7 +36,10 @@ export default function PopularMovies() {
   return (
     <div>
           <Container className='mt-4 pb-4'>
-          <h1 className='text-center mb-4 page-title'>Popular Movies</h1>
+          <header className='d-flex align-items-center justify-content-between mb-3'>
+            <h1 className='page-title m-0'>Popular Movies</h1>
+            <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
+          </header>
             <Row s>
             {popularMovies.map((movie, index) => {
               return (
