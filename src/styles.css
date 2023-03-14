@@ -1,11 +1,13 @@
 :root {
   --light-bg: white !important;
   --light-text: rgb(22, 25, 28) !important;
+  --light-movie-card: rgba(224, 224, 224, 0.626);
   --dark-bg: black !important;
   --dark-grey: rgb(22, 25, 28) !important;
   --dark-text: rgb(241, 241, 241) !important;
   --dark-movie-card: rgba(69, 69, 69, 0.655) !important;
   --dark-medium-card: rgba(97, 97, 97, 0.655);
+  --accent-color: rgb(255, 138, 20);
 }
 
 html {
@@ -201,6 +203,39 @@ body {
   background-color: rgba(171, 9, 9, 0.611);
   border: 1px solid rgb(83, 83, 83) !important;
 }
+/* Pagination Colors */
+#dark .page-link {
+  color: var(--dark-text);
+  background-color: var(--dark-grey) !important;
+  border-color: var(--dark-text);
+}
+#dark .page-link:hover {
+  background-color: var(--dark-medium-card) !important;
+}
+#dark .page-item.active span {
+  background-color: var(--accent-color) !important;
+  border-color: var(--dark-text);
+  color: var(--light-text);
+}
+#light .page-link {
+  color: var(--light-text);
+  background-color: transparent !important;
+  border-color: var(--light-text) !important;
+}
+#light .page-link:hover {
+  background-color: var(--light-movie-card) !important;
+}
+#light .page-item.active span {
+  background-color: var(--accent-color) !important;
+  border-color: var(--light-text) !important;
+  color: var(--dark-text);
+}
+#dark .page-link:active {
+  background-color: rgb(138, 69, 0) !important;
+}
+#light .page-link:active {
+  background-color: rgb(255, 189, 123) !important;
+}
 
 @media screen and (max-width: 700px) {
   .saved-movie-wrapper {
@@ -211,11 +246,23 @@ body {
     max-width: 100% !important;
   }
 }
+
+/* iPad Pro 12.9 inch */
+@media screen and (max-width: 985px) {
+  .movie-card .card-title {
+    font-size: 1rem;
+  }
+  .movie-card .card-text {
+    font-size: 0.75rem;
+  }
+}
+/* Bootstrap Breakpoint */
 @media screen and (max-width: 768px) {
   .navbar-nav {
     align-items: start !important;
   }
 }
+/* Phones */
 @media screen and (max-width: 450px) {
   .modal-body {
     margin: 0 1rem 0 1rem !important;

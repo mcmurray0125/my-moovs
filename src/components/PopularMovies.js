@@ -40,7 +40,7 @@ export default function PopularMovies() {
             <h1 className='page-title m-0'>Popular Movies</h1>
             <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
           </header>
-            <Row s>
+            <Row >
             {popularMovies.map((movie, index) => {
               return (
                 <Col xs={6} md={3} key={index} className='mb-4'>

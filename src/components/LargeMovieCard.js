@@ -112,7 +112,7 @@ export default function LargeMovieCard({movie, id, paginate}) {
             <MovieCard {...movie} movie={movie}/>
             {/* Comments Section */}
             <section className='comments-wrapper d-flex flex-column w-100 gap-2 overflow-auto' style={{zIndex: "200"}}>
-              <Form className='comments-form w-100 h-auto p-1'>
+              <Form className='comments-form w-100 h-auto p-1 rounded'>
                   <Form.Group className="mb-1" controlId="comments">
                       <Form.Label>Comments</Form.Label>
                       <Form.Control 

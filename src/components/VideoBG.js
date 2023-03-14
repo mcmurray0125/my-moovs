@@ -18,12 +18,12 @@ export default function VideoBG({windowWidth}) {
     const smallScreenVideoControls = {
         position: "absolute",
         left: "0",
-        bottom: "15dvh",
+        top: "0",
     }
     const largeScreenVideoControls = {
         position: "absolute",
         left: "0",
-        bottom: "65px",
+        top: "0",
     }
 
 
@@ -44,7 +44,7 @@ export default function VideoBG({windowWidth}) {
             ref={videoRef} >
             <source src={Theater} type="video/mp4"/>
         </video>
-        <div className='video-controls d-flex flex-column gap-1 opacity-50'
+        <div className='video-controls d-flex gap-1 opacity-50'
                 // if Table sized screen, movie video controls up.
                 style={windowWidth < 1300 ? smallScreenVideoControls : largeScreenVideoControls}>
             <Button onClick={handlePlay} className="rounded-circle" variant="light"><i className="fa-solid fa-play"></i></Button>
