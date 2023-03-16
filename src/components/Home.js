@@ -4,20 +4,23 @@ import Slider from "react-slick";
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import largeLogo from "../assets/large-logo.png"
+import largeLogoBlack from "../assets/large-logo-black.png"
 import homeCards from "./home-cards"
 import HomeCard from './HomeCard'
 import MovieCard from './MovieCard'
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function Home() {
     const [featuredMovies, setFeaturedMovies] = useState([])
     const [backgroundImage, setBackgroundImage] = useState('');
+    const { theme } = useTheme()
 
     const navigate = useNavigate()
 
   useEffect(() => {
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`)
     .then(response=>{
-        setFeaturedMovies(response.data.results.slice(0,10))
+        setFeaturedMovies(response.data.results.slice(0,15))
     }).catch(err=>{console.log(err)})
   },[])
 
@@ -38,6 +41,7 @@ export default function Home() {
   const settings = {
     className: "center",
     centerMode: true,
+    swipeToSlide: true,
     infinite: true,
     centerPadding: "60px",
     speed: 400,
@@ -227,11 +231,11 @@ export default function Home() {
             {/* Backdrop Image */}
             <div className="backdrop-img" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundImage})`,}}></div>
         </section>
-        <Container fluid="md" className='d-flex flex-column justify-content-center' style={{minHeight: "90vh"}}>
+        <Container fluid="md" className='d-flex flex-column justify-content-center' id='home-container' style={{minHeight: "90vh"}}>
             <Row gap={2} xs={1} sm={2} className="d-flex align-items-center">
                 <Col className='d-flex justify-content-center align-items-center my-3'>
-                    <Card className="bg-transparent home-card p-0 boder border-light p-3">
-                        <Card.Img src={largeLogo} />
+                    <Card className="bg-transparent home-card p-0 boder p-3">
+                        <Card.Img src={theme === "light" ? largeLogoBlack : largeLogo} />
                     </Card>
                 </Col>
                 <Col className='d-flex justify-content-center my-3'>
@@ -249,21 +253,20 @@ export default function Home() {
                     </Card>
                 </Col>
             </Row>
+            <Row>
+                <Col className="my-3 d-flex align-items-center justify-content-center">
+                    <Card id="search-btn-card" tabIndex={1} role="button" aria-label='go to search' className="home-btn-card bg-transparent w-100 h-auto" onClick={handleClick}>
+                        <Card.Body className='d-flex flex-column justify-content-center'>
+                            <Card.Title className='text-light text-center m-0 p-2'>Go To Search</Card.Title>
+                        </Card.Body>
+                    </Card>
+                </Col>     
+            </Row> 
             <Row><p style={{zIndex: "400"}} className="text-light fs-2 m-0 text-center my-3">Browse by Genre</p></Row>
             <Container className='home-cards-wrapper'>
                 <Row xs={2} sm={3} lg={6}>
                     {cardElements}
                 </Row>   
-                {/* <Row><h1 style={{zIndex: "400"}} className="text-light my-5 text-center">Or</h1></Row>    */}
-                <Row>
-                    <Col className="my-3 d-flex align-items-center justify-content-center">
-                        <Card id="search-btn-card" className="home-btn-card bg-transparent w-100 h-auto" onClick={handleClick}>
-                            <Card.Body className='border border-light rounded d-flex flex-column justify-content-center'>
-                                <Card.Title className='text-light text-center m-0 p-2'>Go To Search</Card.Title>
-                            </Card.Body>
-                        </Card>
-                    </Col>     
-                </Row> 
             </Container>
         </Container>
     </>

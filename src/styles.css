@@ -7,7 +7,8 @@
   --dark-text: rgb(241, 241, 241) !important;
   --dark-movie-card: rgba(69, 69, 69, 0.655) !important;
   --dark-medium-card: rgba(97, 97, 97, 0.655);
-  --accent-color: rgb(255, 138, 20);
+  --accent-light: rgb(255, 138, 20);
+  --accent-dark: rgb(138, 69, 0);
 }
 
 html {
@@ -19,13 +20,59 @@ body {
   font-family: "Red Hat Display", sans-serif;
   margin: 0;
 }
-.video-controls {
-  transform: scale(0.5);
-  z-index: 500 !important;
+.page-title {
+  font-weight: 700 !important;
 }
+/* HOME PAGE */
+#light #home-container .card-title,
+#light #home-container .card-text,
+#light #home-container p {
+  color: var(--light-text) !important;
+}
+#light .home-card,
+#light .home-btn-card {
+  border-color: var(--dark-grey);
+}
+#dark .home-card,
+#dark .home-btn-card {
+  border: 1px solid var(--light-movie-card);
+}
+#light .home-btn-card:hover {
+  background-color: var(--accent-light);
+}
+#dark .home-btn-card:hover {
+  background-color: var(--accent-dark);
+}
+.home-card {
+  transform: scale(1) !important;
+}
+.home-card:hover {
+  transform: scale(1) !important;
+  cursor: default;
+}
+.home-btn-card {
+  background-color: transparent;
+  cursor: pointer;
+  height: 150px;
+  width: 150px;
+}
+/* SLIDER / CAROUSEL */
 .carousel {
   position: relative;
   min-height: 700px;
+}
+.backdrop-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.65;
+  filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: 1s;
 }
 .slick-list,
 .slick-track {
@@ -46,7 +93,6 @@ body {
   transition: 0.4s;
 }
 .slick-slide .movie-card:hover {
-  transform: scale(0.9);
   opacity: 1;
 }
 .slick-current .movie-card {
@@ -65,6 +111,7 @@ body {
   right: 10px !important;
   z-index: 100;
 }
+/* DARK GENERAL */
 #dark {
   background-color: var(--dark-bg);
   z-index: -100 !important;
@@ -78,12 +125,19 @@ body {
 #dark .dashboard-card-wrapper {
   color: var(--dark-text) !important;
 }
-#dark hr {
-  background-color: var(--dark-text);
-}
 #dark .dashboard-card {
   background-color: var(--dark-movie-card);
 }
+#light .dashboard-card-wrapper {
+  color: var(--light-text) !important;
+}
+#light .dashboard-card {
+  background-color: var(--light-movie-card);
+}
+#dark hr {
+  background-color: var(--dark-text);
+}
+/* NAVBAR */
 #dark #navbar {
   background-color: var(--dark-bg) !important;
   border-bottom: 1px solid var(--dark-text);
@@ -117,31 +171,21 @@ body {
   color: var(--dark-text);
   border-bottom: 1px solid var(--dark-text) !important;
 }
-.page-title {
-  font-weight: 700 !important;
+/* MOVIE CARD */
+.movie-card {
+  margin: auto !important;
+  background-color: transparent !important;
+  border-radius: 0px !important;
+  transition: all 0.3s !important;
 }
-.card {
-  background-color: rgba(37, 108, 207, 0.216);
-}
-
-.home-card {
+.movie-img {
+  border-radius: 0px !important;
   transform: scale(1) !important;
+  transition: all 0.3s !important;
 }
-.home-card:hover {
-  transform: scale(1) !important;
-  cursor: default;
+.movie-img:hover {
+  transform: scale(1.04) !important;
 }
-
-.home-btn-card {
-  background-color: transparent;
-  cursor: pointer;
-  height: 150px;
-  width: 150px;
-}
-.home-btn-card:hover {
-  background-color: rgba(32, 79, 179, 0.434);
-}
-
 .star {
   transform: rotate(0deg) !important;
   transition: 0.2s !important;
@@ -152,40 +196,11 @@ body {
 .star:hover {
   transform: rotate(90deg) !important;
 }
-.backdrop-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-size: cover;
-  opacity: 0.65;
-  filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: 1s;
-}
-.movie-card {
-  margin: auto !important;
-  background-color: transparent !important;
-  border-radius: 0px !important;
-  transition: all 0.3s !important;
-}
-
-.movie-img {
-  border-radius: 0px !important;
-  transform: scale(1) !important;
-  transition: all 0.3s !important;
-}
-.movie-img:hover {
-  transform: scale(1.04) !important;
-}
-
+/* SAVED MOVIES */
 .saved-movie-wrapper .movie-card {
   padding: 0.5rem;
   margin: 0;
   height: 100%;
-  max-width: 26%;
   background-color: rgba(224, 224, 224, 0.626) !important;
   transform: scale(1) !important;
   transition: all 0.2s !important;
@@ -206,7 +221,7 @@ body {
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
-
+/* COMMENTS */
 .comments-form {
   background-color: rgba(224, 224, 224, 0.626);
   transition: all 0.2s !important;
@@ -232,7 +247,6 @@ body {
   background-color: rgba(239, 239, 239, 0.883);
   transform: scale(1) !important;
 }
-
 .comment-delete-btn {
   color: rgb(88, 88, 88);
   background-color: transparent;
@@ -266,7 +280,7 @@ body {
   background-color: var(--dark-medium-card) !important;
 }
 #dark .page-item.active span {
-  background-color: var(--accent-color) !important;
+  background-color: var(--accent-light) !important;
   border-color: var(--dark-text);
   color: var(--light-text);
 }
@@ -279,7 +293,7 @@ body {
   background-color: var(--light-movie-card) !important;
 }
 #light .page-item.active span {
-  background-color: var(--accent-color) !important;
+  background-color: var(--accent-light) !important;
   border-color: var(--light-text) !important;
   color: var(--dark-text);
 }
@@ -290,6 +304,7 @@ body {
   background-color: rgb(255, 189, 123) !important;
 }
 
+/* MEDIA QUERIES */
 @media screen and (max-width: 700px) {
   .saved-movie-wrapper {
     flex-direction: column !important;

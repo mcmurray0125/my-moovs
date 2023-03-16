@@ -18,7 +18,7 @@ export default function HomeCard(props) {
   return (
     <Col className="my-3 d-flex align-items-center justify-content-center">
         <Card id={`${props.item.title}-card`} className="home-btn-card" onClick={handleClick}>
-            <Card.Body className='border border-light rounded d-flex flex-column justify-content-center'>
+            <Card.Body className='d-flex flex-column justify-content-center'>
                 <Card.Title className='text-light text-center m-0 p-2'>{props.item.title}</Card.Title>
             </Card.Body>
         </Card>
