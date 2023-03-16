@@ -23,7 +23,48 @@ body {
   transform: scale(0.5);
   z-index: 500 !important;
 }
-
+.carousel {
+  position: relative;
+  min-height: 700px;
+}
+.slick-list,
+.slick-track {
+  padding: 1.5rem 0;
+}
+.slick-slide > div {
+  display: flex;
+  justify-content: center;
+}
+.slick-slide .movie-card-wrapper {
+  width: 310px !important;
+  height: auto;
+}
+.slick-slide .movie-card {
+  width: 100%;
+  transform: scale(0.9);
+  opacity: 0.6;
+  transition: 0.4s;
+}
+.slick-slide .movie-card:hover {
+  transform: scale(0.9);
+  opacity: 1;
+}
+.slick-current .movie-card {
+  transform: scale(1);
+  opacity: 1;
+}
+.slick-prev,
+.slick-next {
+  transform: scale(1.3) !important;
+}
+.slick-prev {
+  left: 10px !important;
+  z-index: 100;
+}
+.slick-next {
+  right: 10px !important;
+  z-index: 100;
+}
 #dark {
   background-color: var(--dark-bg);
   z-index: -100 !important;
@@ -111,7 +152,19 @@ body {
 .star:hover {
   transform: rotate(90deg) !important;
 }
-
+.backdrop-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.65;
+  filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: 1s;
+}
 .movie-card {
   margin: auto !important;
   background-color: transparent !important;

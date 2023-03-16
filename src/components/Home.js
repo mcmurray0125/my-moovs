@@ -1,26 +1,27 @@
-import React from 'react'
-import { Container, Row, Col, Card, Button, Image } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom"
+import { useEffect, useState } from 'react'
+import { Container, Row, Col, Card, Button, } from "react-bootstrap"
+import Slider from "react-slick";
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import largeLogo from "../assets/large-logo.png"
 import homeCards from "./home-cards"
 import HomeCard from './HomeCard'
-import VideoBG from './VideoBG'
-import PhotoBG from './PhotoBG'
+import MovieCard from './MovieCard'
 
 export default function Home() {
-const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
+    const [featuredMovies, setFeaturedMovies] = useState([])
+    const [backgroundImage, setBackgroundImage] = useState('');
 
-React.useEffect(() => {
-    function watchWidth() {
-        setWindowWidth(window.innerWidth)
-    }
-    window.addEventListener("resize", watchWidth) 
-    return function() {
-        window.removeEventListener("resize", watchWidth)
-    }
-}, [])
+    const navigate = useNavigate()
 
-  const navigate = useNavigate()
+  useEffect(() => {
+    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`)
+    .then(response=>{
+        setFeaturedMovies(response.data.results.slice(0,10))
+    }).catch(err=>{console.log(err)})
+  },[])
+
+  //Now Playing API: https://api.themoviedb.org/3/movie/now_playing?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1
 
   const handleClick = () => {
     navigate("/search-movies");
@@ -28,22 +29,204 @@ React.useEffect(() => {
 
   const cardElements = homeCards.map((item) => {
     return (
-        <HomeCard
-            key={item.id}
-            item={item}/>
+    <HomeCard
+        key={item.id}
+        item={item}/>
     )
   })
 
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    speed: 400,
+    slidesToShow: 7,
+    slidesToScroll: 1,
+    initialSlide: 1,
+    afterChange: handleSlideChange,
+    responsive: [
+      {
+        breakpoint: 2350,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          centerPadding: "120px",
+        }
+      },
+      {
+        breakpoint: 2200,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          centerPadding: "100px",
+        }
+      },
+      {
+        breakpoint: 1840,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          centerPadding: "0px",
+        }
+      },
+      {
+        breakpoint: 1560,
+        settings: {
+          centerPadding: "230px",
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 1420,
+        settings: {
+          centerPadding: "100px",
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 1250,
+        settings: {
+          centerPadding: "70px",
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 1100,
+        settings: {
+          centerPadding: "0px",
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 940,
+        settings: {
+          centerPadding: "280px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 882,
+        settings: {
+          centerPadding: "220px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 780,
+        settings: {
+          centerPadding: "200px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 715,
+        settings: {
+          centerPadding: "170px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 655,
+        settings: {
+          centerPadding: "140px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          centerPadding: "120px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 553,
+        settings: {
+          centerPadding: "90px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 494,
+        settings: {
+          centerPadding: "60px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 435,
+        settings: {
+          centerPadding: "50px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 411,
+        settings: {
+          centerPadding: "40px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 391,
+        settings: {
+          centerPadding: "34px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 378,
+        settings: {
+          centerPadding: "0px",
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+    ]
+  };
+
+  useEffect(() => {
+    handleSlideChange()
+    console.log("photo found")
+  },[featuredMovies])
+
+  function handleSlideChange(currentIndex, nextIndex) {
+    const currentSlide = document.querySelector('.slick-current');
+    if (currentSlide) {
+      const slideBg = currentSlide.querySelectorAll('*')[1].getAttribute('data-bg');
+      setBackgroundImage(slideBg);
+    }
+  }
+
   return (
     <>
-        {/* Homepage Background */}
-        <div className='video-wrapper position-fixed h-100 w-100'>
-            <div className='video-container w-100 vh-100 position-relative overflow-hidden' style={{zIndex: "-200"}}>
-                {/* If small screen, use PhotoBG, else use VideoBG */}
-                {windowWidth < 1000 ? <PhotoBG/> : <VideoBG windowWidth={windowWidth}/>}
-            </div>
-        </div>
-        {/* Main Homepage */}
+        <section className='carousel ms-auto me-auto w-100 py-5' style={{position: 'relative'}}>
+            <Slider {...settings} style={{zIndex: "500"}}>
+            {featuredMovies.map((movie, index) => {
+                return (
+                    <MovieCard {...movie} movie={movie} key={index}/>
+                    )
+                    })}
+            </Slider>
+            {/* Backdrop Image */}
+            <div className="backdrop-img" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundImage})`,}}></div>
+        </section>
         <Container fluid="md" className='d-flex flex-column justify-content-center' style={{minHeight: "90vh"}}>
             <Row gap={2} xs={1} sm={2} className="d-flex align-items-center">
                 <Col className='d-flex justify-content-center align-items-center my-3'>

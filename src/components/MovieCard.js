@@ -85,7 +85,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
    },[savedMovies, id])
   
   return (
-    <>
+    <div className='movie-card-wrapper' data-bg={movie.backdrop_path}>
       <section className='fav-toast-wrapper position-absolute top-25 start-25' style={{zIndex: "300"}}>
         <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide className='w-auto'>
           <Toast.Header>
@@ -110,6 +110,6 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           onHide={() => setModalShow(false)}
           movie={movie}
       />
-    </>
+    </div>
   )
 }
