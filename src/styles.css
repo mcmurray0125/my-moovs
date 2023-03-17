@@ -26,7 +26,9 @@ body {
 /* HOME PAGE */
 #light #home-container .card-title,
 #light #home-container .card-text,
-#light #home-container p {
+#light #home-container p,
+#light h2,
+#light .carousel button {
   color: var(--light-text) !important;
 }
 #light .home-card,
@@ -61,7 +63,30 @@ body {
   position: relative;
   min-height: 700px;
 }
+.featured-button {
+  padding: 4px;
+  border: none;
+  border-radius: 0px !important;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 2px solid transparent;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+.featured-button:hover {
+  background-color: transparent;
+  border: 2px solid transparent;
+}
+.featured-button.selected {
+  border-bottom: 2px solid var(--dark-grey);
+  transform: scale(1.1);
+}
+#dark .featured-button.selected {
+  border-bottom: 2px solid var(--dark-text);
+  transform: scale(1.1);
+}
 .backdrop-img {
+  z-index: 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -117,12 +142,14 @@ body {
   z-index: -100 !important;
 }
 #dark h1,
+#dark h2,
 #dark label,
 #dark .page-info,
 #dark #responsive-navbar-nav a,
 #dark .dropdown-item,
 #dark .movie-card,
-#dark .dashboard-card-wrapper {
+#dark .dashboard-card-wrapper,
+#dark .carousel button {
   color: var(--dark-text) !important;
 }
 #dark .dashboard-card {
@@ -177,6 +204,14 @@ body {
   background-color: transparent !important;
   border-radius: 0px !important;
   transition: all 0.3s !important;
+}
+#dark .movie-card .card-title,
+#dark .movie-card .card-text {
+  color: var(--dark-text) !important
+}
+#light .movie-card .card-title,
+#light .movie-card .card-text {
+  color: var(--light-text) !important
 }
 .movie-img {
   border-radius: 0px !important;
@@ -328,6 +363,10 @@ body {
 @media screen and (max-width: 768px) {
   .navbar-nav {
     align-items: start !important;
+  }
+  .carousel .btn-group {
+    flex-direction: column;
+    gap: 0 !important;
   }
 }
 /* Phones */

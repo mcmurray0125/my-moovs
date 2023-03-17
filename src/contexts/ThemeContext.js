@@ -9,7 +9,7 @@ export function useTheme() {
 export function ThemeProvider({ children }) {
     const [theme, setTheme] = useState(() => {
         const storedTheme = localStorage.getItem('theme')
-        return storedTheme || 'light'
+        return storedTheme || 'dark'
     })
   
     function toggleTheme() {

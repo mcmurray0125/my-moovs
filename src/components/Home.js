@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Container, Row, Col, Card, Button, } from "react-bootstrap"
+import { Container, Row, Col, Card, Button, ButtonGroup } from "react-bootstrap"
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
@@ -11,8 +11,10 @@ import MovieCard from './MovieCard'
 import { useTheme } from '../contexts/ThemeContext';
 
 export default function Home() {
-    const [featuredMovies, setFeaturedMovies] = useState([])
+    const [popularMovies, setPopularMovies] = useState([])
+    const [nowPlayingMovies, setNowPlayingMovies] = useState([])
     const [backgroundImage, setBackgroundImage] = useState('');
+    const [featuredSelect, setFeaturedSelect] = useState('popular')
     const { theme } = useTheme()
 
     const navigate = useNavigate()
@@ -20,11 +22,14 @@ export default function Home() {
   useEffect(() => {
     axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`)
     .then(response=>{
-        setFeaturedMovies(response.data.results.slice(0,15))
+        setPopularMovies(response.data.results.slice(0,15))
+    }).catch(err=>{console.log(err)})
+    axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`)
+    .then(response=>{
+        setNowPlayingMovies(response.data.results.slice(0,15))
     }).catch(err=>{console.log(err)})
   },[])
 
-  //Now Playing API: https://api.themoviedb.org/3/movie/now_playing?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1
 
   const handleClick = () => {
     navigate("/search-movies");
@@ -205,10 +210,6 @@ export default function Home() {
     ]
   };
 
-  useEffect(() => {
-    handleSlideChange()
-    console.log("photo found")
-  },[featuredMovies])
 
   function handleSlideChange(currentIndex, nextIndex) {
     const currentSlide = document.querySelector('.slick-current');
@@ -218,11 +219,46 @@ export default function Home() {
     }
   }
 
+  function handleFeaturedToggle(selection) {
+    const popularButton = document.querySelector("#popular-button");
+    const nowPlayingButton = document.querySelector("#now-playing-button");
+    if (selection === "popular") {
+      popularButton.classList.add("selected");
+      nowPlayingButton.classList.remove("selected");
+      //opacity 0 .slick-track
+      setFeaturedSelect('popular')
+      //opacity 1 .slick-track
+    }
+    if (selection === "now-playing") {
+      popularButton.classList.remove("selected");
+      nowPlayingButton.classList.add("selected");
+      //opacity 0 .slick-track
+      setFeaturedSelect('now-playing')
+      //opacity 1 .slick-track
+    }
+    setTimeout(() => {
+      handleSlideChange();
+    }, 600);
+  }
+
   return (
     <>
-        <section className='carousel ms-auto me-auto w-100 py-5' style={{position: 'relative'}}>
+        <section className='carousel ms-auto me-auto w-100 py-4' style={{position: 'relative'}}>
+            <Container className='position-relative featured-header d-flex justify-content-between align-items-center px-5' style={{zIndex: "500"}}>
+              <h2 style={{fontWeight: "700"}}>Featured Moovs</h2>
+              <ButtonGroup aria-label="Select Feautured Movies" className='gap-2'>
+                <Button id="popular-button" className='featured-button selected' onClick={() => handleFeaturedToggle("popular")}>Popular</Button>
+                <Button id="now-playing-button" className='featured-button' onClick={() => handleFeaturedToggle("now-playing")}>Now Playing</Button>
+              </ButtonGroup>
+            </Container>
+            <hr style={{backgroundColor: "white", height: "1.2px", opacity: "1"}}/>
             <Slider {...settings} style={{zIndex: "500"}}>
-            {featuredMovies.map((movie, index) => {
+            {featuredSelect === 'popular' && popularMovies.map((movie, index) => {
+                return (
+                    <MovieCard {...movie} movie={movie} key={index}/>
+                    )
+                    })}
+            {featuredSelect === 'now-playing' && nowPlayingMovies.map((movie, index) => {
                 return (
                     <MovieCard {...movie} movie={movie} key={index}/>
                     )

@@ -12,7 +12,7 @@ export default function Navigation() {
   const { currentUser, logout } = useAuth()
   const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
-  const [isDarkMode, setDarkMode] = useState(theme === 'light' ? false : true);
+  const [isDarkMode, setDarkMode] = useState(theme === 'dark' ? true : false);
 
   const toggleDarkMode = () => {
     setDarkMode(!isDarkMode);
