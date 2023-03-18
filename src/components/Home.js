@@ -19,17 +19,23 @@ export default function Home() {
 
     const navigate = useNavigate()
 
-  useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`)
-    .then(response=>{
-        setPopularMovies(response.data.results.slice(0,15))
-    }).catch(err=>{console.log(err)})
-    axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`)
-    .then(response=>{
-        setNowPlayingMovies(response.data.results.slice(0,15))
-    }).catch(err=>{console.log(err)})
-  },[])
-
+    //Fetch movies for the carousel.
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const popularResponse = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`);
+          setPopularMovies(popularResponse.data.results.slice(0, 15));
+  
+          const nowPlayingResponse = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`);
+          setNowPlayingMovies(nowPlayingResponse.data.results.slice(0, 15));
+    
+          handleSlideChange();
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, []);
 
   const handleClick = () => {
     navigate("/search-movies");
@@ -267,7 +273,7 @@ export default function Home() {
             {/* Backdrop Image */}
             <div className="backdrop-img" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundImage})`,}}></div>
         </section>
-        <Container fluid="md" className='d-flex flex-column justify-content-center' id='home-container' style={{minHeight: "90vh"}}>
+        <Container fluid="md" className='py-4 d-flex flex-column justify-content-center' id='home-container'>
             <Row gap={2} xs={1} sm={2} className="d-flex align-items-center">
                 <Col className='d-flex justify-content-center align-items-center my-3'>
                     <Card className="bg-transparent home-card p-0 boder p-3">

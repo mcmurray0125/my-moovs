@@ -96,7 +96,7 @@ body {
   background-size: cover;
   opacity: 0.65;
   filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-filter: blur(10px);
   transition: 1s;
 }
 .slick-list,
@@ -207,11 +207,11 @@ body {
 }
 #dark .movie-card .card-title,
 #dark .movie-card .card-text {
-  color: var(--dark-text) !important
+  color: var(--dark-text) !important;
 }
 #light .movie-card .card-title,
 #light .movie-card .card-text {
-  color: var(--light-text) !important
+  color: var(--light-text) !important;
 }
 .movie-img {
   border-radius: 0px !important;

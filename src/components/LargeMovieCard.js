@@ -120,7 +120,7 @@ export default function LargeMovieCard({movie, id, paginate}) {
                       type="text"
                       aria-label="comment-input"
                       name="comments"
-                      placeholder="Your thought about the movie"
+                      placeholder="Your thoughts about the movie"
                       onChange={changeHandler}
                       value={comments}
                       className="opacity-75"

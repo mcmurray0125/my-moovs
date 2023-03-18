@@ -96,6 +96,7 @@ _Things I learned building this project:_
 - Dynamically updating API calls on user input (movie search, changing pages...)
 - Using Bootstrap to make all pages and elements responsive.
 - Storing, Writing, and Fetching data to backends like Google Firebase.
+- Using the react-slick library to create smooth, responsive carousels.
 
 <br>
 
@@ -129,36 +130,24 @@ Visit a live version of MyMoovs <a href ="https://mymoovs.netlify.app/">here</a>
 <details open>
   <summary>Navigating the Pages</summary>
 
-
-
 https://user-images.githubusercontent.com/116777356/217154788-046c25e2-2a91-4c16-b2be-a0078a8997fb.mp4
-
-
 
 </details>
 
 <details open>
   <summary>Create account, Save Movies, add Comments</summary>
-  
-  
+
 
 https://user-images.githubusercontent.com/116777356/217154817-6e27d6ce-9b7d-4558-adcb-8592f7e27421.mp4
 
-
-  
-  
 </details>
 
 <details>
   <summary>Upgrade demo account to email account.</summary>
-  
-  
+
 
 https://user-images.githubusercontent.com/116777356/217154850-27ae067e-42db-4098-802e-834fce828172.mp4
 
-
-  
-  
 </details>
 
 _For more examples, please refer to the [Documentation](https://example.com)_
@@ -170,9 +159,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [x] Created notification messages for user actions (Saving and Removing movies)
-- [x] Conditional homepage so video background only shows on large displays (no cell-phones)
 - [x] Responsive design
-- [ ] Ability to remove comments
+- [x] Ability to remove comments
+- [x] Dark/Light theme toggler
 
 See the [open issues](https://github.com/mcmurray0125/my-moovs/issues) for a full list of proposed features (and known issues).
 
