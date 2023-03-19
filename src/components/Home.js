@@ -288,11 +288,12 @@ export default function Home() {
                               Hello, <span className='text-decoration-underline'>{currentUser.email ? currentUser.email : 'Demo User'}</span>
                           </Card.Title>
                           <Card.Text className='fs-5 text-light'>
-                            Continue browsing movies by genre, or <a href='/search' aria-label='go to search'>search</a> instead. View your saved moovs by clicking below.
+                            Continue browsing movies by genre, or <a href='/search-movies' aria-label='go to search'>search</a> instead. View your saved moovs by clicking below.
                           </Card.Text>
                           <Button href='/saved-movies' aria-label='go to saved movies' className="me-4" variant="info">Saved Moovs</Button>
                       </Card.Body>
-                    </Card> :
+                    </Card>
+                    :
                     <Card className="home-card p-3 bg-transparent border-none" >
                       <Card.Body className='text-center'>
                           <Card.Title className='fs-3 text-light'>
