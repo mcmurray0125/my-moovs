@@ -9,13 +9,16 @@ import homeCards from "./home-cards"
 import HomeCard from './HomeCard'
 import MovieCard from './MovieCard'
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext'
 
 export default function Home() {
     const [popularMovies, setPopularMovies] = useState([])
+    const [loading, setLoading] = useState(true)
     const [nowPlayingMovies, setNowPlayingMovies] = useState([])
     const [backgroundImage, setBackgroundImage] = useState('');
     const [featuredSelect, setFeaturedSelect] = useState('popular')
     const { theme } = useTheme()
+    const { currentUser } = useAuth()
 
     const navigate = useNavigate()
 
@@ -28,7 +31,8 @@ export default function Home() {
   
           const nowPlayingResponse = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=1`);
           setNowPlayingMovies(nowPlayingResponse.data.results.slice(0, 15));
-    
+          
+          setLoading(false)
           handleSlideChange();
         } catch (error) {
           console.log(error);
@@ -58,7 +62,7 @@ export default function Home() {
     speed: 400,
     slidesToShow: 7,
     slidesToScroll: 1,
-    initialSlide: 1,
+    initialSlide: 0,
     afterChange: handleSlideChange,
     responsive: [
       {
@@ -231,16 +235,12 @@ export default function Home() {
     if (selection === "popular") {
       popularButton.classList.add("selected");
       nowPlayingButton.classList.remove("selected");
-      //opacity 0 .slick-track
       setFeaturedSelect('popular')
-      //opacity 1 .slick-track
     }
     if (selection === "now-playing") {
       popularButton.classList.remove("selected");
       nowPlayingButton.classList.add("selected");
-      //opacity 0 .slick-track
       setFeaturedSelect('now-playing')
-      //opacity 1 .slick-track
     }
     setTimeout(() => {
       handleSlideChange();
@@ -253,23 +253,23 @@ export default function Home() {
             <Container className='position-relative featured-header d-flex justify-content-between align-items-center px-5' style={{zIndex: "500"}}>
               <h2 style={{fontWeight: "700"}}>Featured Moovs</h2>
               <ButtonGroup aria-label="Select Feautured Movies" className='gap-2'>
-                <Button id="popular-button" className='featured-button selected' onClick={() => handleFeaturedToggle("popular")}>Popular</Button>
-                <Button id="now-playing-button" className='featured-button' onClick={() => handleFeaturedToggle("now-playing")}>Now Playing</Button>
+                <Button id="popular-button" className='featured-button selected' onClick={() => handleFeaturedToggle("popular")} aria-label='view popular movies'>Popular</Button>
+                <Button id="now-playing-button" className='featured-button' onClick={() => handleFeaturedToggle("now-playing")} aria-label='view now playing movies'>Now Playing</Button>
               </ButtonGroup>
             </Container>
             <hr style={{backgroundColor: "white", height: "1.2px", opacity: "1"}}/>
-            <Slider {...settings} style={{zIndex: "500"}}>
-            {featuredSelect === 'popular' && popularMovies.map((movie, index) => {
-                return (
-                    <MovieCard {...movie} movie={movie} key={index}/>
-                    )
-                    })}
-            {featuredSelect === 'now-playing' && nowPlayingMovies.map((movie, index) => {
-                return (
-                    <MovieCard {...movie} movie={movie} key={index}/>
-                    )
-                    })}
-            </Slider>
+            {!loading && <Slider {...settings} style={{zIndex: "500"}}>
+              {featuredSelect === 'popular' && popularMovies.map((movie, index) => {
+                  return (
+                      <MovieCard {...movie} movie={movie} key={index}/>
+                      )
+                      })}
+              {featuredSelect === 'now-playing' && nowPlayingMovies.map((movie, index) => {
+                  return (
+                      <MovieCard {...movie} movie={movie} key={index}/>
+                      )
+                      })}
+            </Slider>}
             {/* Backdrop Image */}
             <div className="backdrop-img" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundImage})`,}}></div>
         </section>
@@ -281,18 +281,31 @@ export default function Home() {
                     </Card>
                 </Col>
                 <Col className='d-flex justify-content-center my-3'>
+                    {currentUser ?
                     <Card className="home-card p-3 bg-transparent border-none" >
-                        <Card.Body className='text-center'>
-                            <Card.Title className='fs-3 text-light'>
-                                Welcome!
-                            </Card.Title>
-                            <Card.Text className='fs-5 text-light'>
+                      <Card.Body className='text-center'>
+                          <Card.Title className='fs-3 text-light'>
+                              Hello, <span className='text-decoration-underline'>{currentUser.email ? currentUser.email : 'Demo User'}</span>
+                          </Card.Title>
+                          <Card.Text className='fs-5 text-light'>
+                            Continue browsing movies by genre, or <a href='/search' aria-label='go to search'>search</a> instead. View your saved moovs by clicking below.
+                          </Card.Text>
+                          <Button href='/saved-movies' aria-label='go to saved movies' className="me-4" variant="info">Saved Moovs</Button>
+                      </Card.Body>
+                    </Card> :
+                    <Card className="home-card p-3 bg-transparent border-none" >
+                      <Card.Body className='text-center'>
+                          <Card.Title className='fs-3 text-light'>
+                              Welcome!
+                          </Card.Title>
+                          <Card.Text className='fs-5 text-light'>
                             MyMoovs is a website where you can save favorite movies and share comments. It's a personal movie journal to document movie likes and dislikes.
-                            </Card.Text>
-                            <Button href='/signup' className="me-4" variant="info">Sign Up</Button>
-                            <Button href='/login' variant="info">Login</Button>
-                        </Card.Body>
-                    </Card>
+                          </Card.Text>
+                          <Button href='/signup' aria-label='sign up link' className="me-4" variant="info">Sign Up</Button>
+                          <Button href='/login' aria-label='login link' variant="info">Login</Button>
+                      </Card.Body>
+                    </Card> 
+                    }
                 </Col>
             </Row>
             <Row>

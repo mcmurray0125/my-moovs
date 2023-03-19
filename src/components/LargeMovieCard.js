@@ -97,7 +97,7 @@ export default function LargeMovieCard({movie, id, paginate}) {
     <Container >
         <div className='d-flex rounded p-3 gap-2 saved-movie-wrapper position-relative shadow'>
           {/* Backdrop Image */}
-            <div className='backdrop-image position-absolute rounded' style={{
+            <div className='backdrop-image position-absolute rounded' alt='backdrop image' style={{
                 top: "0",
                 left: "0",
                 bottom: "0",
@@ -118,7 +118,7 @@ export default function LargeMovieCard({movie, id, paginate}) {
                       <Form.Control 
                       as="textarea"
                       type="text"
-                      aria-label="comment-input"
+                      aria-label={`comment input for ${movie.title}`}
                       name="comments"
                       placeholder="Your thoughts about the movie"
                       onChange={changeHandler}
@@ -127,7 +127,7 @@ export default function LargeMovieCard({movie, id, paginate}) {
                       style={{maxHeight: "300px"}}
                       />
                   </Form.Group>
-                  <Button disabled={comments === ""} variant="success" onClick={handleSubmit} type="submit" className='py-1 float-end'>
+                  <Button disabled={comments === ""} variant="success" onClick={handleSubmit} type="submit" className='py-1 float-end' aria-label='post comment'>
                       Submit
                   </Button>
               </Form>
@@ -142,7 +142,7 @@ export default function LargeMovieCard({movie, id, paginate}) {
                         <Card.Text className='m-0'>
                           {commentText.replace(id, '')}
                         </Card.Text>
-                        <button onClick={() => deleteComment(comment)} className='comment-delete-btn border-0 p-2 m-0 d-flex align-items-center justify-content-center align-self-center ms-auto' style={{height: "1.5rem", width: "1.5rem"}}>
+                        <button onClick={() => deleteComment(comment)} className='comment-delete-btn border-0 p-2 m-0 d-flex align-items-center justify-content-center align-self-center ms-auto' aria-label='delete-comment' style={{height: "1.5rem", width: "1.5rem"}}>
                           <i className="fa-solid fa-xmark"></i>
                         </button>
                         </Card.Body>

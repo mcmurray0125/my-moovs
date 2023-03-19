@@ -20,8 +20,26 @@ body {
   font-family: "Red Hat Display", sans-serif;
   margin: 0;
 }
+.dashboard-card-wrapper,
+.comments-wrapper,
+#navbar,
+.movie-card-wrapper,
+#home-container,
+.featured-header,
+header,
+.pagination,
+.modal-content,
+.alert {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
 .page-title {
   font-weight: 700 !important;
+}
+#light .dashboard-card-wrapper a,
+#light .dashboard-card-wrapper button {
+  color: var(--light-text);
 }
 /* HOME PAGE */
 #light #home-container .card-title,
@@ -30,20 +48,23 @@ body {
 #light h2,
 #light .carousel button {
   color: var(--light-text) !important;
+  transition: 0.2s;
 }
 #light .home-card,
 #light .home-btn-card {
   border-color: var(--dark-grey);
+  transition: 0.2s;
 }
 #dark .home-card,
 #dark .home-btn-card {
   border: 1px solid var(--light-movie-card);
+  transition: 0.2s;
 }
 #light .home-btn-card:hover {
-  background-color: var(--accent-light);
+  background-color: var(--accent-light) !important;
 }
 #dark .home-btn-card:hover {
-  background-color: var(--accent-dark);
+  background-color: var(--accent-dark) !important;
 }
 .home-card {
   transform: scale(1) !important;
@@ -149,7 +170,8 @@ body {
 #dark .dropdown-item,
 #dark .movie-card,
 #dark .dashboard-card-wrapper,
-#dark .carousel button {
+#dark .dashboard-card-wrapper a,
+#dark .dashboard-card-wrapper button #dark .carousel button {
   color: var(--dark-text) !important;
 }
 #dark .dashboard-card {
@@ -224,6 +246,7 @@ body {
 .star {
   transform: rotate(0deg) !important;
   transition: 0.2s !important;
+  image-rendering: crisp-edges;
 }
 #dark .star {
   filter: invert(1) hue-rotate(145deg);

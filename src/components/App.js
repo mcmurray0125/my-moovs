@@ -34,7 +34,7 @@ function App() {
           <div className='App' id={theme}>
           <Navigation/>
           <Routes>
-            <Route path='/profile' element={<PrivateRoute><Dashboard className='w-100' style={formStyles}/></PrivateRoute>} />
+            <Route path='/profile' element={<PrivateRoute><Dashboard className='w-100'/></PrivateRoute>} />
             <Route path='/update-profile' element={<PrivateRoute><UpdateProfile className='w-100' style={formStyles}/></PrivateRoute>} />
             <Route path='/signup' element={<Signup className='w-100' style={formStyles}/>} />
             <Route path='/login' element={<Login className='w-100' style={formStyles}/>} />

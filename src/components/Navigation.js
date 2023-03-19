@@ -19,11 +19,10 @@ export default function Navigation() {
     toggleTheme();
   };
 
-  async function handleLogout(e) {
-    e.preventDefault()
+  async function handleLogout() {
     try {
         await logout()
-        navigate("/")
+        window.location.reload()
     } catch(error) {
         console.log(error)
     }
@@ -75,6 +74,7 @@ export default function Navigation() {
               size={20}
               sunColor="rgb(22, 25, 28)"
               moonColor="rgb(241, 241, 241)"
+              aria-label="toggle dark theme"
             />
           </Nav>
         </Navbar.Collapse>

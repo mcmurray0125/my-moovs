@@ -1,14 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Button, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+import { db } from "../firebase"
+import { doc, getDoc } from "firebase/firestore";
 
 
 export default function Dashboard() {
     const [error, setError] = useState("")
+    const [dbComments, setDBComments] = React.useState([])
+    const [savedMovies, setSavedMovies] = React.useState([])
     const { currentUser, logout } = useAuth()
     const navigate = useNavigate()
+
+    //Check Fire Store for Saved Movies and Comments
+    useEffect(() => {
+    const checkData = async () => {
+        if (currentUser) {
+        const docRef = doc(db, "users", currentUser.uid);
+        try {
+            const docSnap = await getDoc(docRef);
+            setSavedMovies(docSnap.data().saved);
+            setDBComments(docSnap.data().comments);
+        } catch(error) {
+            console.log(error)
+        }
+        }
+    }
+    checkData();
+    },[])
 
     async function handleLogout() {
         setError('')
@@ -29,16 +50,19 @@ export default function Dashboard() {
                 <Card.Body className='dashboard-card'>
                     <h2 className='text-center mb-4'>Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <strong>Email:</strong> {currentUser.email ? currentUser.email : `Demo User ${currentUser.uid}`}
+                    <div className='profile-contents d-flex flex-column'>
+                        <span><strong>Email:</strong> {currentUser.email ? currentUser.email : `Demo User ${currentUser.uid}`}</span>
+                        <span><strong>Moovs Saved:</strong> {savedMovies.length}</span>
+                        <span><strong>Total Comments:</strong> {dbComments.length}</span>
+                    </div>
                     <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
                 </Card.Body>
             </Card>
-            <div className='w-100 text-center mt-2'>
-                <Link to="/">Go to Home Page</Link>
+            <div className='profile-links d-flex py-2 gap-4 justify-content-center'>
+                <a href="/">Go to Home Page</a>
+                <a href="/saved-movies">View Saved <i className="fa-solid fa-cloud"></i></a>
             </div>
-            <div className='w-100 text-center mt-2'>
-                <Button variant='link' onClick={handleLogout}>Log Out</Button>
-            </div>
+            <Button variant='link p-0 text-center w-100' onClick={handleLogout}>Log Out</Button>
         </div>
     </Container>
     </>

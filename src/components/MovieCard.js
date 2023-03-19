@@ -86,6 +86,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   
   return (
     <div className='movie-card-wrapper' data-bg={movie.backdrop_path}>
+      {/* Toast Notification */}
       <section className='fav-toast-wrapper position-absolute top-25 start-25' style={{zIndex: "300"}}>
         <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide className='w-auto'>
           <Toast.Header>
@@ -95,16 +96,18 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           {currentUser? <Toast.Body>{title} {favorite ?`added to saved movies.` : `removed from saved`}</Toast.Body> : <Toast.Body>Login or <Link to="/signup">Signup</Link> to save.</Toast.Body> }   
         </Toast>
       </section>
+      {/* Movie Card */}
       <Card className="movie-card border-0">
           <Card.Body className='p-0'>
-              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow movie-img mb-3" role="button" onClick={() => setModalShow(true)}/>
+              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow movie-img mb-3" role="button" alt='poster image' onClick={() => setModalShow(true)} aria-label={`display movie overview for ${title}`} />
               <Card.Title className='m-0'>{title}</Card.Title>
               <div className='d-flex align-items-center justify-content-between'>
               <Card.Text className='my-0'>Released {formattedDate}</Card.Text>
-              <img className='star' style={{width: "30px", cursor: "pointer" }} onClick={handleClick} src={favorite ? starFilled : star} alt="star-icon"/>
+              <img className='star' style={{width: "30px", cursor: "pointer" }} role='button' onClick={handleClick} src={favorite ? starFilled : star} alt="star-icon" aria-label={`save or remove ${title}`}/>
               </div>
           </Card.Body>
       </Card>
+      {/* Modal */}
       <MovieModal
           show={modalShow}
           onHide={() => setModalShow(false)}

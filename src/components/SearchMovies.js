@@ -81,12 +81,12 @@ export default function SearchMovies() {
             />
         </InputGroup>
         {query === '' ?
-        <div className='d-flex align-items-center justify-content-between page-info'>
+        <header className='d-flex align-items-center justify-content-between page-info'>
             <span className='d-flex justify-content-center align-items-center gap-3 mb-3'>
               <p className='text-center text-nowrap my-0'>Showing Top-Rated Movies</p>
             </span>
             <p>Page {currentPage} of {totalPages}</p>
-        </div> :
+        </header> :
         <span className='d-flex justify-content-between page-info'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>
         }
         <Row >
