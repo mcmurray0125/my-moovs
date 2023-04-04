@@ -130,27 +130,16 @@ Visit a live version of MyMoovs <a href ="https://mymoovs.netlify.app/">here</a>
 <details open>
   <summary>Navigating the Pages</summary>
 
-https://user-images.githubusercontent.com/116777356/217154788-046c25e2-2a91-4c16-b2be-a0078a8997fb.mp4
+https://user-images.githubusercontent.com/116777356/229678201-18b985ee-ed79-47be-a85b-4b9c97cc6847.mp4
 
 </details>
 
 <details open>
   <summary>Create account, Save Movies, add Comments</summary>
 
-
-https://user-images.githubusercontent.com/116777356/217154817-6e27d6ce-9b7d-4558-adcb-8592f7e27421.mp4
-
-</details>
-
-<details>
-  <summary>Upgrade demo account to email account.</summary>
-
-
-https://user-images.githubusercontent.com/116777356/217154850-27ae067e-42db-4098-802e-834fce828172.mp4
+https://user-images.githubusercontent.com/116777356/229677317-ec906664-a234-4a6d-82c4-a9d3ddfadd02.mp4
 
 </details>
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -177,10 +166,22 @@ If you have a suggestion that would make this better, please fork the repo and c
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Clone your forked repo:
+```sh
+git clone https://github.com/YOUR-USERNAME/gps-challenge.git
+```
+3. Install npm packages
+```sh
+npm install
+```
+4. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+5. Run Locally with `npm run dev`
+```
+npm run dev
+```
+6. Commit your Changes (`git commit -m 'Add some feature or fix'`)
+7. Push to the Branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
