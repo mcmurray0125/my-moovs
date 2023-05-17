@@ -22,6 +22,14 @@ export default function Home() {
 
     const navigate = useNavigate()
 
+    function handleSlideChange() {
+      const currentSlide = document.querySelector('.slick-current');
+      if (currentSlide && popularMovies && nowPlayingMovies) {
+        const slideBg = currentSlide.querySelectorAll('*')[1].getAttribute('data-bg');
+        setBackgroundImage(slideBg);
+      }
+    }
+
     //Fetch movies for the carousel.
     useEffect(() => {
       const fetchData = async () => {
@@ -39,11 +47,7 @@ export default function Home() {
         }
       };
       fetchData();
-    }, []);
-
-  const handleClick = () => {
-    navigate("/search-movies");
-};
+    });
 
   const cardElements = homeCards.map((item) => {
     return (
@@ -221,14 +225,6 @@ export default function Home() {
   };
 
 
-  function handleSlideChange(currentIndex, nextIndex) {
-    const currentSlide = document.querySelector('.slick-current');
-    if (currentSlide) {
-      const slideBg = currentSlide.querySelectorAll('*')[1].getAttribute('data-bg');
-      setBackgroundImage(slideBg);
-    }
-  }
-
   function handleFeaturedToggle(selection) {
     const popularButton = document.querySelector("#popular-button");
     const nowPlayingButton = document.querySelector("#now-playing-button");
@@ -242,9 +238,7 @@ export default function Home() {
       nowPlayingButton.classList.add("selected");
       setFeaturedSelect('now-playing')
     }
-    setTimeout(() => {
       handleSlideChange();
-    }, 600);
   }
 
   return (
@@ -258,18 +252,23 @@ export default function Home() {
               </ButtonGroup>
             </Container>
             <hr style={{backgroundColor: "white", height: "1.2px", opacity: "1"}}/>
-            {!loading && <Slider {...settings} style={{zIndex: "500"}}>
-              {featuredSelect === 'popular' && popularMovies.map((movie, index) => {
-                  return (
-                      <MovieCard {...movie} movie={movie} key={index}/>
-                      )
-                      })}
-              {featuredSelect === 'now-playing' && nowPlayingMovies.map((movie, index) => {
-                  return (
-                      <MovieCard {...movie} movie={movie} key={index}/>
-                      )
-                      })}
-            </Slider>}
+            {/* SLIDER */}
+            {!loading &&
+              <Slider {...settings} style={{zIndex: "500"}}>
+                {featuredSelect === "popular" ?
+                  popularMovies.map((movie, index) => {
+                    return (
+                        <MovieCard {...movie} movie={movie} key={index}/>
+                    )
+                  })
+                  : 
+                  nowPlayingMovies.map((movie, index) => {
+                    return (
+                        <MovieCard {...movie} movie={movie} key={index}/>
+                    )
+                  })}
+               </Slider>
+            }
             {/* Backdrop Image */}
             <div className="backdrop-img" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundImage})`,}}></div>
         </section>
@@ -311,7 +310,7 @@ export default function Home() {
             </Row>
             <Row>
                 <Col className="my-3 d-flex align-items-center justify-content-center">
-                    <Card id="search-btn-card" tabIndex={1} role="button" aria-label='go to search' className="home-btn-card bg-transparent w-100 h-auto" onClick={handleClick}>
+                    <Card id="search-btn-card" tabIndex={1} role="button" aria-label='go to search' className="home-btn-card bg-transparent w-100 h-auto" onClick={() => navigate("/search-movies")}>
                         <Card.Body className='d-flex flex-column justify-content-center'>
                             <Card.Title className='text-light text-center m-0 p-2'>Go To Search</Card.Title>
                         </Card.Body>
