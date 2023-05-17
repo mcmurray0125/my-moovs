@@ -42,6 +42,27 @@ header,
   color: var(--light-text);
 }
 /* HOME PAGE */
+#dark .bg-texture {
+  background-color: rgba(138, 69, 0, 0.118);
+  background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+}
+#light .bg-texture {
+  background-color: rgba(138, 69, 0, 0.001);
+  background-image: url("https://www.transparenttextures.com/patterns/az-subtle.png");
+}
+#dark .slider-texture {
+  background-color: rgba(138, 69, 0, 0.118);
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+  border-bottom: 1px solid var(--dark-text);
+  overflow: hidden;
+}
+#light .slider-texture {
+  background-color: rgba(138, 69, 0, 0.001);
+  background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+  border-bottom: 1px solid var(--light-text);
+  overflow: hidden;
+}
+
 #light #home-container .card-title,
 #light #home-container .card-text,
 #light #home-container p,
@@ -54,6 +75,28 @@ header,
 #light .home-btn-card {
   border-color: var(--dark-grey);
   transition: 0.2s;
+}
+.login-btn {
+  font-weight: 500;
+}
+#light .login-btn {
+  background-color: rgb(196, 107, 17);
+  color: var(--dark-text);
+  border-color: var(--light-text);
+  transition: 0.15s;
+}
+#light .login-btn:hover {
+  background-color: rgb(92, 49, 7);
+}
+#dark .login-btn {
+  background-color: rgb(196, 107, 17);
+  color: var(--dark-text);
+  border-color: var(--dark-text);
+  transition: 0.15s;
+}
+#dark .login-btn:hover {
+  background-color: rgb(237, 158, 78);
+  color: var(--light-text);
 }
 #dark .home-card,
 #dark .home-btn-card {

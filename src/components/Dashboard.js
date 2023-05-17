@@ -43,7 +43,7 @@ export default function Dashboard() {
     }
 
   return (
-    <>
+    <div className='bg-texture'>
     <Container className='d-flex align-items-center justify-content-center' style={{height: `calc(100dvh - 73px)`}}>
         <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "400px"}}>
             <Card>
@@ -65,6 +65,6 @@ export default function Dashboard() {
             <Button variant='link p-0 text-center w-100' onClick={handleLogout}>Log Out</Button>
         </div>
     </Container>
-    </>
+    </div>
   )
 }

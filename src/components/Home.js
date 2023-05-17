@@ -243,6 +243,7 @@ export default function Home() {
 
   return (
     <>
+      <div className='slider-texture'>
         <section className='carousel ms-auto me-auto w-100 py-4' style={{position: 'relative'}}>
             <Container className='position-relative featured-header d-flex justify-content-between align-items-center px-5' style={{zIndex: "500"}}>
               <h2 style={{fontWeight: "700"}}>Featured Moovs</h2>
@@ -251,20 +252,20 @@ export default function Home() {
                 <Button id="now-playing-button" className='featured-button' onClick={() => handleFeaturedToggle("now-playing")} aria-label='view now playing movies'>Now Playing</Button>
               </ButtonGroup>
             </Container>
-            <hr style={{backgroundColor: "white", height: "1.2px", opacity: "1"}}/>
+            <hr style={{backgroundColor: "white", height: "1.4px", opacity: "1"}}/>
             {/* SLIDER */}
             {!loading &&
               <Slider {...settings} style={{zIndex: "500"}}>
                 {featuredSelect === "popular" ?
                   popularMovies.map((movie, index) => {
                     return (
-                        <MovieCard {...movie} movie={movie} key={index}/>
+                      <MovieCard {...movie} movie={movie} key={index}/>
                     )
                   })
                   : 
                   nowPlayingMovies.map((movie, index) => {
                     return (
-                        <MovieCard {...movie} movie={movie} key={index}/>
+                      <MovieCard {...movie} movie={movie} key={index}/>
                     )
                   })}
                </Slider>
@@ -272,58 +273,61 @@ export default function Home() {
             {/* Backdrop Image */}
             <div className="backdrop-img" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundImage})`,}}></div>
         </section>
-        <Container fluid="md" className='py-4 d-flex flex-column justify-content-center' id='home-container'>
-            <Row gap={2} xs={1} sm={2} className="d-flex align-items-center">
-                <Col className='d-flex justify-content-center align-items-center my-3'>
-                    <Card className="bg-transparent home-card p-0 boder p-3">
-                        <Card.Img src={theme === "light" ? largeLogoBlack : largeLogo} />
-                    </Card>
-                </Col>
-                <Col className='d-flex justify-content-center my-3'>
-                    {currentUser ?
-                    <Card className="home-card p-3 bg-transparent border-none" >
-                      <Card.Body className='text-center'>
-                          <Card.Title className='fs-3 text-light'>
-                              Hello, <span className='text-decoration-underline'>{currentUser.email ? currentUser.email : 'Demo User'}</span>
-                          </Card.Title>
-                          <Card.Text className='fs-5 text-light'>
-                            Continue browsing movies by genre, or <a href='/search-movies' aria-label='go to search'>search</a> instead. View your saved moovs by clicking below.
-                          </Card.Text>
-                          <Button href='/saved-movies' aria-label='go to saved movies' className="me-4" variant="info">Saved Moovs</Button>
-                      </Card.Body>
-                    </Card>
-                    :
-                    <Card className="home-card p-3 bg-transparent border-none" >
-                      <Card.Body className='text-center'>
-                          <Card.Title className='fs-3 text-light'>
-                              Welcome!
-                          </Card.Title>
-                          <Card.Text className='fs-5 text-light'>
-                            MyMoovs is a website where you can save favorite movies and share comments. It's a personal movie journal to document movie likes and dislikes.
-                          </Card.Text>
-                          <Button href='/signup' aria-label='sign up link' className="me-4" variant="info">Sign Up</Button>
-                          <Button href='/login' aria-label='login link' variant="info">Login</Button>
-                      </Card.Body>
-                    </Card> 
-                    }
-                </Col>
-            </Row>
-            <Row>
-                <Col className="my-3 d-flex align-items-center justify-content-center">
-                    <Card id="search-btn-card" tabIndex={1} role="button" aria-label='go to search' className="home-btn-card bg-transparent w-100 h-auto" onClick={() => navigate("/search-movies")}>
-                        <Card.Body className='d-flex flex-column justify-content-center'>
-                            <Card.Title className='text-light text-center m-0 p-2'>Go To Search</Card.Title>
+      </div>
+      <div className='bg-texture'>
+          <Container fluid="md" className='py-4 d-flex flex-column justify-content-center' id='home-container'>
+              <Row gap={2} xs={1} sm={2} className="d-flex align-items-center">
+                  <Col className='d-flex justify-content-center align-items-center my-3'>
+                      <Card className="bg-transparent home-card p-0 boder p-3">
+                          <Card.Img src={theme === "light" ? largeLogoBlack : largeLogo} />
+                      </Card>
+                  </Col>
+                  <Col className='d-flex justify-content-center my-3'>
+                      {currentUser ?
+                      <Card className="home-card p-3 bg-transparent border-none" >
+                        <Card.Body className='text-center'>
+                            <Card.Title className='fs-3 text-light'>
+                                Hello, <span className='text-decoration-underline'>{currentUser.email ? currentUser.email : 'Demo User'}</span>
+                            </Card.Title>
+                            <Card.Text className='fs-5 text-light'>
+                              Continue browsing movies by genre, or <a href='/search-movies' aria-label='go to search'>search</a> instead. View your saved moovs by clicking below.
+                            </Card.Text>
+                            <Button href='/saved-movies' aria-label='go to saved movies' className="me-4" variant="info">Saved Moovs</Button>
                         </Card.Body>
-                    </Card>
-                </Col>     
-            </Row> 
-            <Row><p style={{zIndex: "400"}} className="text-light fs-2 m-0 text-center my-3">Browse by Genre</p></Row>
-            <Container className='home-cards-wrapper'>
-                <Row xs={2} sm={3} lg={6}>
-                    {cardElements}
-                </Row>   
-            </Container>
-        </Container>
+                      </Card>
+                      :
+                      <Card className="home-card p-3 bg-transparent border-none" >
+                        <Card.Body className='text-center'>
+                            <Card.Title className='fs-3 text-light'>
+                                Welcome!
+                            </Card.Title>
+                            <Card.Text className='fs-5 text-light'>
+                              MyMoovs is a website where you can save favorite movies and share comments. It's a personal movie journal to document movie likes and dislikes.
+                            </Card.Text>
+                            <Button href='/signup' aria-label='sign up link' className="me-4 login-btn">Sign Up</Button>
+                            <Button href='/login' aria-label='login link' className='login-btn'>Login</Button>
+                        </Card.Body>
+                      </Card> 
+                      }
+                  </Col>
+              </Row>
+              <Row>
+                  <Col className="my-3 d-flex align-items-center justify-content-center">
+                      <Card id="search-btn-card" tabIndex={1} role="button" aria-label='go to search' className="home-btn-card bg-transparent w-100 h-auto" onClick={() => navigate("/search-movies")}>
+                          <Card.Body className='d-flex flex-column justify-content-center'>
+                              <Card.Title className='text-light text-center m-0 p-2'>Go To Search</Card.Title>
+                          </Card.Body>
+                      </Card>
+                  </Col>     
+              </Row> 
+              <Row><p style={{zIndex: "400"}} className="text-light fs-2 m-0 text-center my-3">Browse by Genre</p></Row>
+              <Container className='home-cards-wrapper'>
+                  <Row xs={2} sm={3} lg={6}>
+                      {cardElements}
+                  </Row>   
+              </Container>
+          </Container>
+      </div>
     </>
   )
 }
