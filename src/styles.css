@@ -44,7 +44,7 @@ header,
 /* HOME PAGE */
 #dark .bg-texture {
   background-color: rgba(138, 69, 0, 0.118);
-  background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+  background-image: url("https://www.transparenttextures.com/patterns/black-twill.png");
 }
 #light .bg-texture {
   background-color: rgba(138, 69, 0, 0.001);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Button, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import { db } from "../firebase"
 import { doc, getDoc } from "firebase/firestore";
