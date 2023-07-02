@@ -405,6 +405,39 @@ header,
   background-color: rgb(255, 189, 123) !important;
 }
 
+/* GRADIENTS */
+.page-wrapper {
+  position: relative;
+}
+.gradient-backdrop-filter {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backdrop-filter: hue-rotate(45deg);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gradient-left {
+  position: absolute;
+  filter: blur(100px) !important;
+  z-index: 0;
+  height: 90%;
+  margin-top: 10%;
+  width: 20dvw;
+  pointer-events: none;
+}
+.gradient-right {
+  position: absolute;
+  filter: blur(100px) !important;
+  z-index: 0;
+  right: 0px;
+  height: 90%;
+  margin-top: 10%;
+  width: 20dvw;
+  pointer-events: none;
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 700px) {
   .saved-movie-wrapper {

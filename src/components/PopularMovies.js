@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import { Container, Card, Row, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
 import MovieCard from './MovieCard'
+import gradient from "../assets/abstract-gradient.jpg"
 
 
 export default function PopularMovies() {
@@ -34,8 +35,11 @@ export default function PopularMovies() {
   };
 
   return (
-    <div>
-          <Container className='mt-4 pb-4'>
+    <div className='page-wrapper'>
+        <img src={gradient} className='gradient-left' alt='gradient-img'/>
+        <img src={gradient} className='gradient-right' alt='gradient-img'/>
+        <div className='gradient-backdrop-filter'></div>
+          <Container className='pt-4 pb-4'>
           <header className='d-flex align-items-center justify-content-between mb-3'>
             <h1 className='page-title m-0'>Popular Movies</h1>
             <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
