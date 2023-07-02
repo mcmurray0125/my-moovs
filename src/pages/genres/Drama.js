@@ -33,12 +33,11 @@ export default function Drama() {
   };
 
   return (
-    <div>
-      <Container className='mt-4 pb-4'>
-      <header className='d-flex align-items-center justify-content-between mb-3'>
-        <h1 className='page-title m-0'><i className="fa-solid fa-masks-theater fs-3"></i> Drama Movies</h1>
-        <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
-      </header>
+      <Container className='pt-4 pb-4'>
+        <header className='d-flex align-items-center justify-content-between mb-3'>
+          <h1 className='page-title m-0'><i className="fa-solid fa-masks-theater fs-3"></i> Drama Movies</h1>
+          <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
+        </header>
         <Row >
         {dramaMovies.map((movie, index) => {
           return (
@@ -50,6 +49,5 @@ export default function Drama() {
         </Row>
         <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
       </Container>
-    </div>
   )
 }

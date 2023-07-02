@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { useTheme } from "../contexts/ThemeContext";
 import { useAuth } from "../contexts/AuthContext";
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
 import smallLogo from "../assets/small-logo.png"
 import smallLogoBlack from "../assets/small-logo-black.png"
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
@@ -11,7 +10,6 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode';
 export default function Navigation() {
   const { currentUser, logout } = useAuth()
   const { theme, toggleTheme } = useTheme()
-  const navigate = useNavigate()
   const [isDarkMode, setDarkMode] = useState(theme === 'dark' ? true : false);
 
   const toggleDarkMode = () => {
@@ -42,22 +40,22 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/popular-movies"><i className="fa-solid fa-fire"></i> Popular Movies</Nav.Link>
+            <Nav.Link href="/movies/popular-movies"><i className="fa-solid fa-fire"></i> Popular Movies</Nav.Link>
             <NavDropdown title="Genres" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="/action">Action</NavDropdown.Item>
-              <NavDropdown.Item href="/comedy">Comedy</NavDropdown.Item>
-              <NavDropdown.Item href="/drama">Drama</NavDropdown.Item>
-              <NavDropdown.Item href="/family">Family</NavDropdown.Item>
-              <NavDropdown.Item href="/science-fiction">Sci-Fi</NavDropdown.Item>
+              <NavDropdown.Item href="/movies/action">Action</NavDropdown.Item>
+              <NavDropdown.Item href="/movies/comedy">Comedy</NavDropdown.Item>
+              <NavDropdown.Item href="/movies/drama">Drama</NavDropdown.Item>
+              <NavDropdown.Item href="/movies/family">Family</NavDropdown.Item>
+              <NavDropdown.Item href="/movies/science-fiction">Sci-Fi</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/upcoming-movies">Upcoming</NavDropdown.Item>
+              <NavDropdown.Item href="/movies/upcoming-movies">Upcoming</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/search-movies">Search <i className="fa-solid fa-magnifying-glass"></i></Nav.Link>
+            <Nav.Link href="/movies/search-movies">Search <i className="fa-solid fa-magnifying-glass"></i></Nav.Link>
           </Nav>
           <Nav className="align-items-center">
             <Nav.Link href="/saved-movies"><i className="fa-solid fa-cloud"></i> Saved</Nav.Link>
             <NavDropdown title="Profile" id="collasible-nav-dropdown">
-              <NavDropdown.Item eventKey={2} href="/profile">My Account</NavDropdown.Item>
+              <NavDropdown.Item eventKey={2} href="/user/profile">My Account</NavDropdown.Item>
               <NavDropdown.Item href="/saved-movies">Saved Movies</NavDropdown.Item>
               <NavDropdown.Divider />
               {currentUser ?

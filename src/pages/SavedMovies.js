@@ -87,7 +87,6 @@ export default function SavedMovies() {
     }, [query, parsedMovies])
     
   return (
-    <div>
     <Container className='pt-4 pb-4' style={{height: variant !== 'success' ? `calc(100dvh - 73px)` : undefined}}>
       <div className='d-flex align-items-center flex-column justify-content-start'>
         {/* If dbMovies is not empty, display search bar */}
@@ -119,6 +118,5 @@ export default function SavedMovies() {
           })}
         </Row>
     </Container>
-    </div>
   )
 }

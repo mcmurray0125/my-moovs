@@ -55,7 +55,7 @@ export default function Dashboard() {
                         <span><strong>Moovs Saved:</strong> {savedMovies.length}</span>
                         <span><strong>Total Comments:</strong> {dbComments.length}</span>
                     </div>
-                    <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
+                    <Link to="/user/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
                 </Card.Body>
             </Card>
             <div className='profile-links d-flex py-2 gap-4 justify-content-center'>

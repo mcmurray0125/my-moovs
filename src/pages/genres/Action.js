@@ -33,12 +33,11 @@ export default function Action() {
   };
 
   return (
-    <div>
-      <Container className='mt-4 pb-4'>
-      <header className='d-flex align-items-center justify-content-between mb-3'>
-        <h1 className='page-title m-0'><i className="fa-solid fa-burst fs-3"></i> Action Movies</h1>
-        <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
-      </header>
+      <Container className='pt-4 pb-4'>
+        <header className='d-flex align-items-center justify-content-between mb-3'>
+          <h1 className='page-title m-0'><i className="fa-solid fa-burst fs-3"></i> Action Movies</h1>
+          <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
+        </header>
         <Row >
         {actionMovies.map((movie, index) => {
           return (
@@ -50,6 +49,5 @@ export default function Action() {
         </Row>
         <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
       </Container>
-    </div>
   )
 }

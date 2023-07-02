@@ -3,8 +3,6 @@ import { Container, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
 import MovieCard from '../components/MovieCard'
-import gradient from "../assets/abstract-gradient.jpg"
-
 
 export default function PopularMovies() {
   const [popularMovies, setpopularMovies] = useState([])
@@ -35,26 +33,21 @@ export default function PopularMovies() {
   };
 
   return (
-    <div className='page-wrapper'>
-        <img className='gradient-left' src={gradient} alt='gradient-img'/>
-        <img className='gradient-right' src={gradient} alt='gradient-img'/>
-        <div className='gradient-backdrop-filter'></div>
-          <Container className='pt-4 pb-4'>
-          <header className='d-flex align-items-center justify-content-between mb-3'>
-            <h1 className='page-title m-0'>Popular Movies</h1>
-            <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
-          </header>
-            <Row >
-            {popularMovies.map((movie, index) => {
-              return (
-                <Col xs={6} md={3} key={index} className='mb-4'>
-                  <MovieCard {...movie} paginate={paginate} movie={movie}/>
-                </Col>
-                )
-              })}
-            </Row>
-            <Pagination className='w-100 d-flex justify-content-center' onClick={top}>{items}</Pagination>
-          </Container>
-    </div>
+      <Container className='pt-4 pb-4'>
+        <header className='d-flex align-items-center justify-content-between mb-3'>
+          <h1 className='page-title m-0'>Popular Movies</h1>
+          <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
+        </header>
+          <Row >
+          {popularMovies.map((movie, index) => {
+            return (
+              <Col xs={6} md={3} key={index} className='mb-4'>
+                <MovieCard {...movie} paginate={paginate} movie={movie}/>
+              </Col>
+              )
+            })}
+          </Row>
+          <Pagination className='w-100 d-flex justify-content-center' onClick={top}>{items}</Pagination>
+      </Container>
   )
 }

@@ -430,8 +430,7 @@ header,
   filter: blur(100px) !important;
   -webkit-filter: blur(100px) !important;
   z-index: 0;
-  height: 90%;
-  margin-top: 10%;
+  height: 100%;
   width: 20dvw;
   pointer-events: none;
   background-color: #4158d0;
@@ -448,8 +447,7 @@ header,
   -webkit-filter: blur(100px) !important;
   z-index: 0;
   right: 0px;
-  height: 90%;
-  margin-top: 10%;
+  height: 100%;
   width: 20dvw;
   pointer-events: none;
   background-color: #4158d0;

@@ -2,31 +2,31 @@ export default [
     {
         id: 1,
         title: "Action",
-        link: "/action"
+        link: "/movies/action"
     },
     {
         id: 2,
         title: "Comedy",
-        link: "/comedy"
+        link: "/movies/comedy"
     },
     {
         id: 3,
         title: "Family",
-        link: "/family"
+        link: "/movies/family"
     },
     {
         id: 4,
         title: "Drama",
-        link: "/drama"
+        link: "/movies/drama"
     },
     {
         id: 5,
         title: "Sci-Fi",
-        link: "/science-fiction"
+        link: "/movies/science-fiction"
     },
     {
         id: 6,
         title: "Popular",
-        link: "/popular-movies"
+        link: "/movies/popular-movies"
     },
 ]

@@ -39,7 +39,6 @@ export default function UpcomingMovies() {
   };
 
   return (
-    <div>
       <Container className='mt-4 pb-4'>
         <header className='d-flex align-items-center justify-content-between mb-3'>
           <h1 className='page-title m-0'>Upcoming Movies</h1>
@@ -56,6 +55,5 @@ export default function UpcomingMovies() {
         </Row>
         <Pagination className='w-100 d-flex justify-content-center mb-5' onClick={top}>{items}</Pagination>
       </Container>
-    </div>
   )
 }

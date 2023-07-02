@@ -33,23 +33,21 @@ export default function ScienceFiction() {
   };
 
   return (
-    <div>
-      <Container className='mt-4 pb-4'>
+    <Container className='pt-4 pb-4'>
       <header className='d-flex align-items-center justify-content-between mb-3'>
         <h1 className='page-title m-0'><i className="fa-solid fa-flask fs-3"></i> Sci-Fi Movies</h1>
         <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
       </header>
-        <Row >
-        {sciFiMovies.map((movie, index) => {
-          return (
-            <Col xs={6} md={3} key={index} className='mb-4'>
-              <MovieCard {...movie} paginate={paginate} movie={movie}/>
-            </Col>
-            )
-          })}
-        </Row>
-        <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
-      </Container>
-    </div>
+      <Row >
+      {sciFiMovies.map((movie, index) => {
+        return (
+          <Col xs={6} md={3} key={index} className='mb-4'>
+            <MovieCard {...movie} paginate={paginate} movie={movie}/>
+          </Col>
+          )
+        })}
+      </Row>
+      <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
+    </Container>
   )
 }

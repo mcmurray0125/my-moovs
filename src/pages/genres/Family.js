@@ -33,12 +33,11 @@ export default function Family() {
   };
 
   return (
-    <div>
-      <Container className='mt-4 pb-4'>
-      <header className='d-flex align-items-center justify-content-between mb-3'>
-        <h1 className='page-title m-0'><i className="fa-solid fa-child-reaching fs-3"></i> Family Movies</h1>
-        <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
-      </header>
+      <Container className='pt-4 pb-4'>
+        <header className='d-flex align-items-center justify-content-between mb-3'>
+          <h1 className='page-title m-0'><i className="fa-solid fa-child-reaching fs-3"></i> Family Movies</h1>
+          <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
+        </header>
         <Row >
         {familyMovies.map((movie, index) => {
           return (
@@ -50,6 +49,5 @@ export default function Family() {
         </Row>
         <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
       </Container>
-    </div>
   )
 }
