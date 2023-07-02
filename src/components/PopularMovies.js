@@ -36,8 +36,8 @@ export default function PopularMovies() {
 
   return (
     <div className='page-wrapper'>
-        <img src={gradient} className='gradient-left' alt='gradient-img'/>
-        <img src={gradient} className='gradient-right' alt='gradient-img'/>
+        <img className='gradient-left' src={gradient} alt='gradient-img'/>
+        <img className='gradient-right' src={gradient} alt='gradient-img'/>
         <div className='gradient-backdrop-filter'></div>
           <Container className='pt-4 pb-4'>
           <header className='d-flex align-items-center justify-content-between mb-3'>
