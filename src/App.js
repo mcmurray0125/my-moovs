@@ -1,24 +1,24 @@
 import React from 'react';
-import { AuthProvider } from '../contexts/AuthContext';
-import { useTheme } from '../contexts/ThemeContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { useTheme } from './contexts/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Signup from './Signup';
-import Dashboard from './Dashboard';
-import Login from './Login';
-import PrivateRoute from './PrivateRoute';
-import ForgotPassword from './ForgotPassword';
-import UpdateProfile from './UpdateProfile';
-import Home from './Home';
-import PopularMovies from './PopularMovies';
-import Action from './genres/Action';
-import Comedy from './genres/Comedy';
-import Drama from './genres/Drama';
-import Family from './genres/Family';
-import ScienceFiction from './genres/ScienceFiction';
-import SearchMovies from './SearchMovies';
-import SavedMovies from './SavedMovies';
-import UpcomingMovies from './UpcomingMovies';
-import Navigation from './Navigation';
+import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import PrivateRoute from './components/PrivateRoute';
+import ForgotPassword from './pages/ForgotPassword';
+import UpdateProfile from './pages/UpdateProfile';
+import Home from './pages/Home';
+import PopularMovies from './pages/PopularMovies';
+import Action from './pages/genres/Action';
+import Comedy from './pages/genres/Comedy';
+import Drama from './pages/genres/Drama';
+import Family from './pages/genres/Family';
+import ScienceFiction from './pages/genres/ScienceFiction';
+import SearchMovies from './pages/SearchMovies';
+import SavedMovies from './pages/SavedMovies';
+import UpcomingMovies from './pages/UpcomingMovies';
+import Navigation from './components/Navigation';
 
 
 

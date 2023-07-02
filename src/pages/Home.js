@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import largeLogo from "../assets/large-logo.png"
 import largeLogoBlack from "../assets/large-logo-black.png"
-import homeCards from "./home-cards"
-import HomeCard from './HomeCard'
-import MovieCard from './MovieCard'
+import homeCards from "../components/home-cards"
+import HomeCard from '../components/HomeCard'
+import MovieCard from '../components/MovieCard'
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext'
 

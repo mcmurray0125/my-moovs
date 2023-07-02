@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { db } from "../firebase"
 import { doc, getDoc } from "firebase/firestore"
 import Pagination from 'react-bootstrap/Pagination';
-import LargeMovieCard from './LargeMovieCard'
+import LargeMovieCard from '../components/LargeMovieCard'
 
 export default function SavedMovies() {
     const [message, setMessage] = useState("")

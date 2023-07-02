@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Container, Row, Col, Form, InputGroup } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
-import MovieCard from './MovieCard'
+import MovieCard from '../components/MovieCard'
 
 export default function SearchMovies() {
   const [movies, setMovies] = React.useState([])

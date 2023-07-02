@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Container, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
-import MovieCard from './MovieCard'
+import MovieCard from '../components/MovieCard'
 import gradient from "../assets/abstract-gradient.jpg"
 
 
 export default function PopularMovies() {
-  const [popularMovies, setpopularMovies] = React.useState([])
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [popularMovies, setpopularMovies] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 7
   
   const paginate = (number) => setCurrentPage(number);
