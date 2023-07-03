@@ -167,18 +167,24 @@ Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
 2. Clone your forked repo:
+
 ```sh
-git clone https://github.com/YOUR-USERNAME/gps-challenge.git
+git clone https://github.com/YOUR-USERNAME/my-moovs.git
 ```
+
 3. Install npm packages
+
 ```sh
 npm install
 ```
+
 4. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 5. Run Locally with `npm run dev`
+
 ```
 npm run dev
 ```
+
 6. Commit your Changes (`git commit -m 'Add some feature or fix'`)
 7. Push to the Branch (`git push origin feature/amazing-feature`)
 8. Open a Pull Request
