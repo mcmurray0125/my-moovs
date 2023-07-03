@@ -1,4 +1,4 @@
-export default [
+const homeCardsData = [
     {
         id: 1,
         title: "Action",
@@ -30,3 +30,5 @@ export default [
         link: "/movies/popular-movies"
     },
 ]
+
+export default homeCardsData

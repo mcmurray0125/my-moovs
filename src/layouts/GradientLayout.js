@@ -16,8 +16,8 @@ export default function GradientLayout() {
       gradientHueStyles.WebkitBackdropFilter = 'hue-rotate(140deg)';
       break;
     case '/movies/comedy':
-      gradientHueStyles.backdropFilter = 'hue-rotate(120deg)';
-      gradientHueStyles.WebkitBackdropFilter = 'hue-rotate(120deg)';
+      gradientHueStyles.backdropFilter = 'hue-rotate(16deg)';
+      gradientHueStyles.WebkitBackdropFilter = 'hue-rotate(16deg)';
       break;
     case '/movies/drama':
       gradientHueStyles.backdropFilter = 'hue-rotate(160deg)';
@@ -32,8 +32,8 @@ export default function GradientLayout() {
       gradientHueStyles.WebkitBackdropFilter = 'hue-rotate(240deg)';
       break;
     case '/movies/popular-movies':
-      gradientHueStyles.backdropFilter = 'hue-rotate(110deg)';
-      gradientHueStyles.WebkitBackdropFilter = 'hue-rotate(110deg)';
+      gradientHueStyles.backdropFilter = 'hue-rotate(333deg)';
+      gradientHueStyles.WebkitBackdropFilter = 'hue-rotate(333deg)';
       break;
     default:
       gradientHueStyles.backdropFilter = 'hue-rotate(0deg)';

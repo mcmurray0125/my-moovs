@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import largeLogo from "../assets/large-logo.png"
 import largeLogoBlack from "../assets/large-logo-black.png"
-import homeCards from "../components/home-cards"
+import homeCardsData from "../components/home-cards"
 import HomeCard from '../components/HomeCard'
 import MovieCard from '../components/MovieCard'
 import { useTheme } from '../contexts/ThemeContext';
@@ -49,7 +49,7 @@ export default function Home() {
       fetchData();
     });
 
-  const cardElements = homeCards.map((item) => {
+  const cardElements = homeCardsData.map((item) => {
     return (
     <HomeCard
         key={item.id}
