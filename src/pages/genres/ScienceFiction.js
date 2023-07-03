@@ -12,7 +12,7 @@ export default function ScienceFiction() {
   const paginate = (number) => setCurrentPage(number);
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=878&with_watch_monetization_types=flatrate`).then(response=>{
+    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=878&with_watch_monetization_types=flatrate`).then(response=>{
     setSciFiMovies(response.data.results)
     }).catch(err=>{console.log(err)})
   },[currentPage])

@@ -15,7 +15,7 @@ export default function SearchMovies() {
   //When input is empty, display top-rated movies by default.
   useEffect(() => {
     if (query === ''){
-      axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=${currentPage}`).then(response=>{
+      axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}`).then(response=>{
       setMovies(response.data.results)
       }).catch(err=>{console.log(err)})
       setTotalPages(8)
@@ -39,7 +39,7 @@ export default function SearchMovies() {
   useEffect(() => {
     if (query !== '') {
       window.addEventListener('keydown', handleBackspace);
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&query=${query}&page=${currentPage}&include_adult=false`).then(response=>{
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`).then(response=>{
       setMovies(response.data.results)
       setTotalPages(response.data.total_pages)
       }).catch(err=>{console.log(err)})
@@ -86,7 +86,8 @@ export default function SearchMovies() {
               <p className='text-center text-nowrap my-0'>Showing Top-Rated Movies</p>
             </span>
             <p>Page {currentPage} of {totalPages}</p>
-        </header> :
+        </header>
+        :
         <span className='d-flex justify-content-between page-info'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>
         }
         <Row >

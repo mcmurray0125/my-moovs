@@ -12,7 +12,7 @@ export default function PopularMovies() {
   const paginate = (number) => setCurrentPage(number);
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=${currentPage}`).then(response=>{
+    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}`).then(response=>{
     setpopularMovies(response.data.results)
     }).catch(err=>{console.log(err)})
   },[currentPage])

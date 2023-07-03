@@ -15,7 +15,7 @@ export default function UpcomingMovies() {
 
   //Set Up-Coming Movie from API
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=51dc6d0882dbc06cc1467363108a4d8b&language=en-US&page=${currentPage}&region=US`).then(response=>{
+    axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}&region=US`).then(response=>{
     setUpcomingMovies(response.data.results)
     setTotalPages(response.data.total_pages)
     }).catch(err=>{console.log(err)})
@@ -39,7 +39,7 @@ export default function UpcomingMovies() {
   };
 
   return (
-      <Container className='mt-4 pb-4'>
+      <Container className='pt-4 pb-4'>
         <header className='d-flex align-items-center justify-content-between mb-3'>
           <h1 className='page-title m-0'>Upcoming Movies</h1>
           <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>

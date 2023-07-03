@@ -38,7 +38,9 @@ header,
   font-weight: 700 !important;
 }
 .page-title,
-.page-info {
+.page-info,
+.page-info p,
+.page-info span {
   z-index: 2;
 }
 #light .dashboard-card-wrapper a,

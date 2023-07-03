@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react'
-import { Card, Toast } from "react-bootstrap"
-import star from '../assets/star.png'
-import { Link } from 'react-router-dom'
-import starFilled from '../assets/star-filled.png'
+import React, { useEffect, useState } from 'react'
 import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
+import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { Card, Toast } from "react-bootstrap"
+import posterFallback from "../assets/poster-fallback.png"
+import star from '../assets/star.png'
+import starFilled from '../assets/star-filled.png'
 import MovieModal from './Modal'
 
 
 export default function MovieCard({movie, poster_path, title, release_date, id, paginate}) {
-  const [favorite, setFavorite] = React.useState(false)
+  const [favorite, setFavorite] = useState(false)
   const { currentUser } = useAuth()
-  const [savedMovies, setSavedMovies] = React.useState([])
-  const [show, setShow] = React.useState(false);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [savedMovies, setSavedMovies] = useState([])
+  const [show, setShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   
   //Date Formatting
   const movieDate = new Date(release_date);
@@ -99,7 +100,17 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
       {/* Movie Card */}
       <Card className="movie-card border-0">
           <Card.Body className='p-0'>
-              <Card.Img src={`https://image.tmdb.org/t/p/w500`+poster_path} className="shadow movie-img mb-3" role="button" alt='poster image' onClick={() => setModalShow(true)} aria-label={`display movie overview for ${title}`} />
+              <Card.Img
+                src={`https://image.tmdb.org/t/p/w500`+poster_path}
+                onError={(e) => {
+                  e.target.src = posterFallback;
+                }}
+                className="shadow movie-img mb-3"
+                role="button"
+                alt='poster image'
+                onClick={() => setModalShow(true)}
+                aria-label={`display movie overview for ${title}`}
+              />
               <Card.Title className='m-0'>{title}</Card.Title>
               <div className='d-flex align-items-center justify-content-between'>
               <Card.Text className='my-0'>Released {formattedDate}</Card.Text>

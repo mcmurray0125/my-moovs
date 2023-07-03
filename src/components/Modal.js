@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Modal, Button } from "react-bootstrap"
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -16,12 +16,13 @@ export default function MovieModal(props) {
 
   return (
     <Modal
-    {...props}
-    size="lg"
-    aria-labelledby="contained-modal-title-vcenter"
-    centered
-  >
-    <div style={{
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+    <div
+      style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original${props.movie.backdrop_path})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
@@ -29,8 +30,8 @@ export default function MovieModal(props) {
         minHeight: "50vh",
         display: "flex",
         flexDirection: "column",
-    }}
-    className="p-2 border border-dark">
+      }}
+      className="p-2 border border-dark">
     <Modal.Header closeButton className='border-0 flex-grow-1'>
       <Modal.Title id="contained-modal-title-vcenter" className='fs-2 p-2 rounded' style={theme === "dark" ? darkModalStyles : lightModalStyles}>
         {props.movie.title}
