@@ -267,6 +267,11 @@ header,
   color: var(--dark-text);
   border-bottom: 1px solid var(--dark-text) !important;
 }
+#light .search-input {
+  background-color: transparent !important;
+  color: var(--light-text);
+  border-bottom: 1px solid var(--light-text) !important;
+}
 /* MOVIE CARD */
 .movie-card {
   margin: auto !important;
@@ -427,36 +432,27 @@ header,
 
 .gradient-left {
   position: absolute;
-  filter: blur(100px) !important;
-  -webkit-filter: blur(100px) !important;
   z-index: 0;
   height: 100%;
-  width: 20dvw;
+  width: 30dvw;
   pointer-events: none;
-  background-color: #4158d0;
-  background-image: linear-gradient(
-    43deg,
-    #4158d0 0%,
-    #c850c0 46%,
-    #ffcc70 100%
-  );
 }
 .gradient-right {
   position: absolute;
-  filter: blur(100px) !important;
-  -webkit-filter: blur(100px) !important;
   z-index: 0;
   right: 0px;
   height: 100%;
-  width: 20dvw;
+  width: 30dvw;
   pointer-events: none;
-  background-color: #4158d0;
-  background-image: linear-gradient(
-    43deg,
-    #4158d0 0%,
-    #c850c0 46%,
-    #ffcc70 100%
-  );
+}
+.gradient-right img,
+.gradient-left img {
+  height: 100%;
+  width: 100%;
+}
+.gradient-right img {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 /* MEDIA QUERIES */
@@ -487,6 +483,11 @@ header,
   .carousel .btn-group {
     flex-direction: column;
     gap: 0 !important;
+  }
+  .gradient-left,
+  .gradient-right {
+    width: 65dvw;
+    opacity: 0.4;
   }
 }
 /* Phones */

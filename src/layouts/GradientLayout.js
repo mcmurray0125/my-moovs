@@ -1,7 +1,7 @@
 import React from 'react'
 import Navigation from '../components/Navigation'
 import { Outlet } from 'react-router-dom'
-import gradient from "../assets/abstract-gradient.jpg"
+import gradient from "../assets/blur-2.png"
 
 export default function GradientLayout() {
 
@@ -45,8 +45,12 @@ export default function GradientLayout() {
     <>
     <Navigation />
     <div className='page-wrapper'>
-        <img className='gradient-left' src={gradient} alt='gradient-img'/>
-        <img className='gradient-right' src={gradient} alt='gradient-img'/>
+        <div className='gradient-left'>
+          <img src={gradient} alt='gradient-img'/>
+        </div>
+        <div className='gradient-right'>
+          <img src={gradient} alt='gradient-img'/>
+        </div>
         <div className='gradient-backdrop-filter' style={gradientHueStyles}></div>
         <Outlet />
     </div>

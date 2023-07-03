@@ -67,7 +67,7 @@ export default function SearchMovies() {
 
   return (
     <div>
-      <Container className='mt-4 pb-4'>
+      <Container className='pt-4 pb-4'>
         <InputGroup className="mb-3">
             <Form.Control
               placeholder="Search"
