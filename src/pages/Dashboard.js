@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import { db } from "../firebase"
 import { doc, getDoc } from "firebase/firestore";
+import clusterBlur from "../assets/cluster-blur.png"
 
 
 export default function Dashboard() {
@@ -43,28 +44,33 @@ export default function Dashboard() {
     }
 
   return (
-    <div className='bg-texture'>
-    <Container className='d-flex align-items-center justify-content-center' style={{height: `calc(100dvh - 73px)`}}>
-        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "400px"}}>
-            <Card>
-                <Card.Body className='dashboard-card'>
-                    <h2 className='text-center mb-4'>Profile</h2>
+    <Container className='dashboard-container d-flex align-items-center justify-content-center'>
+        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "600px"}}>
+            <Card className='dashboard-card'>
+                <Card.Header>
+                    <h2 className='text-center m-0'>Profile</h2>
+                </Card.Header>
+                <Card.Body >
                     {error && <Alert variant="danger">{error}</Alert>}
                     <div className='profile-contents d-flex flex-column'>
                         <span><strong>Email:</strong> {currentUser.email ? currentUser.email : `Demo User ${currentUser.uid}`}</span>
                         <span><strong>Moovs Saved:</strong> {savedMovies.length}</span>
                         <span><strong>Total Comments:</strong> {dbComments.length}</span>
                     </div>
-                    <Link to="/user/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
                 </Card.Body>
             </Card>
-            <div className='profile-links d-flex py-2 gap-4 justify-content-center'>
-                <a href="/">Go to Home Page</a>
-                <a href="/saved-movies">View Saved <i className="fa-solid fa-cloud"></i></a>
+            <div className='profile-links d-flex flex-column py-2 gap-2 justify-content-center align-items-center'>
+                <div className='d-flex gap-4 justify-content-center'>
+                    <a href="/">Go to Home Page</a>
+                    <a href="/saved-movies">View Saved <i className="fa-solid fa-cloud"></i></a>
+                </div>
+                <Link to="/user/update-profile">Update Profile</Link>
+                <Button className='main-btn text-center w-25 p-1 fs-6 mt-2' onClick={handleLogout}>Log Out</Button>
             </div>
-            <Button variant='link p-0 text-center w-100' onClick={handleLogout}>Log Out</Button>
+            <div className='gradient-card'>
+                <img src={clusterBlur} alt='cluster-blur'/>
+            </div>
         </div>
     </Container>
-    </div>
   )
 }

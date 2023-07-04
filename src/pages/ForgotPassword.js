@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form, Button, Card, Alert, FloatingLabel } from "react-bootstrap"
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from "react-router-dom"
 import { Container } from 'react-bootstrap'
+import clusterBlur from "../assets/cluster-blur.png"
 
 
 
@@ -29,27 +30,41 @@ export default function ForgotPassword() {
     }
 
   return (
-    <Container className='d-flex align-items-center justify-content-center' style={{height: `calc(100dvh - 73px)`}}>
-        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "400px"}}>
+    <Container className='dashboard-container d-flex align-items-center justify-content-center' >
+        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "600px"}}>
             <Card className='dashboard-card'>
                 <Card.Body>
                     <h2 className='text-center mb-4'>Password Reset</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     {message && <Alert variant="success">{message}</Alert>}
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group id='email'>
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" ref={emailRef} required></Form.Control>
-                        </Form.Group>
-                        <Button disabled={loading} type='submit' className='w-100 mt-3'>Reset Password</Button>
+                        <FloatingLabel label="Email">
+                            <Form.Control
+                                type="email"
+                                ref={emailRef}
+                                placeholder='Email'
+                                required
+                                className='dashboard-input mb-3'
+                            />
+                        </FloatingLabel>
+                        <Button
+                            disabled={loading}
+                            type='submit'
+                            className='main-btn w-100 mt-4'
+                        >
+                            Reset Password
+                        </Button>
                     </Form>
-                    <div className='w-100 text-center mt-3'>
-                        <Link to="/login">Login</Link>
-                    </div>
                 </Card.Body>
             </Card>
             <div className='w-100 text-center mt-2'>
+                <Link to="/login">Log in</Link>
+            </div>
+            <div className='w-100 text-center mt-2'>
                 Need an account? <Link to="/signup">Sign Up</Link>
+            </div>
+            <div className='gradient-card'>
+                <img src={clusterBlur} alt='cluster-blur'/>
             </div>
         </div>
     </Container>

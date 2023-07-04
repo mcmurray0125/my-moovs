@@ -48,15 +48,47 @@ header,
   height: calc(100dvh - 73px);
   overflow: hidden;
 }
-#light .dashboard-card-wrapper a,
-#light .dashboard-card-wrapper button {
+#light .dashboard-card-wrapper a {
   color: var(--light-text);
 }
+
+.main-btn {
+  background-image: linear-gradient(
+    to right,
+    #7b4397 0%,
+    #dc2430 51%,
+    #7b4397 100%
+  );
+  padding: 12px 0px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  font-weight: 400;
+  font-size: 1.25rem;
+  border: none;
+  display: block;
+}
+
+.main-btn:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
 .dashboard-card-wrapper {
   position: relative;
 }
-.dashboard-card {
+.dashboard-card,
+.profile-links a {
   z-index: 5;
+}
+.card-header {
+  background-color: transparent !important;
+  border-bottom: 0.5px solid var(--light-text);
+}
+#dark .card-header {
+  border-bottom: 0.5px solid var(--dark-text);
 }
 .gradient-card {
   position: absolute;
@@ -97,7 +129,6 @@ header,
 #light .dashboard-input:focus {
   background-color: rgba(217, 217, 217, 0.195) !important;
 }
-
 /* HOME PAGE */
 #dark .bg-texture {
   background-color: rgba(138, 69, 0, 0.118);
@@ -271,6 +302,7 @@ header,
 #dark .movie-card,
 #dark .dashboard-card-wrapper,
 #dark .dashboard-card-wrapper a,
+#dark .dashboard-card-wrapper span,
 #dark .dashboard-card-wrapper button #dark .carousel button {
   color: var(--dark-text) !important;
 }

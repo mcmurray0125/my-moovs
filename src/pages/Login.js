@@ -55,14 +55,14 @@ export default function Login() {
                                     className='dashboard-input mb-3'
                                 />
                             </FloatingLabel>
-                            <Button disabled={loading} type='submit' className='w-100 my-3'>Log In</Button>
+                            <Button disabled={loading} type='submit' className='main-btn w-100 mt-5 mb-3'>Log In</Button>
                         </Form>
                         <div className='w-100 text-center mt-2'>
                             <Link to="/forgot-password">Forgot Password?</Link>
                         </div>
                     </Card.Body>
                 </Card>
-                <div className='w-100 text-center mt-2'>
+                <div className='w-100 text-center'>
                     Need an account? <Link to="/signup">Sign Up</Link>
                 </div>
                 <div className='w-100 text-center mt-2'>

@@ -3,6 +3,7 @@ import { Form, Button, Card, FormLabel, Alert } from "react-bootstrap"
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useNavigate } from "react-router-dom"
 import { Container } from 'react-bootstrap'
+import clusterBlur from "../assets/cluster-blur.png"
 
 
 
@@ -38,18 +39,19 @@ export default function UpdateProfile() {
         Promise.all(promises)
         .then(() => {
             navigate("/")
-        }).catch(() => {
+        }).catch((error) => {
             setError("Failed to update account")
+            console.log(error)
         }).finally(() => {
             setLoading(false)
         })
     }
 
   return (
-    <Container className='d-flex align-items-center justify-content-center' style={{minHeight: "100vh"}}>
-        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "400px"}}>
-            <Card>
-                <Card.Body className='dashboard-card'>
+    <Container className='dashboard-container d-flex align-items-center justify-content-center'>
+        <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "600px"}}>
+            <Card className='dashboard-card'>
+                <Card.Body >
                     <h2 className='text-center mb-4'>Update Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
@@ -57,7 +59,7 @@ export default function UpdateProfile() {
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="email" ref={emailRef} required defaultValue={currentUser.email}></Form.Control>
                         </Form.Group>
-                        <Form.Group id='password'>
+                        <Form.Group id='password' className='my-2'>
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder='Leave blank to keep the same' ref={passwordRef}></Form.Control>
                         </Form.Group>
@@ -65,14 +67,17 @@ export default function UpdateProfile() {
                             <Form.Label>Password Confirmation</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} placeholder='Leave blank to keep the same'></Form.Control>
                         </Form.Group>
-                        <Button disabled={loading} type='submit' className='w-100 mt-3'>Update</Button>
+                        <Button disabled={loading} type='submit' className='main-btn w-100 mt-3'>Update</Button>
                     </Form>
                 </Card.Body>
             </Card>
             <div className='w-100 text-center mt-2'>
-                Change your mind? <Link to="/profile">Cancel</Link>
+                Change your mind? <Link to="/user/profile">Cancel</Link>
             </div>
+            <div className='gradient-card'>
+                <img src={clusterBlur} alt='cluster-blur'/>
             </div>
+        </div>
     </Container>
   )
 }

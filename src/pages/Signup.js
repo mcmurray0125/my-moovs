@@ -51,7 +51,6 @@ export default function Signup() {
     }
 
   return (
-    <div className='bg-texture'>
         <Container className='dashboard-container d-flex align-items-center justify-content-center' >
         <div className='w-100 dashboard-card-wrapper' style={{maxWidth: "600px"}}>
             <Card className='dashboard-card'>
@@ -59,7 +58,7 @@ export default function Signup() {
                     <h2 className='text-center mb-4'>Sign Up</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
-                        <FloatingLabel controlId="floatingInput" label="Email">
+                        <FloatingLabel label="Email">
                             <Form.Control
                                 type="email"
                                 ref={emailRef}
@@ -68,7 +67,7 @@ export default function Signup() {
                                 className='dashboard-input mb-3'
                             />
                         </FloatingLabel>
-                        <FloatingLabel controlId="floatingPassword" label="Password">
+                        <FloatingLabel label="Password">
                             <Form.Control
                                 type="password"
                                 ref={passwordRef}
@@ -77,7 +76,7 @@ export default function Signup() {
                                 className='dashboard-input mb-3'
                             />
                         </FloatingLabel>
-                        <FloatingLabel controlId="floatingPassword" label="Confirm Password">
+                        <FloatingLabel label="Confirm Password">
                             <Form.Control
                                 type="password"
                                 ref={passwordConfirmRef}
@@ -86,11 +85,18 @@ export default function Signup() {
                                 className='dashboard-input mb-3'
                             />
                         </FloatingLabel>
-                        <Button disabled={loading} type='submit' className='w-100 mt-3'>Sign Up</Button>
+                        <Button disabled={loading} type='submit' className='main-btn w-100 mt-5'>Sign Up</Button>
                     </Form>
                     <p className='text-center mt-3 mb-3'>Or</p>
                     <Form onSubmit={handleDemoSubmit}>
-                        <Button disabled={loading} type='submit' className='w-100'>Sign in as Demo User</Button>
+                        <Button
+                            disabled={loading}
+                            type='submit'
+                            className='main-btn w-100'
+                            style={{filter: 'hue-rotate(285deg)'}}
+                        >
+                            Sign in as Demo User
+                        </Button>
                     </Form>
                 </Card.Body>
             </Card>
@@ -105,6 +111,5 @@ export default function Signup() {
             </div>
         </div>
         </Container>
-    </div>
   )
 }
