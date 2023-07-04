@@ -14,10 +14,19 @@ export default function PopularMovies() {
   const paginate = (number) => setCurrentPage(number);
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}`).then(response=>{
-    setpopularMovies(response.data.results)
-    }).catch(err=>{console.log(err)})
-  },[currentPage])
+    setLoading(true)
+  
+    axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}`)
+      .then(response => {
+        setpopularMovies(response.data.results);
+        setLoading(false)
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [currentPage]);
+  
   
   let items = [];
   for (let number = 1; number <= 7; number++) {
@@ -42,7 +51,7 @@ export default function PopularMovies() {
         </header>
           <Row >
           {loading?
-            <MovieCardSkeleton cards={16}/>
+          <MovieCardSkeleton cards={16}/>
           :
           popularMovies.map((movie, index) => {
             return (
