@@ -3,8 +3,10 @@ import { Container, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
 import MovieCard from '../components/MovieCard'
+import MovieCardSkeleton from '../components/MovieCardSkeleton';
 
 export default function PopularMovies() {
+  const [loading, setLoading] = useState(true)
   const [popularMovies, setpopularMovies] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 7
@@ -39,7 +41,10 @@ export default function PopularMovies() {
           <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
         </header>
           <Row >
-          {popularMovies.map((movie, index) => {
+          {loading?
+            <MovieCardSkeleton cards={16}/>
+          :
+          popularMovies.map((movie, index) => {
             return (
               <Col xs={6} md={3} key={index} className='mb-4'>
                 <MovieCard {...movie} paginate={paginate} movie={movie}/>
