@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
 import MovieCard from '../../components/MovieCard'
+import MovieCardSkeleton from '../../components/MovieCardSkeleton';
 
 export default function Action() {
+  const [loading, setLoading] = useState(true)
   const [actionMovies, setActionMovies] = React.useState([])
   const [currentPage, setCurrentPage] = React.useState(1);
 
@@ -12,9 +14,17 @@ export default function Action() {
   const paginate = (number) => setCurrentPage(number);
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=28&with_watch_monetization_types=flatrate`).then(response=>{
-    setActionMovies(response.data.results)
-    }).catch(err=>{console.log(err)})
+    setLoading(true)
+
+    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&sort_by=revenue.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=28&with_watch_monetization_types=flatrate`)
+      .then(response=>{
+      setActionMovies(response.data.results)
+      setLoading(false)
+      })
+      .catch(err=> {
+        console.log(err)
+        setLoading(false)
+      })
   },[currentPage])
 
   let items = [];
@@ -39,7 +49,10 @@ export default function Action() {
           <p className='page-info m-0'>Page {currentPage} of {totalPages}</p>
         </header>
         <Row >
-        {actionMovies.map((movie, index) => {
+        {loading?
+        <MovieCardSkeleton cards={16}/>
+        :
+        actionMovies.map((movie, index) => {
           return (
             <Col xs={6} md={3} key={index} className='mb-4'>
               <MovieCard {...movie} paginate={paginate} movie={movie}/>
