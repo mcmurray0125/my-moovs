@@ -44,6 +44,7 @@ export default function Home() {
           handleSlideChange();
         } catch (error) {
           console.log(error);
+          setLoading(false)
         }
       };
       fetchData();
