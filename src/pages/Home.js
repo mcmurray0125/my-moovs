@@ -44,10 +44,11 @@ export default function Home() {
           handleSlideChange();
         } catch (error) {
           console.log(error);
+          setLoading(false)
         }
       };
       fetchData();
-    });
+    }, []);
 
   const cardElements = homeCardsData.map((item) => {
     return (
