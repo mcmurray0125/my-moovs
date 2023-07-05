@@ -47,7 +47,7 @@ export default function Home() {
         }
       };
       fetchData();
-    });
+    }, []);
 
   const cardElements = homeCardsData.map((item) => {
     return (
