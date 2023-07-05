@@ -4,7 +4,7 @@ import MovieCard from '../components/MovieCard';
 import MovieCardSkeleton from '../components/MovieCardSkeleton';
 import axios from 'axios';
 
-export default function BrowseLayout({ pageTitle, apiUrl }) {
+export default function BrowseLayout({ pageTitle, apiUrl, icon }) {
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +47,7 @@ export default function BrowseLayout({ pageTitle, apiUrl }) {
     return (
       <Container className="pt-4 pb-4">
         <header className="d-flex align-items-center justify-content-between mb-3">
-          <h1 className="page-title m-0">{pageTitle}</h1>
+          <h1 className="page-title m-0">{icon && <i className={icon}></i>} {pageTitle}</h1>
           <p className="page-info m-0">
             Page {currentPage} of {totalPages}
           </p>
