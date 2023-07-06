@@ -12,12 +12,11 @@ export default function SavedMovies() {
     const [linkPath, setLinkPath] = useState("")
     const [linkText, setLinkText] = useState("")
     const { currentUser, hasFolder } = useAuth()
-    const [query, setQuery] = React.useState('')
-    const [totalPages, setTotalPages] = React.useState(1)
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const [dbMovies, setDBMovies] = React.useState([])
-    const [parsedMovies, setParsedMovies] = React.useState([])
-    const [filteredMovies, setFilteredMovies] = React.useState(parsedMovies)
+    const [query, setQuery] = useState('')
+    const [totalPages, setTotalPages] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dbMovies, setDBMovies] = useState([])
+    const [filteredMovies, setFilteredMovies] = useState(dbMovies)
     const [show, setShow] = useState(true);
 
     const paginate = (number) => setCurrentPage(number);
@@ -41,7 +40,7 @@ export default function SavedMovies() {
         setLinkText("Login")
         setLinkPath("/login")
       }
-    },[dbMovies])
+    }, [dbMovies, currentUser])
 
      //Get the Movies from Database
      useEffect(() => {
@@ -50,23 +49,18 @@ export default function SavedMovies() {
           const docRef = doc(db, "users", currentUser.uid);
           try {
             const docSnap = await getDoc(docRef);
-            setDBMovies(docSnap.data().saved);
+            const savedMoviesData = docSnap.data().saved;
+            setDBMovies(savedMoviesData);
           } catch(error) {
             console.log(error)
           }
         }
       }
       checkData();
-    },[hasFolder])
+    }, [hasFolder, currentUser])
 
     useEffect(() => {
-      if (dbMovies) {
-        let parsedArray = []
-        dbMovies.forEach(function(item) {
-          parsedArray.push((JSON.parse(item)));
-        });
-        setParsedMovies(parsedArray)
-      }
+      console.log(dbMovies)
     }, [dbMovies]);
     
     
@@ -74,17 +68,17 @@ export default function SavedMovies() {
        setQuery(e.target.value);
      }
 
-    //When input is empty, setFiltered to parsedMovie,
-      // else, setFiltered to parsedMovies, filtered by query.
+    //When input is empty, setFiltered to dbMovies,
+      // else, setFiltered to dbMoviess, filtered by query.
     useEffect(() => {
-      if (parsedMovies) {
+      if (dbMovies) {
         if (query !== '') {
-          setFilteredMovies(parsedMovies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase())))
+          setFilteredMovies(dbMovies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase())))
         } else {
-          setFilteredMovies(parsedMovies)
+          setFilteredMovies(dbMovies)
         }
       }
-    }, [query, parsedMovies])
+    }, [query, dbMovies])
     
   return (
     <Container className='pt-4 pb-4' style={{height: variant !== 'success' ? `calc(100dvh - 73px)` : undefined}}>
@@ -96,14 +90,13 @@ export default function SavedMovies() {
         </Alert>}
         {dbMovies.length !== 0 && <InputGroup className="mb-3">
             <Form.Control
+              className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
               placeholder="Search saved Moovs"
               aria-label="comment-input"
-              aria-describedby="basic-addon2"
               type="search"
               onChange={changeHandler}
               name='search'
               value={query}
-              className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
             />
         </InputGroup>
         }

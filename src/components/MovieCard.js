@@ -43,14 +43,9 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
         }
       } else {
         // Favorite a movie that is not saved.
-        const movieObject = {
-          id: id,
-          title: title,
-          release_date: release_date
-        };
         try {
           await updateDoc(savedRef, {
-            saved: arrayUnion(movieObject)
+            saved: arrayUnion(movie)
           });
           setFavorite(true)
           setShow(true)
@@ -73,7 +68,6 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           const docSnap = await getDoc(docRef);
           const savedMoviesData = docSnap.data().saved;
           setSavedMovies(savedMoviesData);
-          console.log(savedMoviesData)
         } catch (error) {
           console.log(error);
         }
