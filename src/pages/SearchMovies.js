@@ -37,6 +37,9 @@ export default function SearchMovies() {
   const changeHandler = (e) => {
     setQuery(e.target.value);
     setDebouncing(true);
+    if (e.target.value === '') {
+      setCurrentPage(1);
+    }
   };
 
   useEffect(() => {
@@ -70,6 +73,7 @@ export default function SearchMovies() {
     }
   };
 
+  //Delay fetching untill 1s after typing stops.
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (debouncing && query !== '') {
@@ -111,9 +115,8 @@ export default function SearchMovies() {
       <Container className='pt-4 pb-4'>
         <InputGroup className="mb-3">
             <Form.Control
-              placeholder="Search"
+              placeholder="Search Moovs"
               aria-label="search"
-              aria-describedby="basic-addon2"
               onChange={changeHandler}
               type="search"
               name='query'
@@ -123,22 +126,15 @@ export default function SearchMovies() {
         </InputGroup>
           <header className="d-flex align-items-center justify-content-between page-info">
             {loading && query.length !== 0 ? (
-            <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
-              <p className="text-center my-0">Loading...</p>
-              <Spinner animation="border" />
-            </span>
-            ) :
-            (
-              query === '' ? (
-                <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
-                  <p className="text-center text-nowrap my-0">Showing Top Rated Movies</p>
-                </span>
+              <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
+                <p className="text-center my-0">Loading...</p>
+                <Spinner animation="border" />
+              </span>
               ) : (
-                <span className="d-flex justify-content-between page-info w-100">
-                  <p>Showing results for: {query}</p>
-                  <p>Page {currentPage} of {totalPages}</p>
-                </span>
-              )
+              <span className="d-flex justify-content-between page-info w-100">
+                <p className="text-center text-nowrap my-0">{query === '' ? `Showing Top Rated Movies` : `Showing results for: ${query}`}</p>
+                <p>Page {currentPage} of {totalPages}</p>
+              </span>
             )}
           </header>
         <Row >
