@@ -1,31 +1,43 @@
-import React, { useEffect } from 'react'
-import { Container, Row, Col, Form, InputGroup } from "react-bootstrap"
+import React, { useState, useEffect } from 'react'
+import { Container, Row, Col, Form, InputGroup, Spinner } from "react-bootstrap"
 import Pagination from 'react-bootstrap/Pagination';
 import axios from "axios"
 import MovieCard from '../components/MovieCard'
+import MovieCardSkeleton from '../components/MovieCardSkeleton';
 
 export default function SearchMovies() {
-  const [movies, setMovies] = React.useState([])
-  const [query, setQuery] = React.useState('')
-  const [totalPages, setTotalPages] = React.useState(1)
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [loading, setLoading] = useState(true)
+  const [debouncing, setDebouncing] = useState(false);
+  const [movies, setMovies] = useState([])
+  const [query, setQuery] = useState('')
+  const [totalPages, setTotalPages] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = (number) => setCurrentPage(number);
 
   //When input is empty, display top-rated movies by default.
   useEffect(() => {
-    if (query === ''){
-      axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}`).then(response=>{
-      setMovies(response.data.results)
-      }).catch(err=>{console.log(err)})
-      setTotalPages(8)
-    }
-  },[query, currentPage])
+    setLoading(true)
 
+    if (query === ''){
+      axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}`)
+      .then(response=>{
+      setMovies(response.data.results)
+      setTotalPages(8)
+      setLoading(false)
+
+      }).catch(err=>{
+        console.log(err)
+        setLoading(false)
+      })
+
+    }
+  }, [query, currentPage])
   
   const changeHandler = (e) => {
     setQuery(e.target.value);
-  }
+    setDebouncing(true);
+  };
 
   //If user deletes their search, page resets to 1.
   const handleBackspace = (event) => {
@@ -34,20 +46,45 @@ export default function SearchMovies() {
     }
   }
 
+  const fetchMovies = () => {
+    setLoading(true)
 
-  //When input is not empty, search movies.
+    if (query !== '') {
+      axios
+        .get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`)
+        .then((response) => {
+          setMovies(response.data.results);
+          setTotalPages(response.data.total_pages);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+          setDebouncing(false);
+        });
+    }
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (debouncing && query !== '') {
+        fetchMovies();
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [query, currentPage, debouncing]);
+
   useEffect(() => {
     if (query !== '') {
       window.addEventListener('keydown', handleBackspace);
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`).then(response=>{
-      setMovies(response.data.results)
-      setTotalPages(response.data.total_pages)
-      }).catch(err=>{console.log(err)})
     }
+
     return () => {
       window.removeEventListener('keydown', handleBackspace);
-    }
-  },[query, currentPage])
+    };
+  }, [query]);
 
   //Push Pagination items into array
   let items = [];
@@ -80,24 +117,39 @@ export default function SearchMovies() {
               className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
             />
         </InputGroup>
-        {query === '' ?
-        <header className='d-flex align-items-center justify-content-between page-info'>
-            <span className='d-flex justify-content-center align-items-center gap-3 mb-3'>
-              <p className='text-center text-nowrap my-0'>Showing Top-Rated Movies</p>
+        {loading && query.length !== 0 ? (
+          <header className="d-flex align-items-center justify-content-between page-info">
+            <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
+              <p className="text-center my-0">Loading...</p>
+              <Spinner animation="border" />
             </span>
-            <p>Page {currentPage} of {totalPages}</p>
-        </header>
-        :
-        <span className='d-flex justify-content-between page-info'><p>Showing results for: {query}</p><p>Page {currentPage} of {totalPages}</p></span>
-        }
+          </header>
+        ) : (
+          <header className="d-flex align-items-center justify-content-between page-info">
+            {query === '' ? (
+              <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
+                <p className="text-center text-nowrap my-0">Showing Top Rated Movies</p>
+              </span>
+            ) : (
+              <span className="d-flex justify-content-between page-info w-100">
+                <p>Showing results for: {query}</p>
+                <p>Page {currentPage} of {totalPages}</p>
+              </span>
+            )}
+          </header>
+        )}
         <Row >
-        {movies.map((movie, index) => {
+          {loading ?
+          <MovieCardSkeleton cards={16}/>
+          :  
+          movies.map((movie, index) => {
           return (
-            <Col xs={6} md={3} key={index} className='mb-4'>
-              <MovieCard {...movie} paginate={paginate} movie={movie}/>
-            </Col>
-            )
-          })}
+              <Col xs={6} md={3} key={index} className='mb-4'>
+                <MovieCard {...movie} paginate={paginate} movie={movie}/>
+              </Col>
+              )
+          })
+          }
         </Row>
         <Pagination className='w-100 d-flex justify-content-center' onClick={scrollToTop}>{items}</Pagination>
       </Container>
