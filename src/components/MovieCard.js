@@ -24,14 +24,15 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
 
   const handleClick = async () => {
     if (currentUser) {
-      const movieRef = JSON.stringify(movie);
       const savedRef = doc(db, "users", currentUser.uid);
-      if (JSON.stringify(savedMovies).includes(id)) {
+
+      // returns true if the movie ID is present in savedMovies.
+      const isMovieSaved = savedMovies.some((savedMovie) => savedMovie.id === id);
+  
+      if (isMovieSaved) {
+        // Un-Favorite a movie if it is already saved.
         try {
-          const newSavedMovies = savedMovies.filter((savedMovie) => {
-            const parsedMovie = JSON.parse(savedMovie);
-            return parsedMovie.id !== id;
-          });
+          const newSavedMovies = savedMovies.filter((savedMovie) => savedMovie.id !== id);
           await updateDoc(savedRef, {
             saved: newSavedMovies
           });
@@ -41,9 +42,15 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           console.log(error)
         }
       } else {
+        // Favorite a movie that is not saved.
+        const movieObject = {
+          id: id,
+          title: title,
+          release_date: release_date
+        };
         try {
           await updateDoc(savedRef, {
-            saved: arrayUnion(movieRef)
+            saved: arrayUnion(movieObject)
           });
           setFavorite(true)
           setShow(true)
@@ -56,34 +63,34 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
     }
   };
   
-  //Set Saved movies from Database.
+  
+  // Set Saved Movies from Database.
   useEffect(() => {
     const checkData = async () => {
       if (currentUser) {
         const docRef = doc(db, "users", currentUser.uid);
         try {
           const docSnap = await getDoc(docRef);
-          setSavedMovies(docSnap.data().saved);
-        } catch(error) {
-          console.log(error)
+          const savedMoviesData = docSnap.data().saved;
+          setSavedMovies(savedMoviesData);
+          console.log(savedMoviesData)
+        } catch (error) {
+          console.log(error);
         }
       }
-    }
+    };
+
     checkData();
-  },[paginate, favorite, currentUser])
+  }, [paginate, favorite, currentUser]);
 
-
-   useEffect(() => {
-     const addFavorites = () => {
-      const movieRef = JSON.stringify(id);
-      if (JSON.stringify(savedMovies).includes(movieRef)){
-        setFavorite(true)
-      } else {
-        setFavorite(false)
-      }
-    }
-     addFavorites();
-   },[savedMovies, id])
+  useEffect(() => {
+    const addFavorites = () => {
+      const isMovieSaved = savedMovies.some((savedMovie) => savedMovie.id === id);
+      setFavorite(isMovieSaved);
+    };
+  
+    addFavorites();
+  }, [savedMovies, id]);  
   
   return (
     <div className='movie-card-wrapper' data-bg={movie.backdrop_path}>
