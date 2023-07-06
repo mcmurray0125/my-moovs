@@ -39,6 +39,10 @@ export default function SearchMovies() {
     setDebouncing(true);
   };
 
+  useEffect(() => {
+    fetchMovies();
+  }, [currentPage])
+
   //If user deletes their search, page resets to 1.
   const handleBackspace = (event) => {
     if (event.key === 'Backspace') {
@@ -117,27 +121,26 @@ export default function SearchMovies() {
               className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
             />
         </InputGroup>
-        {loading && query.length !== 0 ? (
           <header className="d-flex align-items-center justify-content-between page-info">
+            {loading && query.length !== 0 ? (
             <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
               <p className="text-center my-0">Loading...</p>
               <Spinner animation="border" />
             </span>
-          </header>
-        ) : (
-          <header className="d-flex align-items-center justify-content-between page-info">
-            {query === '' ? (
-              <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
-                <p className="text-center text-nowrap my-0">Showing Top Rated Movies</p>
-              </span>
-            ) : (
-              <span className="d-flex justify-content-between page-info w-100">
-                <p>Showing results for: {query}</p>
-                <p>Page {currentPage} of {totalPages}</p>
-              </span>
+            ) :
+            (
+              query === '' ? (
+                <span className="d-flex justify-content-center align-items-center gap-3 mb-3">
+                  <p className="text-center text-nowrap my-0">Showing Top Rated Movies</p>
+                </span>
+              ) : (
+                <span className="d-flex justify-content-between page-info w-100">
+                  <p>Showing results for: {query}</p>
+                  <p>Page {currentPage} of {totalPages}</p>
+                </span>
+              )
             )}
           </header>
-        )}
         <Row >
           {loading ?
           <MovieCardSkeleton cards={16}/>
