@@ -293,7 +293,7 @@ export default function Home() {
                             <Card.Text className='fs-5 text-light'>
                               Continue browsing movies by genre, or <a href='/movies/search-movies' aria-label='go to search'>search</a> instead. View your saved moovs by clicking below.
                             </Card.Text>
-                            <Button href='/saved-movies' aria-label='go to saved movies' className="me-4" variant="info">Saved Moovs</Button>
+                            <Button href='/saved-movies' aria-label='go to saved movies' className="main-btn" variant="info">Saved Moovs</Button>
                         </Card.Body>
                       </Card>
                       :

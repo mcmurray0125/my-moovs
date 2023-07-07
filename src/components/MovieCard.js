@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { db } from "../firebase"
-import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { Card, Toast } from "react-bootstrap"
+import { Card, Toast, Button } from "react-bootstrap"
 import posterFallback from "../assets/poster-fallback.png"
-import star from '../assets/star.png'
-import starFilled from '../assets/star-filled.png'
 import MovieModal from './Modal'
 
 
@@ -22,7 +20,8 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   const options = { month: 'short', day: 'numeric', year: 'numeric' };
   const formattedDate = movieDate.toLocaleDateString('en-US', options)
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    e.preventDefault();
     if (currentUser) {
       const savedRef = doc(db, "users", currentUser.uid);
 
@@ -113,10 +112,26 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
                 aria-label={`display movie overview for ${title}`}
               />
               <Card.Title className='m-0'>{title}</Card.Title>
-              <div className='d-flex align-items-center justify-content-between'>
-              <Card.Text className='my-0'>Released {formattedDate}</Card.Text>
-              <img className='star' style={{width: "30px", cursor: "pointer" }} role='button' onClick={handleClick} src={favorite ? starFilled : star} alt="star-icon" aria-label={`save or remove ${title}`}/>
-              </div>
+                <Card.Text className='mb-1'>Released {formattedDate}</Card.Text>
+                {!favorite ? 
+                <Button
+                  className="save-btn px-4 py-1 fs-6"
+                  onClick={(e) => handleClick(e)}
+                  aria-label={`save ${title}`}
+                >
+                  <i className="fa-solid fa-plus"></i>&nbsp;
+                  Save
+                </Button>
+                :
+                <Button
+                  className="remove-btn px-4 py-1 fs-6"
+                  onClick={(e) => handleClick(e)}
+                  aria-label={`save ${title}`}
+                >
+                  <i className="fa-solid fa-minus"></i>&nbsp;
+                  Remove
+                </Button>
+                }
           </Card.Body>
       </Card>
       {/* Modal */}

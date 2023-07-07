@@ -58,12 +58,7 @@ export default function SavedMovies() {
       }
       checkData();
     }, [hasFolder, currentUser])
-
-    useEffect(() => {
-      console.log(dbMovies)
-    }, [dbMovies]);
-    
-    
+        
      const changeHandler = (e) => {
        setQuery(e.target.value);
      }
