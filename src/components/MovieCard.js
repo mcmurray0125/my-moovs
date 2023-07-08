@@ -3,7 +3,7 @@ import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { Card, Toast, Button } from "react-bootstrap"
+import { Card, Toast, Button, Spinner } from "react-bootstrap"
 import posterFallback from "../assets/poster-fallback.png"
 import MovieModal from './Modal'
 
@@ -14,6 +14,8 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   const [savedMovies, setSavedMovies] = useState([])
   const [show, setShow] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   //Date Formatting
   const movieDate = new Date(release_date);
@@ -22,6 +24,7 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setSaving(true);
     if (currentUser) {
       const savedRef = doc(db, "users", currentUser.uid);
 
@@ -37,8 +40,11 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           });
           setFavorite(false)
           setShow(true)
-        } catch (error) {
+          setSaving(false)
+        }
+        catch (error) {
           console.log(error)
+          setSaving(false)
         }
       } else {
         // Favorite a movie that is not saved.
@@ -48,12 +54,16 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           });
           setFavorite(true)
           setShow(true)
-        } catch (error) {
+          setSaving(false)
+        }
+        catch (error) {
           console.log(error)
+          setSaving(false)
         }
       }
     } else {
       setShow(true);
+      setSaving(false)
     }
   };
   
@@ -62,13 +72,16 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   useEffect(() => {
     const checkData = async () => {
       if (currentUser) {
+        setLoading(true)
         const docRef = doc(db, "users", currentUser.uid);
         try {
           const docSnap = await getDoc(docRef);
           const savedMoviesData = docSnap.data().saved;
           setSavedMovies(savedMoviesData);
+          setLoading(false);
         } catch (error) {
           console.log(error);
+          setLoading(false);
         }
       }
     };
@@ -113,25 +126,23 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
               />
               <Card.Title className='m-0'>{title}</Card.Title>
                 <Card.Text className='mb-1'>Released {formattedDate}</Card.Text>
-                {!favorite ? 
-                <Button
-                  className="save-btn px-4 py-1 fs-6"
-                  onClick={(e) => handleClick(e)}
-                  aria-label={`save ${title}`}
-                >
-                  <i className="fa-solid fa-plus"></i>&nbsp;
-                  Save
-                </Button>
+                {loading ?
+                <Spinner animation="border" size="sm"/>
                 :
                 <Button
-                  className="remove-btn px-4 py-1 fs-6"
+                  className={`${favorite ? 'remove-btn' : 'save-btn'} px-4 py-1 fs-6`}
                   onClick={(e) => handleClick(e)}
-                  aria-label={`save ${title}`}
+                  aria-label={`${favorite? 'remove' : 'save'} ${title}`}
                 >
-                  <i className="fa-solid fa-minus"></i>&nbsp;
-                  Remove
-                </Button>
-                }
+                  {saving ?
+                  <Spinner animation="border" size="sm"/>
+                  : 
+                  <>
+                    <i className={`fa-solid ${favorite ? 'fa-minus' : 'fa-plus'}`} />
+                    &nbsp; {favorite ? 'Remove' : 'Save'}
+                  </>
+                  }
+                </Button>}
           </Card.Body>
       </Card>
       {/* Modal */}

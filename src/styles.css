@@ -154,7 +154,8 @@ header,
 #light #home-container .card-title,
 #light #home-container .card-text,
 #light #home-container p,
-#light h2 {
+#light h2,
+#light .featured-button {
   color: var(--light-text) !important;
   transition: 0.2s;
 }
