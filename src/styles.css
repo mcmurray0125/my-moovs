@@ -159,8 +159,7 @@ header,
   color: var(--light-text) !important;
   transition: 0.2s;
 }
-#light .home-card,
-#light .home-btn-card {
+#light .home-card {
   border-color: var(--dark-grey);
   transition: 0.2s;
 }
@@ -186,8 +185,7 @@ header,
   background-color: rgb(237, 158, 78);
   color: var(--light-text);
 }
-#dark .home-card,
-#dark .home-btn-card {
+#dark .home-card {
   border: 1px solid var(--light-movie-card);
   transition: 0.2s;
 }
@@ -205,10 +203,21 @@ header,
   cursor: default;
 }
 .home-btn-card {
-  background-color: transparent;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 150px;
   width: 150px;
+  position: relative;
+}
+.home-btn-card h5 {
+  z-index: 2;
+}
+.home-btn-card .blob {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 /* SLIDER / CAROUSEL */
 .carousel {
