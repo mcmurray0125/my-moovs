@@ -20,7 +20,7 @@ export default function Navigation() {
   async function handleLogout() {
     try {
         await logout()
-        window.location.reload()
+        window.location.assign("/")
     } catch(error) {
         console.log(error)
     }

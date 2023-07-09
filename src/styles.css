@@ -165,35 +165,11 @@ header,
 }
 .login-btn {
   font-weight: 500;
-}
-#light .login-btn {
-  background-color: rgb(196, 107, 17);
-  color: var(--dark-text);
-  border-color: var(--light-text);
-  transition: 0.15s;
-}
-#light .login-btn:hover {
-  background-color: rgb(92, 49, 7);
-}
-#dark .login-btn {
-  background-color: rgb(196, 107, 17);
-  color: var(--dark-text);
-  border-color: var(--dark-text);
-  transition: 0.15s;
-}
-#dark .login-btn:hover {
-  background-color: rgb(237, 158, 78);
-  color: var(--light-text);
+  max-width: 150px;
 }
 #dark .home-card {
   border: 1px solid var(--light-movie-card);
   transition: 0.2s;
-}
-#light .home-btn-card:hover {
-  background-color: var(--accent-light) !important;
-}
-#dark .home-btn-card:hover {
-  background-color: var(--accent-dark) !important;
 }
 .home-card {
   transform: scale(1) !important;
@@ -202,22 +178,49 @@ header,
   transform: scale(1) !important;
   cursor: default;
 }
+
 .home-btn-card {
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: linear-gradient(
+    to top,
+    #7474bf 0%,
+    #348ac7 51%,
+    #7474bf 100%
+  );
   height: 150px;
   width: 150px;
-  position: relative;
+  transition: 0.5s;
+  background-size: auto 200%;
+  color: white;
+  font-weight: 400;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.home-btn-card:hover {
+  background-position: bottom center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.home-card-title-wrapper {
+  height: 85%;
+  width: 85%;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 .home-btn-card h5 {
-  z-index: 2;
-}
-.home-btn-card .blob {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  z-index: 3;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.436);
 }
 /* SLIDER / CAROUSEL */
 .carousel {
@@ -399,14 +402,18 @@ header,
   transform: scale(1.04) !important;
   -webkit-transform: scale(1.04) !important;
 }
-         
-         
+
 .remove-btn {
-  background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%);
+  background-image: linear-gradient(
+    to right,
+    #314755 0%,
+    #26a0da 51%,
+    #314755 100%
+  );
   text-align: center;
   transition: 0.5s;
   background-size: 200% auto;
-  color: white;            
+  color: white;
   border: none;
   border-radius: 20px;
   display: block;

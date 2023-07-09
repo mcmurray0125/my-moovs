@@ -1,13 +1,13 @@
 const homeCardsData = [
     {
         id: 1,
-        title: "Action",
-        link: "/movies/action"
+        title: "Comedy",
+        link: "/movies/comedy"
     },
     {
         id: 2,
-        title: "Comedy",
-        link: "/movies/comedy"
+        title: "Action",
+        link: "/movies/action"
     },
     {
         id: 3,
@@ -16,13 +16,13 @@ const homeCardsData = [
     },
     {
         id: 4,
-        title: "Drama",
-        link: "/movies/drama"
+        title: "Sci-Fi",
+        link: "/movies/science-fiction"
     },
     {
         id: 5,
-        title: "Sci-Fi",
-        link: "/movies/science-fiction"
+        title: "Drama",
+        link: "/movies/drama"
     },
     {
         id: 6,

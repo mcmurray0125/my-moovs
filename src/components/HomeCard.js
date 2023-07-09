@@ -1,7 +1,6 @@
 import React from 'react'
 import { Col } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import blob from "../assets/gradient-blob.png"
 
 export default function HomeCard(props) {
     const navigate = useNavigate();
@@ -10,57 +9,43 @@ export default function HomeCard(props) {
         navigate(props.item.link);
     };
 
-    const randomRotation = Math.floor(Math.random() * 360);
     
     const blobStyles = {
-      backdropFilter: '',
-      WebkitBackdropFilter: '',
-      transform: `rotate(${randomRotation}deg)`,
+      backgroundImage: ''
     };
-  
-  
+    
     switch (props.item.link) {
       case '/movies/action':
-        blobStyles.filter = 'hue-rotate(140deg)';
-        blobStyles.WebkitFilter = 'hue-rotate(140deg)';
+        blobStyles.backgroundImage = 'linear-gradient(to top, rgb(243, 71, 23) 0%, rgb(255 149 205) 51%, rgb(243, 71, 23) 100%)';
         break;
       case '/movies/comedy':
-        blobStyles.filter = 'hue-rotate(16deg)';
-        blobStyles.WebkitFilter = 'hue-rotate(16deg)';
+        blobStyles.backgroundImage = 'linear-gradient(to top, rgb(96	91	255	) 0%, rgb(147	229	255) 51%, rgb(96	91	255	) 100%)';
         break;
       case '/movies/drama':
-        blobStyles.filter = 'hue-rotate(160deg)';
-        blobStyles.WebkitFilter = 'hue-rotate(160deg)';
+        blobStyles.backgroundImage = 'linear-gradient(to top, rgb(233	96	16) 0%, rgb(255	159	168) 51%, rgb(233	96	16) 100%)';
         break;
       case '/movies/science-fiction':
-        blobStyles.filter = 'hue-rotate(0deg)';
-        blobStyles.WebkitFilter = 'hue-rotate(0deg)';
+        blobStyles.backgroundImage = 'linear-gradient(to top, rgb(50	106	255) 0%, rgb(151	238	255) 51%, rgb(50	106	255) 100%)';
         break;
       case '/movies/family':
-        blobStyles.filter = 'hue-rotate(240deg)';
-        blobStyles.WebkitFilter = 'hue-rotate(240deg)';
+        blobStyles.backgroundImage = 'linear-gradient(to top, rgb(4	148	0) 0%, rgb(193	207	78) 51%, rgb(4	148	0) 100%)';
         break;
       case '/movies/popular-movies':
-        blobStyles.filter = 'hue-rotate(333deg)';
-        blobStyles.WebkitFilter = 'hue-rotate(333deg)';
+        blobStyles.backgroundImage = 'linear-gradient(to top, rgb(0	130	213) 0%, rgb(101	235	209	) 51%, rgb(0	130	213) 100%)';
         break;
       default:
-        blobStyles.filter = 'hue-rotate(0deg)';
-        blobStyles.WebkitFilter = 'hue-rotate(0deg)';
+        blobStyles.backgroundImage = 'linear-gradient(to top, #ff6e7f 0%, #bfe9ff 51%, #ff6e7f 100%)';
         break;
     }
 
+          
 
   return (
     <Col className="my-3 d-flex align-items-center justify-content-center">
-        <div id={`${props.item.title}-card`} className="home-btn-card" onClick={handleClick}>
-          <h5 className='text-center m-0 p-2'>{props.item.title}</h5>
-          <img
-            src={blob}
-            alt='home-card-blob-image'
-            className='blob'
-            style={blobStyles}
-          />
+        <div id={`${props.item.title}-card`} className="home-btn-card main-btn" style={blobStyles} onClick={handleClick}>
+          <div className='home-card-title-wrapper'>
+            <h5 className='text-center m-0' >{props.item.title}</h5>
+          </div>
         </div>
     </Col>
   )
