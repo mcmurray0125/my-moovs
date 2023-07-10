@@ -275,6 +275,7 @@ export default function Home() {
             <div className="backdrop-img" style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${backgroundImage})`,}}></div>
         </section>
       </div>
+      <div className='bg-texture'>
       <Container fluid="md" className='py-4 d-flex flex-column justify-content-center' id='home-container'>
           <Row gap={2} xs={1} sm={2} className="d-flex align-items-center">
               <Col className='d-flex justify-content-center align-items-center my-3'>
@@ -323,7 +324,7 @@ export default function Home() {
                     className="main-btn w-100"
                     onClick={() => navigate("/movies/search-movies")}
                   >
-                      <Card.Body className='d-flex flex-column justify-content-center'>
+                      <Card.Body className='d-flex flex-column justify-content-center p-1'>
                           <h4 className='text-center m-0'>Search Movies</h4>
                       </Card.Body>
                   </Card>
@@ -336,6 +337,7 @@ export default function Home() {
               </Row>   
           </Container>
       </Container>
+      </div>
     </>
   )
 }
