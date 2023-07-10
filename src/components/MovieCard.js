@@ -3,7 +3,8 @@ import { db } from "../firebase"
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { Card, Toast, Button, Spinner } from "react-bootstrap"
+import { Card, Button, Spinner } from "react-bootstrap"
+import { ToastContainer, toast } from "react-toastify"
 import posterFallback from "../assets/poster-fallback.png"
 import MovieModal from './Modal'
 
@@ -38,6 +39,17 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           await updateDoc(savedRef, {
             saved: newSavedMovies
           });
+
+          toast.success(`Removed ${title}.`, {
+            position: "top-right",
+            autoClose: 3500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+
           setFavorite(false)
           setShow(true)
           setSaving(false)
@@ -52,6 +64,17 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           await updateDoc(savedRef, {
             saved: arrayUnion(movie)
           });
+
+          toast.success(`Removed ${title}.`, {
+            position: "top-right",
+            autoClose: 3500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+
           setFavorite(true)
           setShow(true)
           setSaving(false)
@@ -64,6 +87,16 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
     } else {
       setShow(true);
       setSaving(false)
+
+      toast.warning(`Login or Signup to save.`, {
+        position: "top-right",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   
@@ -99,17 +132,8 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
   }, [savedMovies, id]);  
   
   return (
+    <>
     <div className='movie-card-wrapper' data-bg={movie.backdrop_path}>
-      {/* Toast Notification */}
-      <section className='fav-toast-wrapper position-absolute top-25 start-25' style={{zIndex: "300"}}>
-        <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide className='w-auto'>
-          <Toast.Header>
-            <strong className="me-auto">MyMoovs</strong>
-            {currentUser ? <small>&#128077;</small> : <small>&#128078;</small>}      
-          </Toast.Header>
-          {currentUser? <Toast.Body>{title} {favorite ?`added to saved movies.` : `removed from saved`}</Toast.Body> : <Toast.Body>Login or <Link to="/signup">Signup</Link> to save.</Toast.Body> }   
-        </Toast>
-      </section>
       {/* Movie Card */}
       <Card className="movie-card border-0">
           <Card.Body className='p-0'>
@@ -150,7 +174,9 @@ export default function MovieCard({movie, poster_path, title, release_date, id, 
           show={modalShow}
           onHide={() => setModalShow(false)}
           movie={movie}
-      />
+          />
     </div>
+    <ToastContainer/>
+    </>
   )
 }
