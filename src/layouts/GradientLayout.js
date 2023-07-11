@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navigation from '../components/Navigation'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import gradient from "../assets/blur-2.png"
 
 export default function GradientLayout() {
+  const location = useLocation();
+    
+  //Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const gradientHueStyles = {
     backdropFilter: '',

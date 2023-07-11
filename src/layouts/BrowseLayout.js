@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Pagination } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 import MovieCardSkeleton from '../components/MovieCardSkeleton';
 import axios from 'axios';
@@ -9,6 +10,12 @@ export default function BrowseLayout({ pageTitle, apiUrl, icon }) {
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 7;
+    const location = useLocation();
+    
+    //Scroll to top on page change
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [location]);
   
     const paginate = (number) => setCurrentPage(number);
   
