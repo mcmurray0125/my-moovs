@@ -191,10 +191,10 @@ header,
   align-items: center;
   justify-content: center;
   background-image: linear-gradient(
-      to top,
+    to top,
     #d094b9 0%,
     #80489f 51%,
-    #d094b9 100% 
+    #d094b9 100%
   );
   height: 75px;
   width: 150px;
@@ -481,7 +481,9 @@ header,
   background-color: rgba(239, 239, 239, 0.817) !important;
 }
 .modal-title,
-.modal-body {
+.modal-body,
+.comments-form,
+.comment-card .card-body {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -501,6 +503,10 @@ header,
 .comments-wrapper .comment-card {
   background-color: rgba(239, 239, 239, 0.817);
   transition: all 0.2s !important;
+  border: none;
+}
+.comment-card .card-body {
+  border-radius: 6px !important;
 }
 #dark .comments-wrapper .comment-card {
   background-color: var(--dark-medium-card) !important;

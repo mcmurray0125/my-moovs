@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Alert, Container, Row, Col, Form, InputGroup } from "react-bootstrap"
 import { useAuth } from '../contexts/AuthContext'
 import { db } from "../firebase"
@@ -18,6 +18,7 @@ export default function SavedMovies() {
     const [dbMovies, setDBMovies] = useState([])
     const [filteredMovies, setFilteredMovies] = useState(dbMovies)
     const [show, setShow] = useState(true);
+    const orderRef = useRef();
 
     const paginate = (number) => setCurrentPage(number);
 
@@ -75,28 +76,53 @@ export default function SavedMovies() {
       }
     }, [query, dbMovies])
     
+  
+    //Changes order of quiz results from newest to oldest
+    function toggleOrder() {
+      const resultsSection = document.getElementById("saved-movies")
+      if (orderRef.current.value === "Most Recent") {
+        resultsSection.classList.remove("flex-column")
+        resultsSection.classList.add("flex-column-reverse")
+      } else {
+        resultsSection.classList.remove("flex-column-reverse")
+        resultsSection.classList.add("flex-column")
+      }
+    }
+
   return (
     <Container className='pt-4 pb-4' style={{height: variant !== 'success' ? `calc(100dvh - 73px)` : undefined}}>
       <div className='d-flex align-items-center flex-column justify-content-start'>
-        {/* If dbMovies is not empty, display search bar */}
 
-        {show && <Alert variant={variant} onClose={() => setShow(false)} dismissible={variant === 'success'}>
+        {show &&
+        <Alert variant={variant} onClose={() => setShow(false)} dismissible={variant === 'success'}>
           {message} <Alert.Link href={linkPath}>{linkText}</Alert.Link>
-        </Alert>}
-        {dbMovies.length !== 0 && <InputGroup className="mb-3">
-            <Form.Control
-              className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
-              placeholder="Search saved Moovs"
-              aria-label="comment-input"
-              type="search"
-              onChange={changeHandler}
-              name='search'
-              value={query}
-            />
-        </InputGroup>
+        </Alert>
+        }
+
+        {/* If dbMovies is not empty, display search bar */}
+        {dbMovies.length !== 0 &&
+        <>
+          <InputGroup className="mb-3">
+              <Form.Control
+                className='border rounded-0 border-0 border-bottom fs-1 shadow-none search-input'
+                placeholder="Search saved Moovs"
+                aria-label="comment-input"
+                type="search"
+                onChange={changeHandler}
+                name='search'
+                value={query}
+              />
+          </InputGroup>
+          <div className='d-flex justify-content-end align-self-end mb-3'>
+            <Form.Select ref={orderRef} onChange={toggleOrder} className=''>
+              <option value="Most Recent">Most Recent</option>
+              <option value="Oldest">Oldest</option>
+            </Form.Select>
+          </div>
+        </>
         }
       </div>
-      <Row >
+      <Row id='saved-movies' className='flex-column-reverse'>
         {filteredMovies.map((movie, index) => {
           return (
             <Col sm={12} key={index} className='mb-4'>

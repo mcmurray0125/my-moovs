@@ -30,7 +30,7 @@ export default function Dashboard() {
         }
     }
     checkData();
-    },[])
+    },[currentUser])
 
     async function handleLogout() {
         setError('')
