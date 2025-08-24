@@ -25,7 +25,7 @@ export default function Home() {
     function handleSlideChange() {
       const currentSlide = document.querySelector('.slick-current');
       if (currentSlide && popularMovies && nowPlayingMovies) {
-        const slideBg = currentSlide.querySelectorAll('*')[1].getAttribute('data-bg');
+        const slideBg = currentSlide.querySelector('.movie-card-wrapper').getAttribute('data-bg');
         setBackgroundImage(slideBg);
       }
     }
@@ -41,7 +41,6 @@ export default function Home() {
           setNowPlayingMovies(nowPlayingResponse.data.results.slice(0, 15));
           
           setLoading(false)
-          handleSlideChange();
         } catch (error) {
           console.log(error);
           setLoading(false)
@@ -69,6 +68,7 @@ export default function Home() {
     slidesToScroll: 1,
     initialSlide: 0,
     afterChange: handleSlideChange,
+    onInit: handleSlideChange,
     responsive: [
       {
         breakpoint: 2350,
