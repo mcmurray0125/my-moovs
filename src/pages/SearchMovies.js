@@ -20,7 +20,7 @@ export default function SearchMovies() {
     setLoading(true)
 
     if (query === ''){
-      axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}`)
+      axios.get(`/.netlify/functions/fetchMovies?endpoint=top_rated&page=${currentPage}`)
       .then(response=>{
       setMovies(response.data.results)
       setTotalPages(8)
@@ -58,7 +58,7 @@ export default function SearchMovies() {
 
     if (query !== '') {
       axios
-        .get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&query=${query}&page=${currentPage}&include_adult=false`)
+        .get(`/.netlify/functions/fetchMovies?endpoint=search&query=${encodeURIComponent(query)}&page=${currentPage}`)
         .then((response) => {
           setMovies(response.data.results);
           setTotalPages(response.data.total_pages);

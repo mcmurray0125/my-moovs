@@ -19,7 +19,7 @@ export default function UpcomingMovies() {
   useEffect(() => {
     setLoading(true)
     
-    axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=${currentPage}&region=US`)
+    axios.get(`/.netlify/functions/fetchMovies?endpoint=upcoming&page=${currentPage}`)
       .then(response=> {
         setUpcomingMovies(response.data.results)
         setTotalPages(response.data.total_pages)

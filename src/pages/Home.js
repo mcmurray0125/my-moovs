@@ -34,10 +34,10 @@ export default function Home() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const popularResponse = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`);
+          const popularResponse = await axios.get(`/.netlify/functions/fetchMovies?endpoint=popular&page=1`);
           setPopularMovies(popularResponse.data.results.slice(0, 15));
   
-          const nowPlayingResponse = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`);
+          const nowPlayingResponse = await axios.get(`/.netlify/functions/fetchMovies?endpoint=now_playing&page=1`);
           setNowPlayingMovies(nowPlayingResponse.data.results.slice(0, 15));
           
           setLoading(false)

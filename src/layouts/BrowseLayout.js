@@ -5,7 +5,7 @@ import MovieCard from '../components/MovieCard';
 import MovieCardSkeleton from '../components/MovieCardSkeleton';
 import axios from 'axios';
 
-export default function BrowseLayout({ pageTitle, apiUrl, icon }) {
+export default function BrowseLayout({ pageTitle, endpoint, genre, icon }) {
     const [loading, setLoading] = useState(true);
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -22,8 +22,13 @@ export default function BrowseLayout({ pageTitle, apiUrl, icon }) {
     useEffect(() => {
       setLoading(true);
   
+      let url = `/.netlify/functions/fetchMovies?endpoint=${endpoint}&page=${currentPage}`;
+      if (genre) {
+        url += `&genre=${genre}`;
+      }
+  
       axios
-        .get(`${apiUrl}&page=${currentPage}`)
+        .get(url)
         .then((response) => {
             setMovies(response.data.results);
             setLoading(false)
@@ -32,7 +37,7 @@ export default function BrowseLayout({ pageTitle, apiUrl, icon }) {
             console.log(err);
             setLoading(false)
         })
-    }, [apiUrl, currentPage]);
+    }, [endpoint, genre, currentPage]);
   
     let items = [];
     for (let number = 1; number <= totalPages; number++) {
