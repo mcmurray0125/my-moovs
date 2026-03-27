@@ -178,16 +178,39 @@ git clone https://github.com/YOUR-USERNAME/my-moovs.git
 npm install
 ```
 
-4. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-5. Run Locally with `npm run dev`
+4. Set Environmental Variables
+This project requries a [Google Firebase](https://firebase.google.com) project for saving user data.
+Create a Googgle Firebase project and create a ```.env.local``` file with in this format:
+
+You will also need an API key from [The Movie Database (TMDB)](https://www.themoviedb.org/) 
+```sh
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+REACT_APP_FIREBASE_MEASUREMENT_ID=
+REACT_APP_FIREBASE_APP_ID=
+TMDB_KEY=
+```
+
+5. Install Netlify CLI tools.
+```sh
+npm install netlify-cli --global
+```
+
+This project is set up to deploy on Netlify, and uses [netlify serverless functions](https://www.netlify.com/blog/intro-to-serverless-functions/#serverless-functions-on-netlify) to handle HTTP requests, preventing your TMDB API key from being exposed on the client.
+
+6. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+7. Run Locally with `netlify dev`
 
 ```
-npm run dev
+netlify dev
 ```
 
-6. Commit your Changes (`git commit -m 'Add some feature or fix'`)
-7. Push to the Branch (`git push origin feature/amazing-feature`)
-8. Open a Pull Request
+8. Commit your Changes (`git commit -m 'Add some feature or fix'`)
+9. Push to the Branch (`git push origin feature/amazing-feature`)
+10. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
